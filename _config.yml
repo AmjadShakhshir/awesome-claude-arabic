@@ -1,0 +1,29 @@
+# Site settings
+title: Awesome Arabic AI
+description: >-
+  أفضل الموارد العملية للذكاء الاصطناعي باللغة العربية
+  — Practical AI resources for Arabic-speaking users.
+url: "https://AmjadShakhshir.github.io"
+baseurl: "/awesome-arabic-AI"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Markdown
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+
+# Exclude from build
+exclude:
+  - .gitignore
+  - README.md
+  - CONTRIBUTING.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
+  - .claude/
+  - "*.png"

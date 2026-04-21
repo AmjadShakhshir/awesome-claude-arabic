@@ -1,0 +1,30 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">
+      {{ site.title | escape }}
+    </a>
+
+    <nav class="site-nav">
+      <!-- Arabic nav items -->
+      <span data-lang="ar">
+        {% for item in site.data.navigation.ar %}
+          <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {% endfor %}
+      </span>
+
+      <!-- English nav items -->
+      <span data-lang="en">
+        {% for item in site.data.navigation.en %}
+          <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {% endfor %}
+      </span>
+
+      <!-- Language switcher (always visible) -->
+      <span class="lang-switcher">
+        <a href="#" class="lang-switch active" data-set-lang="ar">العربية</a>
+        <span class="lang-divider">|</span>
+        <a href="#" class="lang-switch" data-set-lang="en">English</a>
+      </span>
+    </nav>
+  </div>
+</header>
