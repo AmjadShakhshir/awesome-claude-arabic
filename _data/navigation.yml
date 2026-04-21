@@ -1,0 +1,14 @@
+ar:
+  - title: الرئيسية
+    url: /
+  - title: المهارات
+    url: /skills/
+  - title: حول
+    url: /about/
+en:
+  - title: Home
+    url: /
+  - title: Skills
+    url: /skills/
+  - title: About
+    url: /about/

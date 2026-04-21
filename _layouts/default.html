@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- seo -%}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    {%- feed_meta -%}
+  </head>
+  <body class="lang-ar">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-mark">✦</span>
+          <span>Awesome Arabic AI</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main navigation">
+          <div class="nav-links" data-lang="ar">
+            {% for item in site.data.navigation.ar %}
+              <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endfor %}
+          </div>
+          <div class="nav-links" data-lang="en">
+            {% for item in site.data.navigation.en %}
+              <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endfor %}
+          </div>
+          <div class="lang-switcher">
+            <a href="#" class="lang-switch active" data-set-lang="ar">العربية</a>
+            <a href="#" class="lang-switch" data-set-lang="en">English</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span data-lang="ar">{{ site.title }} &copy; {{ 'now' | date: "%Y" }}</span>
+        <span data-lang="en">{{ site.title }} &copy; {{ 'now' | date: "%Y" }}</span>
+        <a href="{{ '/CONTRIBUTING.html' | relative_url }}" data-lang="ar">إرشادات المساهمة</a>
+        <a href="{{ '/CONTRIBUTING.html' | relative_url }}" data-lang="en">Contribution guidelines</a>
+      </div>
+    </footer>
+
+    <script src="{{ '/assets/js/lang-switcher.js' | relative_url }}"></script>
+  </body>
+</html>
