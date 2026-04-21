@@ -2,7 +2,7 @@
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://AmjadShakhshir.github.io/awesome-arabic-AI)
 
-🌐 **[Visit the Live Site](https://AmjadShakhshir.github.io/awesome-arabic-AI)** — bilingual (العربية / English) with built-in language switcher.
+🌐 **[Visit the Live Site](https://amjadshakhshir.github.io/awesome-claude-arabic/)** — bilingual (العربية / English) with built-in language switcher.
 
 أفضل الموارد العملية للذكاء الاصطناعي باللغة العربية  
 Prompts, guides, tools, and real workflows for getting actual results with AI
