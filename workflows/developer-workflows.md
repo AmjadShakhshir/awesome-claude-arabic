@@ -28,6 +28,8 @@ title: "سير عمل المطور مع الذكاء الاصطناعي | Develo
   <li>عندما تريد فهم <em>لماذا</em> الخطأ حدث لا فقط كيف تصلحه</li>
 </ul>
 
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج قوي في الاستدلال التقني وقراءة رسائل الخطأ. في أغلب الحالات، استخدم الإنجليزية عند وصف المشكلة لأنها تعطي دقة أعلى في التشخيص.</p>
+
 <p><strong>الخطوات:</strong></p>
 <ol>
   <li>لا تلصق الكود كله — حدد الجزء المشكل فقط (مع السياق الكافي)</li>
@@ -71,6 +73,8 @@ Please:
   <li>تطبيق الحل دون فهمه — ستقع في نفس الخطأ مستقبلاً</li>
 </ul>
 
+<p><strong>كيف تحسن النتيجة؟</strong> بعد الحل الأول، اطلب: "ما الاختبارات أو الحالات الحدّية التي قد تكسر هذا الإصلاح؟" ثم اختبرها فعلياً قبل اعتماد الحل.</p>
+
 <hr>
 
 <h2>سير عمل ٢: كتابة ميزة جديدة</h2>
@@ -83,6 +87,8 @@ Please:
   <li>عندما تعمل في تقنية تعرفها لكن تريد الكود الأسرع</li>
   <li>عندما تريد مقارنة تصميمات مختلفة قبل الالتزام بأحدها</li>
 </ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج جيّد في توليد الكود المنضبط بالقيود. إذا كانت الميزة حساسة، اطلب الخطة من نموذج أول، والتنفيذ من نموذج ثانٍ للمقارنة.</p>
 
 <p><strong>الخطوات:</strong></p>
 <ol>
@@ -131,6 +137,8 @@ Please:
   <li>الثقة الكاملة دون اختبار — الكود الذي يبدو صحيحاً قد يفشل في الحالات الخاصة</li>
 </ul>
 
+<p><strong>كيف تحسن النتيجة؟</strong> اطلب نسخة ثانية من نفس الحل بأسلوب مختلف (مثلاً functional vs class-based) ثم اختر الأنسب لبنية المشروع الحالية.</p>
+
 <hr>
 
 <h2>سير عمل ٣: كتابة وصف Pull Request</h2>
@@ -142,6 +150,8 @@ Please:
   <li>بعد الانتهاء من ميزة أو إصلاح وقبل رفع الـ PR</li>
   <li>عندما تكون التغييرات معقدة وتحتاج شرحاً للفريق</li>
 </ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج يبرع في التلخيص التقني المنظّم. يمكنك تزويده بـ diff مختصر أو نقاط التغيير الأساسية بدل كامل السجل.</p>
 
 <p><strong>الخطوات:</strong></p>
 <ol>
@@ -178,6 +188,15 @@ Format the PR description with these sections:
   <li>القرارات التصميمية غير الواضحة موثّقة</li>
 </ul>
 
+<p><strong>أخطاء شائعة:</strong></p>
+<ul>
+  <li>وصف PR يكرر الـ diff بدون ذكر الدافع</li>
+  <li>خطوات اختبار عامة غير قابلة للتنفيذ</li>
+  <li>نسيان توثيق المقايضات أو المخاطر</li>
+</ul>
+
+<p><strong>كيف تحسن النتيجة؟</strong> اطلب من النموذج مراجعة الوصف بنظرة مراجع: "ما السؤال الذي سيطرحه المراجع بعد قراءة هذا الوصف؟" ثم أضف الإجابة داخل الـ PR.</p>
+
 </div>
 
 <div data-lang="en">
@@ -204,6 +223,8 @@ Format the PR description with these sections:
   <li>When you've tried multiple solutions and none worked</li>
   <li>When you want to understand <em>why</em> the error happened, not just how to fix it</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model strong in technical reasoning and error interpretation. In most cases, use English for debugging prompts to increase diagnostic precision.</p>
 
 <p><strong>Steps:</strong></p>
 <ol>
@@ -248,6 +269,8 @@ Please:
   <li>Applying the fix without understanding it — you'll hit the same error again</li>
 </ul>
 
+<p><strong>How to refine the result:</strong> After the first fix, ask: "What edge cases or tests could break this patch?" and validate those cases before merging.</p>
+
 <hr>
 
 <h2>Workflow 2: Writing a new feature</h2>
@@ -260,6 +283,8 @@ Please:
   <li>When you know the technology but want faster code</li>
   <li>When you want to compare design approaches before committing</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model that handles constrained code generation well. For critical features, generate plan and implementation in separate passes (or models) to reduce blind spots.</p>
 
 <p><strong>Steps:</strong></p>
 <ol>
@@ -301,6 +326,15 @@ Please:
   <li>Assumptions are clearly stated</li>
 </ul>
 
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Requesting full implementation in one shot with no staged validation</li>
+  <li>Missing framework/version constraints</li>
+  <li>Trusting generated code without execution tests</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask for a second variant using a different design style (for example functional vs class-based), then select what fits your current codebase conventions.</p>
+
 <hr>
 
 <h2>Workflow 3: Writing a pull request description</h2>
@@ -312,6 +346,16 @@ Please:
   <li>After completing a feature or fix, before opening the PR</li>
   <li>When changes are complex and need explanation for the team</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model good at structured technical summarization. Feed it concise change notes or selected diff sections, not raw unrelated file history.</p>
+
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Provide a concise change summary and motivation</li>
+  <li>List non-obvious design decisions and tradeoffs</li>
+  <li>Request executable reviewer test steps</li>
+  <li>Review the draft for missing context before posting</li>
+</ol>
 
 <span class="prompt-label">Prompt</span>
 <pre class="prompt-box">Write a pull request description for the following changes:
@@ -340,5 +384,14 @@ Format the PR description with these sections:
   <li>Testing steps are executable</li>
   <li>Non-obvious design decisions are documented</li>
 </ul>
+
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Repeating the diff without motivation</li>
+  <li>Providing vague test instructions</li>
+  <li>Skipping known tradeoffs and risks</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask the model to critique the PR description from a reviewer perspective: "What would still be unclear?" then patch those gaps.</p>
 
 </div>

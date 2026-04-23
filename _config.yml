@@ -20,7 +20,6 @@ kramdown:
 exclude:
   - .gitignore
   - README.md
-  - CONTRIBUTING.md
   - Gemfile
   - Gemfile.lock
   - vendor/

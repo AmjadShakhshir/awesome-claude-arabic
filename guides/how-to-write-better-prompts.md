@@ -93,6 +93,17 @@ title: "كيف تكتب برومبت أفضل | How to Write Better Prompts"
 
 <hr>
 
+<h2>أخطاء شائعة في كتابة البرومبتات</h2>
+
+<ul>
+  <li><strong>العمومية المفرطة:</strong> برومبت مثل "اكتب شيئاً جيداً" ينتج مخرجات متوقعة وضعيفة.</li>
+  <li><strong>السياق الناقص:</strong> عدم توضيح الجمهور والهدف يجعل الناتج غير مناسب حتى لو كان لغوياً جيداً.</li>
+  <li><strong>غياب التنسيق:</strong> عدم تحديد شكل الناتج يسبب اختلافاً كبيراً بين ما تريده وما تستلمه.</li>
+  <li><strong>عدم التكرار:</strong> قبول أول ناتج دون تحسين يضيّع أغلب القيمة الممكنة من الأداة.</li>
+</ul>
+
+<hr>
+
 <h2>الجمع بين المبادئ الأربعة</h2>
 
 <p>البرومبت الاحترافي يجمع في العادة بين الأربعة:</p>
@@ -198,6 +209,17 @@ title: "كيف تكتب برومبت أفضل | How to Write Better Prompts"
 </div>
 
 <p><strong>Tip:</strong> If you don't have a positive example, give a negative one — "I don't want the output to look like [X]" — sometimes that's clearer than describing what you do want.</p>
+
+<hr>
+
+<h2>Common prompt-writing mistakes</h2>
+
+<ul>
+  <li><strong>Overly generic requests:</strong> Prompts like "write something good" usually produce predictable weak output.</li>
+  <li><strong>Missing context:</strong> If audience and objective are unclear, output quality drops even when wording looks fine.</li>
+  <li><strong>No output format constraints:</strong> You get inconsistent structure that rarely matches your intended use.</li>
+  <li><strong>No iteration:</strong> Accepting first-pass output leaves significant quality on the table.</li>
+</ul>
 
 <hr>
 

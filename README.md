@@ -28,10 +28,12 @@ Prompts, guides, tools, and real workflows for getting actual results with AI
 ### ✍️ Prompts
 برومبتات جاهزة للاستخدام:
 
+- [Prompts Library](./prompts/index.md)
 - [Writing Prompts](./prompts/writing-prompts.md)
 - [Coding Prompts](./prompts/coding-prompts.md)
 - [Productivity Prompts](./prompts/productivity-prompts.md)
 - [Learning Prompts](./prompts/learning-prompts.md)
+- [AI Image Generation Prompts](./prompts/image-generation-prompts.md)
 
 ---
 

@@ -11,6 +11,8 @@ title: "سير عمل البحث عن وظائف عبر LinkedIn | LinkedIn Job 
 
 <p>هذا البرومبت يساعدك على أتمتة البحث عن وظائف مناسبة لملفك الشخصي — عبر دمج نتائج من Google (بمساعدة Claude) ومن LinkedIn مباشرةً (بمساعدة Apify). الناتج النهائي جدول مرتّب بأعلى الوظائف تطابقاً مع سيرتك الذاتية.</p>
 
+<p><strong>الهدف:</strong> الحصول على قائمة وظائف حديثة ومرتّبة حسب درجة التطابق مع سيرتك الذاتية، لتقليل الوقت الضائع في البحث اليدوي.</p>
+
 <h2>لمن هذه الصفحة؟</h2>
 <ul>
   <li>الباحثون عن عمل الذين يريدون تسريع عملية البحث</li>
@@ -98,6 +100,13 @@ Return only a table with these exact columns:
   <li><strong>نسيان API key في Apify:</strong> السكريبر لن يعمل بدون مفتاح صالح</li>
 </ul>
 
+<h2>كيف تحسن النتيجة؟</h2>
+<ul>
+  <li>عدّل حد التطابق تدريجياً (٧ ثم ٦) إذا كانت النتائج قليلة جداً</li>
+  <li>اطلب جولة ثانية مع كلمات مفتاحية أضيق من سيرتك (مثل أدوات أو تخصص دقيق)</li>
+  <li>راجع أفضل ٣ نتائج يدوياً، ثم أعِد تشغيل البرومبت مع ملاحظاتك لتحسين الدقة</li>
+</ul>
+
 <div class="lang-tip">
 <p>💡 <strong>تخصيص البرومبت:</strong></p>
 <ul>
@@ -117,6 +126,8 @@ Return only a table with these exact columns:
 <h1>🔍 LinkedIn Job Search Workflow</h1>
 
 <p>This prompt automates job hunting by combining Google search results (via Claude) with LinkedIn job data (via Apify). The output is a ranked table of the best-matching roles for your resume — filtered by recency and fit score.</p>
+
+<p><strong>Goal:</strong> Produce a recent, ranked shortlist of jobs that match your resume so you can spend less time searching manually and more time applying strategically.</p>
 
 <h2>Who is this for?</h2>
 <ul>
@@ -203,6 +214,13 @@ Return only a table with these exact columns:
   <li><strong>Fit threshold too low:</strong> Setting it at 5 or below brings in poor-match roles — 7 is a practical default</li>
   <li><strong>Web search not enabled:</strong> Confirm your tool has internet access turned on before running</li>
   <li><strong>Missing Apify API key:</strong> The scraper will not run without a valid key</li>
+</ul>
+
+<h2>How to refine the result</h2>
+<ul>
+  <li>Tune the fit threshold gradually (start at 7, then move to 6 if results are too narrow)</li>
+  <li>Run a second pass with tighter resume-based keywords (tools, stack, domain focus)</li>
+  <li>Manually review top 3 results, then rerun the prompt with your feedback to improve precision</li>
 </ul>
 
 <div class="lang-tip">

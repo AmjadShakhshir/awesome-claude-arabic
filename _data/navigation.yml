@@ -1,6 +1,8 @@
 ar:
   - title: الرئيسية
     url: /
+  - title: البرومبتات
+    url: /prompts/
   - title: المهارات
     url: /skills/
   - title: حول
@@ -8,6 +10,8 @@ ar:
 en:
   - title: Home
     url: /
+  - title: Prompts
+    url: /prompts/
   - title: Skills
     url: /skills/
   - title: About

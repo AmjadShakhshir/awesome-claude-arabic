@@ -28,6 +28,8 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
   <li>عندما تريد التأكد أنك فهمت لا فقط حفظت</li>
 </ul>
 
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج قوي في الشرح التعليمي خطوة بخطوة. ابدأ بالعربية للفهم، ثم اطلب المصطلحات الإنجليزية إذا كانت المادة تتطلب ذلك.</p>
+
 <p><strong>الخطوات:</strong></p>
 <ol>
   <li>ابدأ بطلب شرح مبسط مع تشبيه</li>
@@ -59,6 +61,15 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
   <li>تستطيع ربطه بمفاهيم أخرى تعرفها</li>
 </ul>
 
+<p><strong>أخطاء شائعة:</strong></p>
+<ul>
+  <li>الاكتفاء بقراءة الشرح دون اختبار نفسك بسؤال متابعة</li>
+  <li>الانتقال للتفاصيل قبل فهم الصورة الكبيرة</li>
+  <li>طلب إجابة جاهزة بدل صياغة الفكرة بكلماتك</li>
+</ul>
+
+<p><strong>كيف تحسن النتيجة؟</strong> اطلب من النموذج اختباراً سريعاً من ٣ أسئلة قصيرة بعد كل شرح، ثم أعد الشرح للنقاط التي أخطأت فيها فقط.</p>
+
 <hr>
 
 <h2>سير عمل ٢: التحضير للامتحان</h2>
@@ -70,6 +81,8 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
   <li>قبل أسبوع من الامتحان لا قبل ليلة منه</li>
   <li>بعد قراءة المادة كاملاً لا بدلاً منها</li>
 </ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج جيد في توليد أسئلة تقييمية متعددة المستويات (تذكر، تطبيق، تحليل). الأفضل أن تُبقي الجلسة تفاعلية سؤالاً بسؤال.</p>
 
 <p><strong>الخطوات:</strong></p>
 <ol>
@@ -111,11 +124,22 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
   <li>الجلسة الطويلة المتواصلة — أجلسات قصيرة متكررة أفضل</li>
 </ul>
 
+<p><strong>كيف تحسن النتيجة؟</strong> بعد كل جلسة، اطلب "خطة مراجعة ٣٠ دقيقة" مبنية فقط على أخطائك الفعلية، وليس على كل المنهج.</p>
+
 <hr>
 
 <h2>سير عمل ٣: كتابة مقال أكاديمي</h2>
 
 <p><strong>الهدف:</strong> استخدام الذكاء الاصطناعي كمساعد في التفكير والهيكلة والمراجعة — مع كتابة المحتوى الفعلي بنفسك.</p>
+
+<p><strong>متى تستخدمه:</strong></p>
+<ul>
+  <li>عندما تتعثر في فهم المطلوب من سؤال المقال</li>
+  <li>عندما تحتاج مراجعة منطق الحجج قبل كتابة المسودة النهائية</li>
+  <li>عندما تريد تحسين فقرة كتبتها دون تفويض الكتابة للنموذج</li>
+</ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج تحليلي جيد في مراجعة البنية المنطقية والحجج. استخدمه كمدقق ومنظم أفكار، لا ككاتب بديل.</p>
 
 <div class="lang-tip">
 <p>⚠️ <strong>وضوح مهم:</strong> هذا السير عمل يساعدك على كتابة مقالك الخاص بشكل أفضل — ليس على توليد مقال لتسليمه. الكتابة الفعلية تكون منك.</p>
@@ -166,6 +190,22 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
 
 لا تعيد كتابة الفقرة — أشر فقط لما يمكن تحسينه.</pre>
 
+<p><strong>علامات الناتج الجيد:</strong></p>
+<ul>
+  <li>الملاحظات تركز على المنطق والوضوح لا على الزخرفة اللغوية فقط</li>
+  <li>توضّح أين الحجة ضعيفة وكيف تقويها أنت</li>
+  <li>لا تولّد نصاً جاهزاً للتسليم بدل عملك</li>
+</ul>
+
+<p><strong>أخطاء شائعة:</strong></p>
+<ul>
+  <li>طلب كتابة المقال كاملاً ثم محاولة تعديله لاحقاً</li>
+  <li>نسخ تعليقات النموذج دون التحقق من دقتها المنهجية</li>
+  <li>نسيان ربط كل فقرة مباشرة بسؤال المقال</li>
+</ul>
+
+<p><strong>كيف تحسن النتيجة؟</strong> بعد كل مراجعة، اطلب "أقوى سؤال نقدي ضد حجتي" ثم عدّل الهيكل بناءً عليه قبل كتابة النسخة النهائية.</p>
+
 </div>
 
 <div data-lang="en">
@@ -193,6 +233,8 @@ title: "سير عمل الطالب مع الذكاء الاصطناعي | Studen
   <li>When you want to verify you understood, not just memorized</li>
 </ul>
 
+<p><strong>Tools/model type:</strong> A model strong at step-by-step teaching explanations. Start in Arabic for comprehension, then request English terminology when needed for your course material.</p>
+
 <span class="prompt-label">Prompt — Phase 1</span>
 <pre class="prompt-box">Explain [concept] as if you're explaining it to a smart student who has never studied it before.
 
@@ -217,11 +259,36 @@ And I want to understand: in what real-world context does this concept appear? G
   <li>You can connect it to other concepts you know</li>
 </ul>
 
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Reading explanations passively without self-testing</li>
+  <li>Jumping into details before building a big-picture mental model</li>
+  <li>Asking for final answers instead of re-explaining in your own words</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask for a 3-question mini-quiz after each explanation, then revisit only the points you miss.</p>
+
 <hr>
 
 <h2>Workflow 2: Preparing for an exam</h2>
 
 <p><strong>Goal:</strong> Review material in a way that tests understanding, not memorization — and reveals gaps before the exam.</p>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>At least several days before the exam, not the last night</li>
+  <li>After completing a full reading of the required content</li>
+</ul>
+
+<p><strong>Tools/model type:</strong> A model capable of generating multi-level assessment questions (recall, application, analysis) in an interactive one-question-at-a-time flow.</p>
+
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Provide syllabus topics and exam format</li>
+  <li>Request mixed-level questions</li>
+  <li>Answer first, then ask for evaluation</li>
+  <li>Prioritize review based on your weakest topics</li>
+</ol>
 
 <span class="prompt-label">Prompt — generating review questions</span>
 <pre class="prompt-box">I'm preparing for an exam in [subject].
@@ -241,11 +308,44 @@ After each answer: tell me if it was correct, where I was incomplete or wrong, a
 Rank them from most to least likely to appear in the exam.
 Then suggest a brief review method for each.</pre>
 
+<p><strong>Signs of an effective session:</strong></p>
+<ul>
+  <li>You discover weaknesses you were unaware of</li>
+  <li>You answer first before requesting model evaluation</li>
+  <li>You leave with a focused review list, not vague notes</li>
+</ul>
+
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Requesting answer keys before trying yourself</li>
+  <li>Over-reviewing comfortable topics only</li>
+  <li>Long unfocused sessions instead of short repeated drills</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> At the end of each session, ask for a 30-minute revision plan based only on your mistakes.</p>
+
 <hr>
 
 <h2>Workflow 3: Writing an academic essay</h2>
 
 <p><strong>Goal:</strong> Use AI as a thinking and structuring assistant — while you write the actual content yourself.</p>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>When the essay question feels ambiguous</li>
+  <li>When you need logical feedback on your outline before drafting</li>
+  <li>When polishing paragraphs you already wrote yourself</li>
+</ul>
+
+<p><strong>Tools/model type:</strong> A model with strong analytical feedback quality for argument structure. Use it as a reviewer and reasoning coach, not as a ghostwriter.</p>
+
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Clarify the essay question and possible arguments</li>
+  <li>Draft your own outline first</li>
+  <li>Request logical feedback on the outline and sample paragraphs</li>
+  <li>Write the final essay draft yourself</li>
+</ol>
 
 <div class="lang-tip">
 <p>⚠️ <strong>Important clarity:</strong> This workflow helps you write your essay better — not generate an essay to submit. The actual writing is yours.</p>
@@ -287,5 +387,21 @@ Review it for:
 - Relevance to the essay question: "[restate the question]"
 
 Do not rewrite the paragraph — only point out what can be improved.</pre>
+
+<p><strong>Signs of good output:</strong></p>
+<ul>
+  <li>Feedback focuses on clarity and argument logic, not stylistic noise</li>
+  <li>Weak reasoning spots are clearly identified</li>
+  <li>The model supports your writing process without replacing it</li>
+</ul>
+
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Asking the model to write the whole essay first</li>
+  <li>Accepting feedback without checking course criteria</li>
+  <li>Forgetting to tie each paragraph back to the essay question</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask for the strongest possible counter-question against your argument, then revise your structure before final drafting.</p>
 
 </div>

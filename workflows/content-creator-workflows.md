@@ -24,6 +24,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>عندما تريد مسودة أولى سريعة ثم تراجعها</li>
 </ul>
 
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج قوي في الكتابة العربية الإبداعية والتحرير (مثل ChatGPT أو Claude). استخدم نموذجاً واحداً للهيكل، ثم نموذجاً ثانياً فقط إذا أردت مقارنة أسلوبية.</p>
+
 <p><strong>الخطوات:</strong></p>
 <ol>
   <li>حدّد الجمهور والزاوية قبل البدء — لا الموضوع العام فقط</li>
@@ -68,6 +70,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>قبول أي نبرة — الناتج الافتراضي عادةً رسمي أكثر مما ينبغي</li>
 </ul>
 
+<p><strong>كيف تحسن النتيجة؟</strong> بعد المسودة الأولى، اطلب نسختين بديلتين للمقدمة والخاتمة فقط، ثم اختر الأقوى وادمجها مع جسم المقال الذي كتبته.</p>
+
 <hr>
 
 <h2>سير عمل ٢: تحويل فكرة واحدة لسلسلة منصات</h2>
@@ -79,6 +83,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>بعد كتابة مقال أو محتوى طويل وتريد تعظيم أثره</li>
   <li>عندما عندك فكرة واحدة وتريد حضوراً على أكثر من منصة</li>
 </ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج جيد في كتابة السوشيال ميديا متعددة المنصات. الأفضل أن تطلب مخرجات قصيرة ومنضبطة لكل منصة بدلاً من نص طويل ثم اختصاره.</p>
 
 <p><strong>الخطوات:</strong></p>
 <ol>
@@ -121,6 +127,15 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>إنستغرام يشجع التفاعل</li>
 </ul>
 
+<p><strong>أخطاء شائعة:</strong></p>
+<ul>
+  <li>نسخ نفس النص لكل المنصات مع تعديلات طفيفة فقط</li>
+  <li>تجاهل اختلاف الجمهور بين LinkedIn وInstagram</li>
+  <li>إدخال هاشتاقات أو CTA غير مناسب لسياق المنصة</li>
+</ul>
+
+<p><strong>كيف تحسن النتيجة؟</strong> اطلب من النموذج تقييم كل نسخة بدرجة "ملاءمة منصة" من ١٠، ثم أعد توليد النسخ التي حصلت على أقل من ٨.</p>
+
 <hr>
 
 <h2>سير عمل ٣: إعادة توظيف محتوى قديم</h2>
@@ -132,6 +147,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>عندما عندك أرشيف محتوى لم يصل لجمهور واسع</li>
   <li>عندما كتبت مقالاً طويلاً وتريد استخراج قيمته لمنصات أخرى</li>
 </ul>
+
+<p><strong>الأدوات/النموذج المناسب:</strong> نموذج جيد في التلخيص وإعادة الصياغة العربية بدون فقدان المعنى. إن كان النص الأصلي تقنياً، يمكنك تمرير نسخة إنجليزية للتحقق من المصطلحات.</p>
 
 <span class="prompt-label">البرومبت</span>
 <pre class="prompt-box">المحتوى الأصلي:
@@ -162,6 +179,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>السماح للنموذج بـ"تحسين" الأفكار الأصلية — احتفظ بمعناك الأصلي</li>
 </ul>
 
+<p><strong>كيف تحسن النتيجة؟</strong> اطلب مقارنة بين "النسخة الأصلية" و"النسخة المعاد توظيفها" للتأكد أن الرسالة الأساسية لم تتغير قبل النشر.</p>
+
 </div>
 
 <div data-lang="en">
@@ -184,6 +203,8 @@ title: "سير عمل صانع المحتوى مع الذكاء الاصطناع
   <li>When you have an idea but don't know where to start</li>
   <li>When you want a fast first draft to revise</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model that performs well on Arabic creative writing and editing (e.g., ChatGPT or Claude). Use one model for structure first, then optionally compare style variants in a second model.</p>
 
 <p><strong>Steps:</strong></p>
 <ol>
@@ -222,6 +243,15 @@ Avoid: [what you want avoided — e.g., clichés, vague sentences, enthusiastic 
   <li>The audience feels it was written specifically for them</li>
 </ul>
 
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Prompting "write an article about X" with no angle</li>
+  <li>Skipping outline review before drafting</li>
+  <li>Accepting default tone without calibration</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> After the draft, ask for two alternative intros and conclusions only, then merge the strongest pair into your final version.</p>
+
 <hr>
 
 <h2>Workflow 2: Turning one idea into a multi-platform series</h2>
@@ -233,6 +263,16 @@ Avoid: [what you want avoided — e.g., clichés, vague sentences, enthusiastic 
   <li>After writing an article and wanting to maximize its reach</li>
   <li>When you have one idea and want presence on multiple platforms</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model that is good at short-form social copy across platforms. Prefer platform-constrained prompts over a long generic post split afterward.</p>
+
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Define the core idea in one sentence</li>
+  <li>Set the audience and constraints for each platform</li>
+  <li>Generate separate drafts per platform</li>
+  <li>Review and tune each draft for platform-native tone</li>
+</ol>
 
 <span class="prompt-label">Prompt</span>
 <pre class="prompt-box">Core idea: [one sentence describing the main message]
@@ -259,6 +299,23 @@ Write a separate version for each platform:
 
 For each platform: the final copy only — no explanations or notes.</pre>
 
+<p><strong>Signs of good output:</strong></p>
+<ul>
+  <li>Each post feels native to its platform</li>
+  <li>LinkedIn version carries more depth</li>
+  <li>X version stays clear and useful within the character limit</li>
+  <li>Instagram version invites interaction naturally</li>
+</ul>
+
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Copy-pasting almost the same text across all platforms</li>
+  <li>Ignoring audience differences by platform</li>
+  <li>Using mismatched CTA or hashtag style for the channel</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask the model to score each draft for "platform fit" out of 10, then regenerate only drafts scoring below 8.</p>
+
 <hr>
 
 <h2>Workflow 3: Repurposing existing content</h2>
@@ -270,6 +327,8 @@ For each platform: the final copy only — no explanations or notes.</pre>
   <li>When you have a content archive that didn't reach a wide audience</li>
   <li>When you wrote a long article and want to extract its value for other platforms</li>
 </ul>
+
+<p><strong>Tools/model type:</strong> A model strong in summarization and rewriting while preserving meaning. If the source is technical, run a terminology check in English as a second pass.</p>
 
 <span class="prompt-label">Prompt</span>
 <pre class="prompt-box">Original content:
@@ -293,5 +352,13 @@ Do not change the original meaning — only condense and rephrase for readers wh
   <li>The excerpt stands alone and drives readers to the original</li>
   <li>The question generates genuine engagement, not polite responses</li>
 </ul>
+
+<p><strong>Common mistakes:</strong></p>
+<ul>
+  <li>Repurposing without specifying destination platform</li>
+  <li>Allowing the model to alter the original meaning for drama</li>
+</ul>
+
+<p><strong>How to refine the result:</strong> Ask for a side-by-side check between source meaning and repurposed output before publishing.</p>
 
 </div>
