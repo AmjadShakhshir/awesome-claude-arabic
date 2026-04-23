@@ -6,7 +6,7 @@ ar:
   - title: المهارات
     url: /skills/
   - title: حول
-    url: /about/
+    url: /about.html
 en:
   - title: Home
     url: /
@@ -15,4 +15,4 @@ en:
   - title: Skills
     url: /skills/
   - title: About
-    url: /about/
+    url: /about.htmlhtml

@@ -1,6 +1,6 @@
 # 🚀 Awesome Arabic AI
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://AmjadShakhshir.github.io/awesome-arabic-AI)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabicabic)
 
 🌐 **[Visit the Live Site](https://amjadshakhshir.github.io/awesome-claude-arabic/)** — bilingual (العربية / English) with built-in language switcher.
 
