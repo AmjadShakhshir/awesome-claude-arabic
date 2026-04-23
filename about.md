@@ -21,7 +21,7 @@ title: حول | About
 <h2>المساهمة</h2>
 <p>
 نرحب بجميع المساهمات! يمكنك فتح Pull Request أو Issue على
-<a href="https://github.com/AmjadShakhshir/awesome-arabic-AI">GitHub</a>.
+<a href="https://github.com/AmjadShakhshir/awesome-claude-arabicabic">GitHub</a>.
 </p>
 
 </div>
@@ -44,7 +44,7 @@ title: حول | About
 <h2>Contributing</h2>
 <p>
 Contributions are welcome! Open a Pull Request or Issue on
-<a href="https://github.com/AmjadShakhshir/awesome-arabic-AI">GitHub</a>.
+<a href="https://github.com/AmjadShakhshir/awesome-claude-arabic">GitHub</a>.
 </p>
 
 </div>
