@@ -1,5 +1,6 @@
 ---
 layout: default
+gated: true
 title: أدلة الذكاء الاصطناعي العملية | Practical AI Guides
 ---
 
@@ -50,6 +51,11 @@ title: أدلة الذكاء الاصطناعي العملية | Practical AI Gu
   <a class="section-card" href="{{ site.baseurl }}/guides/ai-usage-tips.html">
     <div class="card-title">نصائح عملية للاستخدام اليومي</div>
     <p class="card-desc">تقنيات تكرار، ضبط نبرة، والتحقق من المخرجات لتجنب الأخطاء المكلفة</p>
+  </a>
+
+  <a class="section-card" href="{{ site.baseurl }}/guides/how-to-use-context-mode.html">
+    <div class="card-title">وضع السياق — Context Mode</div>
+    <p class="card-desc">كيف تحمي نافذة السياق وتمدد جلسات AI من 30 دقيقة إلى 3 ساعات</p>
   </a>
 </div>
 
@@ -112,6 +118,11 @@ This page collects the core guides that help you improve how you use AI in every
   <a class="section-card" href="{{ site.baseurl }}/guides/ai-usage-tips.html">
     <div class="card-title">Practical Daily Usage Tips</div>
     <p class="card-desc">Iteration, tone control, and verification habits for reliable outputs</p>
+  </a>
+
+  <a class="section-card" href="{{ site.baseurl }}/guides/how-to-use-context-mode.html">
+    <div class="card-title">Context Mode Guide</div>
+    <p class="card-desc">Protect your context window and extend AI sessions from 30 minutes to 3 hours</p>
   </a>
 </div>
 
