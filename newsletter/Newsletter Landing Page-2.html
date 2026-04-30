@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Awesome Arabic Claude — Weekly Newsletter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --bg-2:#0f0f16;
+    --fg:#f4f4f5;
+    --fg-muted:rgba(244,244,245,.7);
+    --fg-dim:rgba(244,244,245,.5);
+    --line:rgba(255,255,255,.06);
+    --line-2:rgba(255,255,255,.12);
+    --card:rgba(255,255,255,.025);
+    --accent:#f59e0b;
+    --accent-2:#c2780a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg)}
+  body{
+    font-family:'Inter','Inter Tight',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, rgba(245,158,11,.08), transparent 60%),
+      radial-gradient(900px 500px at 90% 110%, rgba(245,158,11,.05), transparent 60%),
+      var(--bg);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  html[lang="ar"] body{font-family:'Tajawal','IBM Plex Sans Arabic','Inter',system-ui,sans-serif}
+  a{color:inherit}
+  ::selection{background:rgba(245,158,11,.3);color:#fff}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  main > section{animation:fadeUp .5s ease both}
+  main > section:nth-child(2){animation-delay:.05s}
+  main > section:nth-child(3){animation-delay:.1s}
+
+  /* Nav */
+  nav.site{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 40px;border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+    background:rgba(10,10,15,.72);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-mark{
+    width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;flex-shrink:0;
+    box-shadow:0 2px 10px -2px rgba(245,158,11,.4);
+  }
+  .brand-txt{display:flex;flex-direction:column;line-height:1.15}
+  .brand-name{font-weight:600;font-size:14px;color:var(--fg);letter-spacing:-.01em}
+  .brand-sub{font-size:11px;color:var(--fg-dim)}
+  .nav-links{display:flex;align-items:center;gap:22px}
+  .nav-links a{
+    color:rgba(244,244,245,.72);font-size:13px;text-decoration:none;
+    font-weight:500;transition:color .15s;
+  }
+  .nav-links a:hover{color:var(--fg)}
+  .lang-btn{
+    appearance:none;border:1px solid var(--line-2);background:rgba(255,255,255,.04);
+    color:rgba(244,244,245,.85);padding:7px 12px;border-radius:999px;font-size:12px;
+    font-weight:500;font-family:inherit;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+    transition:background .15s,border-color .15s;letter-spacing:.02em;
+  }
+  .lang-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+
+  /* Hero */
+  .hero{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:40px;
+    padding:80px 40px 60px;max-width:1280px;margin:0 auto;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;background:rgba(245,158,11,.08);
+    border:1px solid rgba(245,158,11,.2);border-radius:999px;
+    font-size:12px;color:var(--accent);font-weight:500;width:fit-content;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 8px var(--accent)}
+  h1.hero-title{
+    font-size:clamp(40px,5.2vw,64px);line-height:1.05;letter-spacing:-.02em;
+    font-weight:700;margin:0;color:#fafafa;
+    font-family:'Inter Tight','Inter',sans-serif;
+  }
+  html[lang="ar"] h1.hero-title{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif}
+  h1.hero-title .accent{color:var(--accent)}
+  .hero-sub{
+    font-size:17px;line-height:1.65;color:var(--fg-muted);margin:0;max-width:540px;
+  }
+  ul.bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+  ul.bullets li{
+    display:flex;align-items:flex-start;gap:12px;
+    font-size:14.5px;color:rgba(244,244,245,.85);line-height:1.55;
+  }
+  .check{
+    width:20px;height:20px;border-radius:6px;background:rgba(245,158,11,.12);
+    display:grid;place-items:center;flex-shrink:0;margin-top:2px;
+  }
+
+  /* Subscribe form */
+  .sub-wrap{max-width:520px;margin-top:8px;display:flex;flex-direction:column;gap:10px}
+  .sub-row{
+    display:flex;gap:8px;flex-direction:row;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line-2);
+    border-radius:14px;padding:6px;transition:border-color .2s;
+  }
+  .sub-row.error{border-color:rgba(239,68,68,.5)}
+  .sub-row input[type="email"]{
+    flex:1;min-width:0;appearance:none;border:none;outline:none;background:transparent;
+    color:var(--fg);padding:16px 18px;font-size:15px;font-family:inherit;
+  }
+  html[dir="rtl"] .sub-row input[type="email"]{text-align:right}
+  .sub-btn{
+    appearance:none;border:none;background:var(--accent);color:#1a1205;
+    font-weight:600;font-size:15px;font-family:inherit;
+    padding:16px 22px;border-radius:10px;cursor:pointer;white-space:nowrap;
+    transition:transform .12s,filter .12s;
+    box-shadow:0 4px 20px -6px var(--accent);
+  }
+  .sub-btn:active{transform:scale(.97)}
+  .sub-btn:disabled{cursor:wait;filter:brightness(.9)}
+  .sub-btn .spinner{display:inline-block;width:14px;height:14px;vertical-align:middle;
+    margin-inline-end:8px;animation:spin .8s linear infinite;border:2px solid rgba(26,18,5,.3);
+    border-top-color:#1a1205;border-radius:50%}
+  .err-msg{color:#fca5a5;font-size:13px;padding:0 4px;display:none}
+  .sub-row.error ~ .err-msg{display:block}
+  .privacy{
+    display:flex;align-items:center;gap:8px;font-size:12.5px;
+    color:var(--fg-dim);padding:2px 4px;
+  }
+  .hp{position:absolute;left:-5000px}
+  .success{
+    display:none;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;
+    background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#4ade80;
+    font-size:15px;font-weight:500;
+  }
+  .success.show{display:flex}
+  .success-ic{
+    width:32px;height:32px;border-radius:50%;background:rgba(34,197,94,.2);
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .success-ttl{color:#bbf7d0;font-weight:600;margin-bottom:2px}
+  .success-body{font-size:13px;color:rgba(187,247,208,.75);font-weight:400}
+
+  /* Lead magnet */
+  .magnet{
+    display:flex;gap:14px;align-items:center;padding:14px 16px;
+    background:rgba(255,255,255,.03);border:1px dashed var(--line-2);
+    border-radius:12px;max-width:520px;
+  }
+  .magnet-ic{
+    width:44px;height:56px;
+    background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.07));
+    border:1px solid rgba(245,158,11,.33);border-radius:4px;
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .magnet-ic span{font-size:9px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .magnet-ttl{font-size:14px;font-weight:600;color:var(--fg)}
+  .magnet-desc{font-size:12.5px;color:rgba(244,244,245,.6);line-height:1.5}
+  .magnet-badge{
+    font-size:10px;font-weight:600;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.08em;
+  }
+
+  /* Issue preview */
+  .preview-wrap{position:relative}
+  .preview-label{
+    position:absolute;top:-14px;left:24px;background:#0a0a0f;padding:4px 10px;
+    border-radius:999px;border:1px solid var(--line-2);font-size:11px;color:var(--fg-dim);
+    display:inline-flex;align-items:center;gap:6px;z-index:2;
+  }
+  html[dir="rtl"] .preview-label{left:auto;right:24px}
+  .preview-label .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .browser{
+    background:#13131a;border:1px solid rgba(255,255,255,.08);border-radius:14px;
+    overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.02);
+    transform:rotate(-.4deg);position:relative;z-index:1;
+  }
+  .browser-bar{
+    display:flex;align-items:center;gap:6px;padding:10px 14px;
+    border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);
+  }
+  .browser-bar .dot{width:10px;height:10px;border-radius:50%}
+  .browser-bar .dot.r{background:#ff5f57}
+  .browser-bar .dot.y{background:#ffbd2e}
+  .browser-bar .dot.g{background:#28c840}
+  .browser-url{
+    flex:1;text-align:center;font-size:11px;color:rgba(244,244,245,.4);
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+  }
+  .browser-body{padding:22px 24px;display:flex;flex-direction:column;gap:18px}
+  .issue-meta{display:flex;justify-content:space-between;align-items:baseline}
+  .issue-num{font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.06em}
+  .issue-date{font-size:11px;color:rgba(244,244,245,.4)}
+  .issue-ttl{
+    margin:0;font-size:22px;line-height:1.25;font-weight:700;
+    color:#fafafa;letter-spacing:-.01em;
+  }
+  .screenshot-ph{
+    height:110px;border-radius:8px;
+    background:repeating-linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.035) 10px,rgba(255,255,255,.06) 10px,rgba(255,255,255,.06) 20px);
+    border:1px solid var(--line);display:grid;place-items:center;
+    font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;
+    color:rgba(244,244,245,.4);letter-spacing:.04em;
+  }
+  .issue-sections{display:flex;flex-direction:column;gap:14px}
+  .issue-section-ttl{
+    display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent);
+    font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .issue-section p{margin:4px 0 0;font-size:13px;color:rgba(244,244,245,.72);line-height:1.55}
+  .preview-stack{
+    position:absolute;inset:0;background:#0f0f15;border:1px solid var(--line);
+    border-radius:14px;z-index:0;transform:rotate(1.5deg) translate(0,14px);opacity:.6;
+  }
+
+  /* Social proof */
+  .proof{
+    padding:60px 40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+  }
+  .proof-inner{max-width:1200px;margin:0 auto}
+  .section-head{text-align:center;margin-bottom:40px}
+  .section-head h2{margin:0;font-size:32px;font-weight:700;color:#fafafa;letter-spacing:-.015em}
+  .section-head p{margin:10px 0 0;color:rgba(244,244,245,.6);font-size:15px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+  .stat{
+    padding:24px 20px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;text-align:center;
+  }
+  .stat-val{
+    font-size:32px;font-weight:700;color:var(--accent);letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .stat-lbl{font-size:12px;color:rgba(244,244,245,.55);margin-top:4px}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .quote{
+    margin:0;padding:22px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;display:flex;flex-direction:column;gap:14px;
+  }
+  .quote blockquote{margin:0;font-size:14.5px;line-height:1.6;color:rgba(244,244,245,.88)}
+  .quote figcaption{display:flex;align-items:center;gap:10px;margin-top:auto}
+  .avatar{
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(245,158,11,.4),rgba(245,158,11,.13));
+    display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--accent);
+  }
+  .q-name{font-size:13px;font-weight:600;color:var(--fg)}
+  .q-role{font-size:11.5px;color:var(--fg-dim)}
+
+  /* About */
+  .about{padding:70px 40px}
+  .about-inner{
+    max-width:860px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;
+    gap:36px;align-items:start;
+  }
+  .portrait{
+    width:140px;height:180px;border-radius:12px;
+    background:repeating-linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.04) 8px,rgba(255,255,255,.08) 8px,rgba(255,255,255,.08) 16px);
+    border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;
+    font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;
+    color:rgba(244,244,245,.4);text-align:center;padding:8px;
+  }
+  .about-body{display:flex;flex-direction:column;gap:14px}
+  .about-eyebrow{
+    font-size:11px;font-weight:600;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.08em;
+  }
+  .about-body h2{margin:0;font-size:28px;font-weight:700;color:#fafafa;letter-spacing:-.01em}
+  .about-body p{margin:0;font-size:15.5px;line-height:1.7;color:rgba(244,244,245,.75)}
+  .about-meta{font-size:12.5px;color:rgba(244,244,245,.45);margin-top:4px}
+
+  /* FAQ */
+  .faq{padding:40px 40px 80px}
+  .faq-inner{max-width:720px;margin:0 auto}
+  .faq-inner h2{margin:0 0 24px;font-size:22px;font-weight:700;color:#fafafa;letter-spacing:-.01em}
+  .faq-list{display:flex;flex-direction:column;gap:8px}
+  details.faq-item{
+    border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;
+    background:transparent;transition:background .15s;
+  }
+  details.faq-item[open]{background:rgba(255,255,255,.03)}
+  details.faq-item summary{
+    padding:14px 18px;font-size:14.5px;font-weight:500;color:var(--fg);
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    cursor:pointer;list-style:none;
+  }
+  details.faq-item summary::-webkit-details-marker{display:none}
+  .faq-plus{
+    font-size:18px;color:var(--accent);line-height:1;
+    transition:transform .2s;
+  }
+  details.faq-item[open] .faq-plus{transform:rotate(45deg)}
+  .faq-answer{padding:0 18px 16px;font-size:14px;line-height:1.6;color:rgba(244,244,245,.7)}
+
+  /* Footer */
+  footer.site{
+    padding:40px 40px 32px;border-top:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+  }
+  .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+  .footer-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+  .footer-brand{display:flex;flex-direction:column;gap:10px;max-width:420px}
+  .footer-brand-row{display:flex;align-items:center;gap:10px}
+  .footer-tag{margin:0;font-size:13px;color:rgba(244,244,245,.55);line-height:1.6}
+  .footer-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end}
+  .footer-links a{
+    font-size:13px;color:rgba(244,244,245,.7);text-decoration:none;transition:color .15s;
+  }
+  .footer-links a:hover{color:var(--accent)}
+  .footer-bot{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;
+  }
+  .footer-rights{font-size:12px;color:rgba(244,244,245,.45)}
+  .footer-legal{display:flex;gap:18px}
+  .footer-legal a{font-size:12px;color:rgba(244,244,245,.55);text-decoration:none}
+  .footer-legal a:hover{color:var(--fg)}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:32px;padding:48px 20px}
+    .about-inner{grid-template-columns:1fr;gap:20px}
+    .stats,.quotes{grid-template-columns:1fr}
+    nav.site{padding:16px 20px}
+    .nav-links a{display:none}
+    .proof,.about,.faq,footer.site{padding-left:20px;padding-right:20px}
+    .footer-top{grid-template-columns:1fr}
+    .footer-links{justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- ──────────── NAV ──────────── -->
+<nav class="site">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M4 4l5 10 5-10M6 10h6" stroke="#1a1205" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="brand-txt">
+      <span class="brand-name" data-i18n="nav.brand">Awesome Arabic Claude</span>
+      <span class="brand-sub" data-i18n="nav.brandSub">Weekly newsletter</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#archive" data-i18n="nav.archive">Archive</a>
+    <button type="button" class="lang-btn" id="lang-btn" aria-label="Switch language">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1"/>
+        <path d="M1 6h10M6 1c1.5 1.5 2.3 3.2 2.3 5S7.5 10.5 6 11M6 1C4.5 2.5 3.7 4.2 3.7 6S4.5 10.5 6 11" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span id="lang-label" data-i18n="nav.langLabel">ع</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <!-- ──────────── HERO ──────────── -->
+  <section class="hero">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        <span data-i18n="hero.eyebrow">Weekly newsletter</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-i18n="hero.title1">Master Claude in Arabic.</span><br>
+        <span class="accent" data-i18n="hero.title2">Every week.</span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        Tips, ready-to-use prompts, and practical workflows for Claude, MCP, and Skills — in Arabic, for people who want real results.
+      </p>
+
+      <ul class="bullets" id="bullets"></ul>
+
+      <!-- ── Subscribe form ── -->
+      <div class="sub-wrap">
+        <form id="sub-form" action="https://example.us1.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_LIST_ID" method="post" target="mc_iframe" novalidate>
+          <iframe name="mc_iframe" style="display:none" title="mc-response"></iframe>
+
+          <div class="sub-row" id="sub-row">
+            <input
+              type="email"
+              name="EMAIL"
+              id="email-input"
+              required
+              autocomplete="email"
+              dir="ltr"
+              placeholder="your@email.com"
+              data-i18n-attr="placeholder:hero.emailPlaceholder"
+            />
+            <!-- Mailchimp honeypot (required) -->
+            <div class="hp" aria-hidden="true">
+              <input type="text" name="b_YOUR_USER_ID_YOUR_LIST_ID" tabindex="-1" value="" />
+            </div>
+            <button type="submit" class="sub-btn" id="sub-btn" data-i18n="hero.cta">Subscribe free</button>
+          </div>
+          <div class="err-msg" id="err-msg"></div>
+          <div class="privacy">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M6 1l4 2v3c0 2.5-1.7 4.3-4 5-2.3-.7-4-2.5-4-5V3l4-2z" stroke="currentColor" stroke-width="1" fill="none"/>
+            </svg>
+            <span data-i18n="hero.privacy">No spam. Unsubscribe anytime.</span>
+          </div>
+        </form>
+
+        <div class="success" id="success" role="status" aria-live="polite">
+          <span class="success-ic" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8.5l3 3 7-7" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div>
+            <div class="success-ttl" data-i18n="hero.ctaDone">Done ✓ Check your inbox</div>
+            <div class="success-body" data-i18n="hero.successBody">We've sent you a confirmation link + your free PDF.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Lead magnet ── -->
+      <div class="magnet">
+        <div class="magnet-ic"><span>PDF</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+          <div class="magnet-badge" data-i18n="hero.magnet.badge">Instant gift</div>
+          <div class="magnet-ttl" data-i18n="hero.magnet.title">Get the free PDF</div>
+          <div class="magnet-desc" data-i18n="hero.magnet.desc">Our top 20 Arabic prompts for Claude — the moment you confirm your email.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Sample issue preview ── -->
+    <div class="preview-wrap">
+      <div class="preview-label">
+        <span class="dot"></span>
+        <span data-i18n="preview.label">Sample issue</span>
+      </div>
+      <div class="browser">
+        <div class="browser-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <div class="browser-url">awesome-arabic-claude.com/issues/47</div>
+        </div>
+        <div class="browser-body">
+          <div class="issue-meta">
+            <span class="issue-num" data-i18n="preview.header">Issue #47</span>
+            <span class="issue-date"><span data-i18n="preview.date">April 23, 2026</span> · <span data-i18n="preview.readTime">4 min read</span></span>
+          </div>
+          <h3 class="issue-ttl" data-i18n="preview.title">How to build a Skill that searches your docs</h3>
+          <div class="screenshot-ph">[ product_screenshot.png ]</div>
+          <div class="issue-sections">
+            <div class="issue-section">
+              <div class="issue-section-ttl">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span data-i18n="preview.section1">Prompt of the week</span>
+              </div>
+              <p data-i18n="preview.section1Body">Use this template to review Python code with Claude Code — guarantees test coverage and security before the PR.</p>
+            </div>
+            <div class="issue-section">
+              <div class="issue-section-ttl">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2" width="9" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3 5h5M3 7h5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+                <span data-i18n="preview.section2">Quick news</span>
+              </div>
+              <p data-i18n="preview.section2Body">Anthropic released Claude 4.5 Haiku — 3× faster for light tasks. When to use it and when not to.</p>
+            </div>
+            <div class="issue-section">
+              <div class="issue-section-ttl">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="3" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="9" cy="9" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 4.5v3h6" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+                <span data-i18n="preview.section3">Workflow</span>
+              </div>
+              <p data-i18n="preview.section3Body">Connect Claude to Notion over MCP in 5 minutes — step by step.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-stack"></div>
+    </div>
+  </section>
+
+  <!-- ──────────── SOCIAL PROOF ──────────── -->
+  <section class="proof" id="proof-section">
+    <div class="proof-inner">
+      <div class="section-head">
+        <h2 data-i18n="proof.title">Join 3,200+ Arabic readers</h2>
+        <p data-i18n="proof.sub">Developers, creators, and founders using Claude daily</p>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="quotes" id="quotes"></div>
+    </div>
+  </section>
+
+  <!-- ──────────── ABOUT ──────────── -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="portrait">[ author_photo.jpg ]</div>
+      <div class="about-body">
+        <span class="about-eyebrow" data-i18n="about.eyebrow">About</span>
+        <h2 data-i18n="about.title">The person behind this</h2>
+        <p data-i18n="about.body">I'm Omar. Software engineer and AI consultant, working with Claude daily since launch. I write this newsletter because I couldn't find a serious Arabic source that explains AI tools in depth — so I decided to be that source.</p>
+        <p data-i18n="about.body2">Each issue takes me 4–6 hours of writing and testing. No agency, no ghostwriters — just real experience.</p>
+        <div class="about-meta" data-i18n="about.meta">Writing from Dubai · since 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── FAQ ──────────── -->
+  <section class="faq">
+    <div class="faq-inner">
+      <h2 data-i18n="faq.title">Quick questions</h2>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer class="site">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 4l5 10 5-10M6 10h6" stroke="#1a1205" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span style="font-size:14px;font-weight:600" data-i18n="nav.brand">Awesome Arabic Claude</span>
+        </div>
+        <p class="footer-tag" data-i18n="footer.tag">An Arabic newsletter on AI and its tools.</p>
+      </div>
+      <div class="footer-links" id="footer-links"></div>
+    </div>
+    <div class="footer-bot">
+      <span class="footer-rights" data-i18n="footer.rights">© 2026 Awesome Arabic Claude — all rights reserved</span>
+      <div class="footer-legal" id="footer-legal"></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ──────────── SCRIPTS ──────────── -->
+<script>
+/* Mailchimp config — replace with your real embedded form values */
+const MAILCHIMP = {
+  action: 'https://example.us1.list-manage.com/subscribe/post?u=YOUR_USER_ID&id=YOUR_LIST_ID',
+  honeypotName: 'b_YOUR_USER_ID_YOUR_LIST_ID'
+};
+
+/* ── i18n strings ── */
+const STRINGS = {
+  ar: {
+    dir: 'rtl', lang: 'ar',
+    nav: { brand: 'Awesome Arabic Claude', brandSub: 'نشرة أسبوعية', about: 'عنّي', archive: 'الأعداد السابقة', langLabel: 'EN' },
+    hero: {
+      eyebrow: 'النشرة الأسبوعية',
+      title1: 'أتقن Claude بالعربية',
+      title2: 'كل أسبوع.',
+      sub: 'نصائح، برومبتات جاهزة، و workflows عملية لاستخدام Claude و MCP و الـSkills — بالعربية، لمن يريد نتائج فعلية.',
+      bullets: [
+        'برومبتات جاهزة بقيود واضحة — ليس "اكتب مقالاً"',
+        'workflows عملية للمطورين، صناع المحتوى، وأصحاب الأعمال',
+        'أحدث أخبار الذكاء الاصطناعي — مختصرة ومفيدة',
+        'رسائل قصيرة بدون حشو — إلغاء الاشتراك بضغطة'
+      ],
+      emailPlaceholder: 'your@email.com',
+      cta: 'اشترك مجاناً',
+      ctaLoading: 'جارٍ الاشتراك...',
+      ctaDone: 'تم ✓ تحقق من بريدك',
+      successBody: 'أرسلنا لك رابط التأكيد و الـPDF المجاني.',
+      privacy: 'لا سبام. إلغاء الاشتراك في أي وقت.',
+      magnet: { badge: 'هدية فورية', title: 'احصل على PDF مجاني', desc: 'حزمة أفضل 20 برومبت عربي لـ Claude — فور تأكيد بريدك.' },
+      errors: { invalid: 'يرجى إدخال بريد إلكتروني صحيح', generic: 'حدث خطأ. حاول مرة أخرى.' }
+    },
+    proof: {
+      title: 'ينضم إليها +٣٬٢٠٠ قارئ عربي',
+      sub: 'مطورون، صناع محتوى، ورواد أعمال يستخدمون Claude يومياً',
+      stats: [
+        { value: '٣٬٢٠٠+', label: 'مشترك' },
+        { value: '٤٫٩', label: 'تقييم المحتوى' },
+        { value: '٠٪', label: 'حشو أو سبام' }
+      ],
+      quotes: [
+        { text: 'أول نشرة عربية تشرح MCP و Skills بطريقة أفهمها فعلاً. كل عدد فيه شيء أطبّقه نفس اليوم.', name: 'أحمد م.', role: 'مطور برمجيات، الرياض' },
+        { text: 'البرومبتات وحدها تستحق الاشتراك. وفّرت علي ساعات في الأسبوع.', name: 'ليلى ع.', role: 'صانعة محتوى، القاهرة' },
+        { text: 'مختصرة ومركّزة. لا أحذف شيئاً منها.', name: 'خالد ر.', role: 'مؤسس شركة، دبي' }
+      ]
+    },
+    preview: {
+      label: 'عدد تجريبي', header: 'العدد #٤٧', date: '٢٣ أبريل ٢٠٢٦',
+      title: 'كيف تبني Skill يبحث في مستنداتك',
+      section1: 'برومبت الأسبوع',
+      section1Body: 'استخدم هذا القالب لمراجعة كود Python مع Claude Code — يضمن تغطية الاختبارات والأمان قبل الـPR.',
+      section2: 'خبر سريع',
+      section2Body: 'Anthropic أطلقت Claude 4.5 Haiku — أسرع بـ٣× للمهام الخفيفة. متى تستخدمها ومتى لا.',
+      section3: 'workflow',
+      section3Body: 'اربط Claude مع Notion عبر MCP في ٥ دقائق — خطوة بخطوة.',
+      readTime: 'قراءة ٤ دقائق'
+    },
+    about: {
+      eyebrow: 'عنّي', title: 'أنا من يكتب هذه النشرة',
+      body: 'اسمي عمر. مهندس برمجيات ومستشار ذكاء اصطناعي، أعمل مع Claude يومياً منذ إطلاقه. أكتب هذه النشرة لأنني لم أجد مصدراً عربياً جاداً يشرح أدوات الذكاء الاصطناعي بعمق — فقررت أن أكون ذلك المصدر.',
+      body2: 'كل عدد يأخذ منّي ٤-٦ ساعات كتابة وتجريب. لا وكالة، لا كتّاب أشباح — فقط تجربة حقيقية.',
+      meta: 'يكتب من دبي · منذ ٢٠٢٤'
+    },
+    faq: {
+      title: 'أسئلة سريعة',
+      items: [
+        { q: 'كم مرة تصل النشرة؟', a: 'مرة في الأسبوع، صباح الأحد.' },
+        { q: 'هل هي مجانية حقاً؟', a: 'نعم، وستبقى كذلك. هناك عدد مدفوع شهرياً اختياري للمحتوى المتعمّق.' },
+        { q: 'كيف ألغي الاشتراك؟', a: 'رابط إلغاء الاشتراك في أسفل كل رسالة. بضغطة واحدة.' }
+      ]
+    },
+    footer: {
+      tag: 'نشرة عربية عن الذكاء الاصطناعي وأدواته.',
+      rights: '© ٢٠٢٦ Awesome Arabic Claude — جميع الحقوق محفوظة',
+      links: [
+        { label: 'تويتر / X', href: '#' },
+        { label: 'LinkedIn', href: '#' },
+        { label: 'YouTube', href: '#' },
+        { label: 'RSS', href: '#' }
+      ],
+      legal: [ { label: 'سياسة الخصوصية', href: '#' }, { label: 'الشروط', href: '#' } ]
+    }
+  },
+  en: {
+    dir: 'ltr', lang: 'en',
+    nav: { brand: 'Awesome Arabic Claude', brandSub: 'Weekly newsletter', about: 'About', archive: 'Archive', langLabel: 'ع' },
+    hero: {
+      eyebrow: 'Weekly newsletter',
+      title1: 'Master Claude in Arabic.',
+      title2: 'Every week.',
+      sub: 'Tips, ready-to-use prompts, and practical workflows for Claude, MCP, and Skills — in Arabic, for people who want real results.',
+      bullets: [
+        'Ready-made prompts with clear constraints — not "write an article"',
+        'Practical workflows for developers, creators, and business owners',
+        'Latest AI news — short and useful',
+        'Short emails, no filler — unsubscribe anytime'
+      ],
+      emailPlaceholder: 'your@email.com',
+      cta: 'Subscribe free',
+      ctaLoading: 'Subscribing...',
+      ctaDone: 'Done ✓ Check your inbox',
+      successBody: "We've sent you a confirmation link + your free PDF.",
+      privacy: 'No spam. Unsubscribe anytime.',
+      magnet: { badge: 'Instant gift', title: 'Get the free PDF', desc: 'Our top 20 Arabic prompts for Claude — the moment you confirm your email.' },
+      errors: { invalid: 'Please enter a valid email', generic: 'Something went wrong. Try again.' }
+    },
+    proof: {
+      title: 'Join 3,200+ Arabic readers',
+      sub: 'Developers, creators, and founders using Claude daily',
+      stats: [
+        { value: '3,200+', label: 'Subscribers' },
+        { value: '4.9', label: 'Content rating' },
+        { value: '0%', label: 'Fluff or spam' }
+      ],
+      quotes: [
+        { text: 'The first Arabic newsletter that explains MCP and Skills in a way I actually get. Every issue has something I apply the same day.', name: 'Ahmed M.', role: 'Software Engineer, Riyadh' },
+        { text: 'The prompts alone are worth subscribing for. Saved me hours every week.', name: 'Layla A.', role: 'Content Creator, Cairo' },
+        { text: 'Short and focused. I never delete an issue.', name: 'Khalid R.', role: 'Founder, Dubai' }
+      ]
+    },
+    preview: {
+      label: 'Sample issue', header: 'Issue #47', date: 'April 23, 2026',
+      title: 'How to build a Skill that searches your docs',
+      section1: 'Prompt of the week',
+      section1Body: 'Use this template to review Python code with Claude Code — guarantees test coverage and security before the PR.',
+      section2: 'Quick news',
+      section2Body: 'Anthropic released Claude 4.5 Haiku — 3× faster for light tasks. When to use it and when not to.',
+      section3: 'Workflow',
+      section3Body: 'Connect Claude to Notion over MCP in 5 minutes — step by step.',
+      readTime: '4 min read'
+    },
+    about: {
+      eyebrow: 'About', title: 'The person behind this',
+      body: "I'm Omar. Software engineer and AI consultant, working with Claude daily since launch. I write this newsletter because I couldn't find a serious Arabic source that explains AI tools in depth — so I decided to be that source.",
+      body2: 'Each issue takes me 4–6 hours of writing and testing. No agency, no ghostwriters — just real experience.',
+      meta: 'Writing from Dubai · since 2024'
+    },
+    faq: {
+      title: 'Quick questions',
+      items: [
+        { q: 'How often does it arrive?', a: 'Once a week, Sunday morning.' },
+        { q: 'Is it really free?', a: "Yes, and it will stay free. There's an optional paid monthly deep-dive issue." },
+        { q: 'How do I unsubscribe?', a: 'Unsubscribe link at the bottom of every email. One click.' }
+      ]
+    },
+    footer: {
+      tag: 'An Arabic newsletter on AI and its tools.',
+      rights: '© 2026 Awesome Arabic Claude — all rights reserved',
+      links: [
+        { label: 'Twitter / X', href: '#' },
+        { label: 'LinkedIn', href: '#' },
+        { label: 'YouTube', href: '#' },
+        { label: 'RSS', href: '#' }
+      ],
+      legal: [ { label: 'Privacy', href: '#' }, { label: 'Terms', href: '#' } ]
+    }
+  }
+};
+
+/* ── helpers ── */
+function getByPath(obj, path){
+  return path.split('.').reduce((o,k)=>o==null?o:o[k], obj);
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ── apply language ── */
+let currentLang = 'en'; // will be set by init
+
+function applyLang(lang){
+  currentLang = lang;
+  const t = STRINGS[lang];
+  document.documentElement.lang = t.lang;
+  document.documentElement.dir = t.dir;
+
+  // Text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const val = getByPath(t, el.dataset.i18n);
+    if (typeof val === 'string') el.textContent = val;
+  });
+  // Attributes (data-i18n-attr="placeholder:hero.emailPlaceholder")
+  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    el.dataset.i18nAttr.split(',').forEach(pair => {
+      const [attr, path] = pair.split(':');
+      const val = getByPath(t, path);
+      if (typeof val === 'string') el.setAttribute(attr, val);
+    });
+  });
+
+  // Bullets
+  const bulletsEl = document.getElementById('bullets');
+  bulletsEl.innerHTML = t.hero.bullets.map(b => `
+    <li>
+      <span class="check" aria-hidden="true">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+          <path d="M2 5.5l2.5 2.5L9 3" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>${escapeHtml(b)}</span>
+    </li>`).join('');
+
+  // Stats
+  document.getElementById('stats').innerHTML = t.proof.stats.map(s => `
+    <div class="stat">
+      <div class="stat-val">${escapeHtml(s.value)}</div>
+      <div class="stat-lbl">${escapeHtml(s.label)}</div>
+    </div>`).join('');
+
+  // Quotes
+  document.getElementById('quotes').innerHTML = t.proof.quotes.map(q => `
+    <figure class="quote">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
+        <path d="M0 16V10C0 4.5 3 1 8 0v3c-2.5 1-4 3-4 5h4v8H0zm12 0V10C12 4.5 15 1 20 0v3c-2.5 1-4 3-4 5h4v8H12z" fill="var(--accent)" opacity="0.4"/>
+      </svg>
+      <blockquote>${escapeHtml(q.text)}</blockquote>
+      <figcaption>
+        <div class="avatar">${escapeHtml(q.name.charAt(0))}</div>
+        <div>
+          <div class="q-name">${escapeHtml(q.name)}</div>
+          <div class="q-role">${escapeHtml(q.role)}</div>
+        </div>
+      </figcaption>
+    </figure>`).join('');
+
+  // FAQ
+  document.getElementById('faq-list').innerHTML = t.faq.items.map((item, i) => `
+    <details class="faq-item"${i===0?' open':''}>
+      <summary>
+        <span>${escapeHtml(item.q)}</span>
+        <span class="faq-plus" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-answer">${escapeHtml(item.a)}</div>
+    </details>`).join('');
+
+  // Footer links
+  document.getElementById('footer-links').innerHTML = t.footer.links.map(l =>
+    `<a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a>`
+  ).join('');
+  document.getElementById('footer-legal').innerHTML = t.footer.legal.map(l =>
+    `<a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a>`
+  ).join('');
+
+  // Update title
+  document.title = lang === 'ar'
+    ? 'Awesome Arabic Claude — النشرة الأسبوعية'
+    : 'Awesome Arabic Claude — Weekly Newsletter';
+}
+
+/* ── lang switch ── */
+document.getElementById('lang-btn').addEventListener('click', () => {
+  const next = currentLang === 'ar' ? 'en' : 'ar';
+  applyLang(next);
+  try { localStorage.setItem('aac-lang', next); } catch(e){}
+});
+
+/* ── subscribe form ── */
+const subForm = document.getElementById('sub-form');
+const subRow = document.getElementById('sub-row');
+const subBtn = document.getElementById('sub-btn');
+const emailInput = document.getElementById('email-input');
+const errMsg = document.getElementById('err-msg');
+const successEl = document.getElementById('success');
+
+function validateEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+subForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = emailInput.value.trim();
+  const t = STRINGS[currentLang];
+
+  if (!validateEmail(email)) {
+    subRow.classList.add('error');
+    errMsg.textContent = t.hero.errors.invalid;
+    errMsg.style.display = 'block';
+    return;
+  }
+
+  subRow.classList.remove('error');
+  errMsg.style.display = 'none';
+
+  // Loading state
+  const origText = subBtn.textContent;
+  subBtn.disabled = true;
+  subBtn.innerHTML = `<span class="spinner"></span>${escapeHtml(t.hero.ctaLoading)}`;
+
+  try {
+    // If configured, submit into hidden iframe (Mailchimp-friendly)
+    if (!MAILCHIMP.action.includes('YOUR_USER_ID')) {
+      subForm.submit();
+    }
+    // Simulate / allow response time
+    await new Promise(r => setTimeout(r, 900));
+    // Show success
+    subForm.style.display = 'none';
+    successEl.classList.add('show');
+  } catch(err){
+    subBtn.disabled = false;
+    subBtn.textContent = origText;
+    subRow.classList.add('error');
+    errMsg.textContent = t.hero.errors.generic;
+    errMsg.style.display = 'block';
+  }
+});
+
+emailInput.addEventListener('input', () => {
+  if (subRow.classList.contains('error')) {
+    subRow.classList.remove('error');
+    errMsg.style.display = 'none';
+  }
+});
+
+/* ── init ── */
+(function init(){
+  let lang = 'en';
+  try {
+    const saved = localStorage.getItem('aac-lang');
+    if (saved === 'ar' || saved === 'en') lang = saved;
+  } catch(e){}
+  applyLang(lang);
+})();
+</script>
+</body>
+</html>
