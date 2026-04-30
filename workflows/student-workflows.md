@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "سير عمل الطالب مع الذكاء الاصطناعي | Student AI Workflows"
 ---

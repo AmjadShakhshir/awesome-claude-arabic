@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: مهارة سكربتات تيك توك والفيديوهات الفيروسية
 ---

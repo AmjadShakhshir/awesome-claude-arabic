@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "برومبتات التعلم والدراسة | Learning & Study Prompts"
 ---

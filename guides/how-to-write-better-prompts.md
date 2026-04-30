@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "كيف تكتب برومبت أفضل | How to Write Better Prompts"
 ---

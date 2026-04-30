@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "نصائح عملية لاستخدام الذكاء الاصطناعي | Practical AI Usage Tips"
 ---

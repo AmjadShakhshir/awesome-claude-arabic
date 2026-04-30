@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "العربية أم الإنجليزية مع الذكاء الاصطناعي؟ | Arabic vs English for AI"
 ---

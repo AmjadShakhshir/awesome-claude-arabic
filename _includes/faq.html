@@ -1,0 +1,126 @@
+{%- comment -%}
+  Bilingual FAQ section — answers the most common pre-subscribe questions.
+  Copy adapted from i18n.jsx in the newsletter prototype.
+{%- endcomment -%}
+
+<section class="faq-section">
+  <h2 class="faq-heading">
+    <span data-lang="ar">أسئلة شائعة</span>
+    <span data-lang="en">Frequently asked questions</span>
+  </h2>
+
+  <div class="faq-list">
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span data-lang="ar">كم مرة تصل النشرة؟</span>
+        <span data-lang="en">How often does the newsletter arrive?</span>
+        <span class="faq-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-answer">
+        <span data-lang="ar">أسبوعياً — كل أسبوع برومبت جديد، أداة مختارة، ونصيحة عملية. لا حشو، لا تسويق مبالغ فيه. رسالة واحدة فقط.</span>
+        <span data-lang="en">Weekly — every week brings a new prompt, a curated tool, and one practical tip. No fluff, no aggressive marketing. Just one email.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span data-lang="ar">هل الاشتراك مجاني حقاً؟</span>
+        <span data-lang="en">Is it really free?</span>
+        <span class="faq-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-answer">
+        <span data-lang="ar">نعم، مجاني تماماً — بلا بطاقة ائتمان، بلا تجربة مدفوعة. كل المحتوى في النشرة ومحتوى الموقع يصلك مجاناً عند الاشتراك.</span>
+        <span data-lang="en">Yes, completely free — no credit card, no paid trial. All newsletter content and site content unlocks for free when you subscribe.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span data-lang="ar">كيف أوقف الاشتراك؟</span>
+        <span data-lang="en">How do I unsubscribe?</span>
+        <span class="faq-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-answer">
+        <span data-lang="ar">في أسفل كل رسالة ستجد رابط إلغاء الاشتراك — نقرة واحدة، فوراً، بلا رسائل تأكيد أو أسئلة.</span>
+        <span data-lang="en">Every email has an unsubscribe link at the bottom — one click, instant, no confirmation messages or questions asked.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span data-lang="ar">سجّلت من قبل — ماذا يحدث لو أعدت الاشتراك؟</span>
+        <span data-lang="en">I already subscribed — what happens if I sign up again?</span>
+        <span class="faq-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-answer">
+        <span data-lang="ar">لا شيء يتغير في بياناتك. ستظهر لك رسالة تؤكد أنك مشترك بالفعل، وستُفتح لك المكتبة فوراً دون الحاجة لإعادة الاشتراك. إذا لم تصلك رسائل النشرة، تحقق من مجلد Spam أو Promotions.</span>
+        <span data-lang="en">Nothing changes in your account. You'll see a confirmation that you're already subscribed, and the library will unlock immediately — no need to re-subscribe. If you're not receiving emails, check your Spam or Promotions folder.</span>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<style>
+.faq-section {
+  padding: 48px 0 24px;
+}
+.faq-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--fg, #f4f4f5);
+  letter-spacing: -0.03em;
+  margin: 0 0 24px;
+  text-align: center;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.faq-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 180ms ease;
+}
+.faq-item[open] {
+  border-color: rgba(245,158,11,0.3);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--fg, #f4f4f5);
+  font-size: 0.98rem;
+  list-style: none;
+  user-select: none;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-icon {
+  font-size: 1.3rem;
+  color: #f59e0b;
+  line-height: 1;
+  transition: transform 180ms ease;
+  flex: 0 0 auto;
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-answer {
+  padding: 0 20px 18px;
+  color: #a1a1aa;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 14px;
+}
+</style>

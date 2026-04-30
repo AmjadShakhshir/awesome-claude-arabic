@@ -1,0 +1,11 @@
+# Local dev secrets — DO NOT commit this file (already in .gitignore)
+# Copy this file to .dev.vars and fill in real values before running `wrangler dev`
+BREVO_API_KEY=your_brevo_api_key_here
+BREVO_LIST_ID=3
+ALLOWED_ORIGIN=http://localhost:4000
+
+# Welcome email — sender must be verified in Brevo
+BREVO_SENDER_EMAIL=hello@example.com
+BREVO_SENDER_NAME=Awesome Arabic AI
+SITE_URL=http://localhost:4000/awesome-arabic-AI/
+LEAD_MAGNET_URL=

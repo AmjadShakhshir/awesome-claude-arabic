@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "سير عمل المطور مع الذكاء الاصطناعي | Developer AI Workflows"
 ---

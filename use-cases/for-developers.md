@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "الذكاء الاصطناعي للمطورين | AI for Developers"
 ---

@@ -1,5 +1,6 @@
 ---
 layout: default
+gated: true
 title: ابدأ حسب دورك | AI Use Cases by Audience
 ---
 

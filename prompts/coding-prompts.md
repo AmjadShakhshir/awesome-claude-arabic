@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "برومبتات البرمجة والتقنية | Coding & Tech Prompts"
 ---

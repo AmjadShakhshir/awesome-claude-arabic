@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "برومبتات العمل والإنتاجية | Work & Productivity Prompts"
 ---

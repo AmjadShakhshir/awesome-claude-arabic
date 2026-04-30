@@ -1,6 +1,6 @@
 ---
 layout: none
-title: Awesome Arabic AI
+title: Awesome Arabic AI — برومبتات وأدوات الذكاء الاصطناعي بالعربية
 ---
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -10,66 +10,73 @@ title: Awesome Arabic AI
     <title>Awesome Arabic AI</title>
     <meta
       name="description"
-      content="قائمة منسّقة من الموارد والأدوات العربية للذكاء الاصطناعي — A curated list of Arabic AI resources, tools, and guides."
+      content="النشرة الأسبوعية العربية للذكاء الاصطناعي — برومبتات، شروحات، وworkflows جاهزة. مجاني تماماً."
     />
+
+    <!-- Redirect subscribed users to the library immediately — no flash -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('nl_unlocked') === '1') {
+            window.location.replace('{{ site.baseurl }}/library/');
+          }
+        } catch (e) {}
+      }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
     <style>
       :root {
-        --bg: #0b1020;
-        --bg-soft: #111831;
-        --panel: rgba(255, 255, 255, 0.06);
-        --panel-strong: rgba(255, 255, 255, 0.1);
-        --text: #eff4ff;
-        --muted: #b7c2de;
-        --line: rgba(255, 255, 255, 0.12);
-        --brand: #7c9cff;
-        --brand-2: #6ee7d8;
-        --brand-3: #b388ff;
-        --shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+        --bg: #0a0a0f;
+        --bg-2: #0f0f16;
+        --fg: #f4f4f5;
+        --muted: #a1a1aa;
+        --line: rgba(255, 255, 255, 0.10);
+        --panel: rgba(255, 255, 255, 0.05);
+        --accent: #f59e0b;
+        --accent-2: #fbbf24;
+        --accent-dark: #b45309;
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --shadow-amber: 0 14px 32px rgba(245, 158, 11, 0.25);
         --radius: 22px;
         --radius-sm: 16px;
-        --max: 1180px;
+        --max: 1160px;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
+      * { box-sizing: border-box; }
+      img { max-width: 100%; height: auto; display: block; }
+      html { scroll-behavior: smooth; overflow-x: hidden; }
 
       body {
         margin: 0;
-        font-family: "Inter", "Segoe UI", Tahoma, Arial, sans-serif;
-        color: var(--text);
+        overflow-x: hidden;
+        font-family: 'Tajawal', 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
+        color: var(--fg);
         background:
-          radial-gradient(circle at top right, rgba(124, 156, 255, 0.2), transparent 28%),
-          radial-gradient(circle at top left, rgba(110, 231, 216, 0.12), transparent 22%),
-          linear-gradient(180deg, #0b1020 0%, #0e1428 45%, #0a0f1f 100%);
+          radial-gradient(circle at top right, rgba(245, 158, 11, 0.20), transparent 28%),
+          radial-gradient(circle at bottom left, rgba(180, 83, 9, 0.12), transparent 22%),
+          linear-gradient(180deg, #0a0a0f 0%, #0f0f16 55%, #0a0a0f 100%);
         line-height: 1.7;
+        min-height: 100dvh;
       }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      img {
-        max-width: 100%;
-        display: block;
-      }
+      a { color: inherit; text-decoration: none; }
 
       .container {
-        width: min(calc(100% - 32px), var(--max));
-        margin: 0 auto;
+        width: 100%;
+        padding-inline: clamp(16px, 4vw, 48px);
+        box-sizing: border-box;
       }
 
       .site-header {
         position: sticky;
         top: 0;
         z-index: 30;
-        backdrop-filter: blur(16px);
-        background: rgba(11, 16, 32, 0.74);
+        backdrop-filter: blur(18px);
+        background: rgba(10, 10, 15, 0.80);
         border-bottom: 1px solid var(--line);
       }
 
@@ -78,7 +85,7 @@ title: Awesome Arabic AI
         align-items: center;
         justify-content: space-between;
         gap: 20px;
-        min-height: 76px;
+        min-height: 72px;
       }
 
       .brand {
@@ -87,94 +94,74 @@ title: Awesome Arabic AI
         gap: 12px;
         font-weight: 800;
         letter-spacing: -0.02em;
-        font-size: 1.05rem;
+        font-size: 1rem;
       }
 
       .brand-mark {
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        width: 40px;
+        height: 40px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
         display: grid;
         place-items: center;
-        color: white;
-        font-size: 1.1rem;
-        box-shadow: 0 12px 30px rgba(124, 156, 255, 0.35);
+        color: #1a1205;
+        font-size: 1.05rem;
+        box-shadow: 0 10px 28px rgba(245, 158, 11, 0.35);
+        flex: 0 0 auto;
       }
 
-      .site-nav {
+      .header-nav {
         display: flex;
         align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
+        gap: 6px;
       }
 
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-
-      .page-link,
-      .lang-switch {
+      .nav-link {
         color: var(--muted);
-        padding: 10px 14px;
+        padding: 9px 14px;
         border-radius: 999px;
-        transition: 180ms ease;
-        font-size: 0.96rem;
+        font-size: 0.95rem;
+        transition: 160ms;
       }
 
-      .page-link:hover,
-      .lang-switch:hover,
-      .lang-switch.active {
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.08);
-      }
+      .nav-link:hover { color: var(--fg); background: rgba(255,255,255,0.07); }
 
       .lang-switcher {
         display: flex;
         align-items: center;
-        gap: 6px;
-        margin-inline-start: 8px;
+        gap: 4px;
+        margin-inline-start: 6px;
         padding-inline-start: 10px;
         border-inline-start: 1px solid var(--line);
       }
 
+      .lang-btn {
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: 160ms;
+      }
+
+      .lang-btn:hover,
+      .lang-btn.active {
+        color: var(--fg);
+        background: rgba(255,255,255,0.08);
+      }
+
       .hero {
-        padding: 72px 0 40px;
+        padding: 80px 0 52px;
       }
 
       .hero-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 26px;
-        align-items: stretch;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 28px;
+        align-items: start;
       }
 
-      .hero-card,
-      .panel {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-
-      .hero-card {
-        padding: 34px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-card::after {
-        content: "";
-        position: absolute;
-        inset: auto -80px -80px auto;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, rgba(124, 156, 255, 0.28), transparent 65%);
-        pointer-events: none;
-      }
+      .hero-left { display: flex; flex-direction: column; gap: 20px; }
 
       .eyebrow {
         display: inline-flex;
@@ -182,283 +169,151 @@ title: Awesome Arabic AI
         gap: 8px;
         padding: 8px 14px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.05);
-        color: #d7e1ff;
-        font-size: 0.92rem;
-        margin-bottom: 18px;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--accent-2);
+        font-size: 0.9rem;
+        width: fit-content;
+        margin-bottom: 16px;
       }
 
       .hero h1 {
-        margin: 0 0 16px;
-        font-size: clamp(2.2rem, 5vw, 4.2rem);
-        line-height: 1.05;
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.8rem);
+        line-height: 1.07;
         letter-spacing: -0.04em;
       }
 
-      .hero p {
+      .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(90deg, var(--accent-2), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-tagline {
         margin: 0;
         color: var(--muted);
-        font-size: 1.08rem;
-        max-width: 62ch;
+        font-size: 1.07rem;
+        max-width: 54ch;
       }
 
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 14px;
-        font-weight: 700;
-        transition: 180ms ease;
-        border: 1px solid transparent;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, var(--brand), var(--brand-3));
-        color: white;
-        box-shadow: 0 14px 28px rgba(124, 156, 255, 0.28);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 18px 32px rgba(124, 156, 255, 0.34);
-      }
-
-      .btn-secondary {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--text);
-        border-color: var(--line);
-      }
-
-      .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .hero-side {
-        padding: 24px;
-        display: grid;
-        grid-template-rows: auto auto 1fr;
-        gap: 16px;
-      }
-
-      .mini-stat-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .mini-stat {
-        padding: 18px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .mini-stat strong {
-        display: block;
-        font-size: 1.5rem;
-        margin-bottom: 4px;
-      }
-
-      .mini-stat span {
-        color: var(--muted);
-        font-size: 0.94rem;
-      }
-
-      .highlight-list {
-        display: grid;
-        gap: 10px;
-      }
-
-      .highlight-item {
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
-        padding: 14px 15px;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .highlight-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-top: 10px;
-        background: linear-gradient(135deg, var(--brand-2), var(--brand));
-        flex: 0 0 auto;
-      }
-
-      .section {
-        padding: 22px 0 12px;
-      }
-
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 18px;
-      }
-
-      .section-title {
-        margin: 0;
-        font-size: clamp(1.4rem, 3vw, 2rem);
-        letter-spacing: -0.03em;
-      }
-
-      .section-copy {
-        margin: 8px 0 0;
-        color: var(--muted);
-        max-width: 72ch;
-      }
-
-      .section-badge {
-        color: #dbe4ff;
-        background: rgba(124, 156, 255, 0.12);
-        border: 1px solid rgba(124, 156, 255, 0.28);
-        padding: 8px 12px;
-        border-radius: 999px;
-        white-space: nowrap;
-        font-size: 0.92rem;
-      }
-
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .card {
-        display: block;
-        padding: 22px;
-        border-radius: 20px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(124, 156, 255, 0.4);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
-      }
-
-      .card-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 16px;
-        background: linear-gradient(135deg, rgba(124, 156, 255, 0.22), rgba(110, 231, 216, 0.18));
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .card-title {
-        font-size: 1.15rem;
-        font-weight: 800;
-        margin: 0 0 8px;
-        letter-spacing: -0.02em;
-      }
-
-      .card-desc {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.98rem;
-      }
-
-      .quick-start {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 18px;
-      }
-
-      .step-panel {
-        padding: 24px;
-      }
-
-      .step-panel h3 {
-        margin: 0 0 16px;
-        font-size: 1.16rem;
-      }
-
-      .steps {
+      .hero-bullets {
         list-style: none;
         margin: 0;
         padding: 0;
         display: grid;
-        gap: 12px;
+        gap: 9px;
       }
 
-      .steps li {
+      .hero-bullets li {
         display: flex;
-        gap: 14px;
         align-items: flex-start;
-        color: var(--muted);
+        gap: 10px;
+        font-size: 1.01rem;
       }
 
-      .step-num {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
-        display: grid;
-        place-items: center;
+      .bullet-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex: 0 0 auto;
+        margin-top: 9px;
+      }
+
+      .lp-form-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lp-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+      }
+
+      .lp-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .lp-input {
+        flex: 1;
+        min-width: 0;
+        height: 52px;
+        padding: 0 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.07);
+        color: var(--fg);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: 180ms;
+        outline: none;
+      }
+
+      .lp-input::placeholder { color: var(--muted); }
+
+      .lp-input:focus {
+        border-color: var(--accent);
+        background: rgba(255,255,255,0.10);
+        box-shadow: 0 0 0 3px rgba(245,158,11,0.18);
+      }
+
+      .lp-btn {
+        height: 52px;
+        padding: 0 22px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent));
+        color: #1a1205;
         font-weight: 800;
-        color: white;
-        background: linear-gradient(135deg, var(--brand), var(--brand-3));
+        font-family: inherit;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: var(--shadow-amber);
+        transition: 180ms;
         flex: 0 0 auto;
       }
 
-      .notes {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+      .lp-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 36px rgba(245,158,11,0.4);
       }
 
-      .note {
-        padding: 18px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      .lp-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .lp-fineprint {
         color: var(--muted);
+        font-size: 0.87rem;
+        margin: 0;
       }
 
-      .support-box {
-        padding: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        flex-wrap: wrap;
+      .lp-notice {
+        color: #fbbf24;
+        font-size: 0.88rem;
+        padding: 8px 12px;
+        background: rgba(245,158,11,0.08);
+        border-radius: 10px;
+        border: 1px solid rgba(245,158,11,0.2);
+        margin: 0;
       }
 
-      .support-box p {
-        margin: 8px 0 0;
-        color: var(--muted);
-      }
+      .stats-section { padding: 8px 0 32px; }
 
-      .coffee {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
+      .faq-section { padding: 52px 0 24px; }
 
       .site-footer {
-        padding: 28px 0 42px;
+        padding: 28px 0 48px;
         color: var(--muted);
       }
 
@@ -467,79 +322,81 @@ title: Awesome Arabic AI
         padding-top: 20px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         gap: 16px;
         flex-wrap: wrap;
+        font-size: 0.94rem;
       }
 
-      [data-lang] {
-        display: none;
-      }
+      [data-lang] { display: none; }
 
       body.lang-ar [data-lang="ar"],
-      body.lang-en [data-lang="en"] {
-        display: block;
-      }
+      body.lang-en [data-lang="en"] { display: block; }
 
-      body.lang-ar .nav-links[data-lang="ar"],
-      body.lang-en .nav-links[data-lang="en"],
       body.lang-ar span[data-lang="ar"],
-      body.lang-en span[data-lang="en"] {
-        display: flex;
-      }
+      body.lang-en span[data-lang="en"],
+      body.lang-ar li[data-lang="ar"],
+      body.lang-en li[data-lang="en"] { display: flex; }
 
       .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
+        position: absolute; width: 1px; height: 1px;
+        padding: 0; margin: -1px; overflow: hidden;
+        clip: rect(0,0,0,0); white-space: nowrap; border: 0;
       }
 
-      @media (max-width: 960px) {
-        .hero-grid,
-        .quick-start,
-        .notes,
-        .cards {
-          grid-template-columns: 1fr;
-        }
-
-        .header-inner {
-          align-items: flex-start;
-          padding: 14px 0;
-          flex-direction: column;
-        }
-
-        .lang-switcher {
-          margin-inline-start: 0;
-          padding-inline-start: 0;
-          border-inline-start: 0;
-        }
+      @media (max-width: 900px) {
+        .hero-grid { grid-template-columns: 1fr; }
+        .hero { padding: 52px 0 36px; }
+        .header-inner { flex-wrap: wrap; min-height: auto; padding: 14px 0; }
       }
 
+      @media (max-width: 600px) {
+        .lp-row { flex-direction: column; }
+        .lp-btn { width: 100%; }
+      }
+
+      /* ── Toast (shared with newsletter.html) ── */
+      .nl-toast {
+        position: fixed;
+        bottom: 24px;
+        inset-inline-end: 24px;
+        z-index: 9999;
+        max-width: calc(100vw - 32px);
+        min-width: 260px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06) inset;
+        background: linear-gradient(180deg, rgba(245,158,11,0.18), rgba(15,15,22,0.98));
+        color: #fff;
+        border: 1px solid rgba(245,158,11,0.4);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 220ms ease, opacity 220ms ease;
+        pointer-events: none;
+      }
+      .nl-toast[data-show="1"] { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nl-toast--success { background: linear-gradient(180deg, rgba(34,197,94,0.22), rgba(15,15,22,0.98)); border-color: rgba(34,197,94,0.45); }
+      .nl-toast--error   { background: linear-gradient(180deg, rgba(239,68,68,0.22), rgba(15,15,22,0.98)); border-color: rgba(239,68,68,0.45); }
+      .nl-toast__msg { flex: 1; }
+      .nl-toast__close {
+        background: transparent; border: 0; color: inherit;
+        font-size: 1.2rem; line-height: 1; cursor: pointer;
+        padding: 4px 6px; border-radius: 6px; opacity: 0.75;
+      }
+      .nl-toast__close:hover { opacity: 1; background: rgba(255,255,255,0.08); }
       @media (max-width: 640px) {
-        .hero {
-          padding-top: 42px;
-        }
-
-        .hero-card,
-        .hero-side,
-        .step-panel,
-        .support-box,
-        .card {
-          padding: 20px;
-        }
-
-        .mini-stat-grid {
-          grid-template-columns: 1fr 1fr;
-        }
+        .nl-toast { left: 16px; right: 16px; inset-inline-end: 16px; bottom: 16px; min-width: 0; }
       }
     </style>
   </head>
   <body class="lang-ar">
+
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="{{ site.baseurl }}/">
@@ -547,325 +404,143 @@ title: Awesome Arabic AI
           <span>Awesome Arabic AI</span>
         </a>
 
-        <nav class="site-nav" aria-label="Main navigation">
-          <div class="nav-links" data-lang="ar">
-            <a class="page-link" href="{{ site.baseurl }}/">الرئيسية</a>
-            <a class="page-link" href="{{ site.baseurl }}/prompts/">البرومبتات</a>
-            <a class="page-link" href="{{ site.baseurl }}/skills/">المهارات</a>
-            <a class="page-link" href="{{ site.baseurl }}/about.html">حول</a>
-          </div>
+        <div class="header-nav">
+          <a class="nav-link" href="{{ site.baseurl }}/about.html" data-lang="ar">حول</a>
+          <a class="nav-link" href="{{ site.baseurl }}/about.html" data-lang="en">About</a>
 
-          <div class="nav-links" data-lang="en">
-            <a class="page-link" href="{{ site.baseurl }}/">Home</a>
-            <a class="page-link" href="{{ site.baseurl }}/prompts/">Prompts</a>
-            <a class="page-link" href="{{ site.baseurl }}/skills/">Skills</a>
-            <a class="page-link" href="{{ site.baseurl }}/about.html">About</a>
+          <div class="lang-switcher">
+            <a href="#" class="lang-btn active" data-set-lang="ar">العربية</a>
+            <a href="#" class="lang-btn" data-set-lang="en">English</a>
           </div>
-
-          <div class="lang-switcher" aria-label="Language switcher">
-            <a href="#" class="lang-switch active" data-set-lang="ar">العربية</a>
-            <a href="#" class="lang-switch" data-set-lang="en">English</a>
-          </div>
-        </nav>
+        </div>
       </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="container hero-grid">
-          <div class="hero-card">
+
+          <!-- Left: Copy + Form -->
+          <div class="hero-left">
+
             <div data-lang="ar">
-              <div class="eyebrow">دليل عملي لا مجرد قائمة روابط</div>
-              <h1>أفضل موارد الذكاء الاصطناعي بالعربية</h1>
-              <p>
-                برومبتات، شروحات، workflows، ومسارات استخدام جاهزة — لمن يريد نتائج فعلية لا مجرد تصفح.
+              <div class="eyebrow">📬 النشرة العربية للذكاء الاصطناعي — أسبوعية ومجانية</div>
+              <h1>برومبتات وأدوات الذكاء الاصطناعي<br /><em>بالعربية</em> — كل أسبوع</h1>
+              <p class="hero-tagline">
+                نشرة عملية للمستخدمين العرب الجادين — برومبتات جاهزة، شروحات مباشرة، وworkflows قابلة للتطبيق.
               </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#content-sections">ابدأ الاستكشاف</a>
-                <a class="btn btn-secondary" href="{{ site.baseurl }}/skills/">عرض المهارات</a>
-              </div>
             </div>
 
             <div data-lang="en">
-              <div class="eyebrow">A practical guide, not just a list of links</div>
-              <h1>Arabic AI resources — practical, curated, ready to use</h1>
-              <p>
-                Prompts, guides, workflows, and clear starting paths. Built for people who want results, not just a collection to browse.
+              <div class="eyebrow">📬 Arabic AI newsletter — weekly, completely free</div>
+              <h1>Arabic AI prompts and tools — <em>every week</em></h1>
+              <p class="hero-tagline">
+                A practical newsletter for serious Arabic-speaking AI users — ready prompts, clear guides, and actionable workflows.
               </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#content-sections">Start exploring</a>
-                <a class="btn btn-secondary" href="{{ site.baseurl }}/skills/">View skills</a>
-              </div>
-            </div>
-          </div>
-
-          <aside class="panel hero-side">
-            <div class="mini-stat-grid">
-              <div class="mini-stat">
-                <strong>4</strong>
-                <span data-lang="ar">أقسام عملية</span>
-                <span data-lang="en">Practical sections</span>
-              </div>
-              <div class="mini-stat">
-                <strong>2</strong>
-                <span data-lang="ar">لغتان</span>
-                <span data-lang="en">Languages</span>
-              </div>
-              <div class="mini-stat">
-                <strong>5+</strong>
-                <span data-lang="ar">مهارات جاهزة</span>
-                <span data-lang="en">Ready skills</span>
-              </div>
-              <div class="mini-stat">
-                <strong>20+</strong>
-                <span data-lang="ar">برومبت عملي</span>
-                <span data-lang="en">Practical prompts</span>
-              </div>
             </div>
 
-            <div class="highlight-list">
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <div>
-                  <strong data-lang="ar">برومبتات قوية</strong>
-                  <strong data-lang="en">Strong prompts</strong>
-                  <div data-lang="ar">قوالب مع قيود واضحة — ليس "اكتب مقال"، بل تعليمات تنتج نتائج ملموسة.</div>
-                  <div data-lang="en">Templates with real constraints — not "write an article," but instructions that produce results.</div>
+            <ul class="hero-bullets">
+              <li data-lang="ar"><span class="bullet-dot"></span>برومبت أسبوعي محكم مع شرح الاستخدام</li>
+              <li data-lang="ar"><span class="bullet-dot"></span>أداة أو تقنية مختارة تناسب العمل العربي</li>
+              <li data-lang="ar"><span class="bullet-dot"></span>وصول فوري للمكتبة — 60+ برومبت، 5+ workflows</li>
+
+              <li data-lang="en"><span class="bullet-dot"></span>One carefully crafted weekly prompt with usage notes</li>
+              <li data-lang="en"><span class="bullet-dot"></span>A selected tool or technique suited to Arabic-language work</li>
+              <li data-lang="en"><span class="bullet-dot"></span>Instant access to the library — 60+ prompts, 5+ workflows</li>
+            </ul>
+
+            <div class="lp-form-wrap">
+              {% assign nl = site.newsletter %}
+              {% assign nl_action = nl.action_url | default: "" %}
+              {% assign nl_honeypot = nl.honeypot_name | default: "" %}
+              {% assign nl_api = nl.api_url | default: "" %}
+
+              <form class="lp-form"
+                {% if nl_action != "" %}action="{{ nl_action }}" method="post"{% endif %}
+                novalidate data-lp-form
+                {% if nl_api != "" %}data-lp-api="{{ nl_api }}"{% endif %}>
+
+                {% if nl_honeypot != "" %}
+                <div style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;" aria-hidden="true">
+                  <label>Leave this field empty <input type="text" name="{{ nl_honeypot }}" tabindex="-1" autocomplete="off" value="" /></label>
                 </div>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <div>
-                  <strong data-lang="ar">مهارات Claude</strong>
-                  <strong data-lang="en">Claude skills</strong>
-                  <div data-lang="ar">ملفات جاهزة للتثبيت في مشاريعك — تُحسّن أداء Claude لحالات عربية محددة.</div>
-                  <div data-lang="en">Ready-to-install files for your projects — improve Claude for specific Arabic use cases.</div>
+                {% endif %}
+
+                <div class="lp-row">
+                  <input
+                    type="email"
+                    name="EMAIL"
+                    class="lp-input"
+                    id="lp-email"
+                    required
+                    autocomplete="email"
+                    data-placeholder-ar="بريدك الإلكتروني"
+                    data-placeholder-en="Your email address"
+                    placeholder="بريدك الإلكتروني"
+                  />
+                  <button type="submit" class="lp-btn" {% if nl_action == "" %}disabled{% endif %}>
+                    <span data-lang="ar">🎁 اشترك مجاناً</span>
+                    <span data-lang="en">🎁 Subscribe FREE</span>
+                  </button>
                 </div>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <div>
-                  <strong data-lang="ar">مسارات واضحة</strong>
-                  <strong data-lang="en">Clear paths</strong>
-                  <div data-lang="ar">كل جمهور له مسار خاص به — مطور، طالب، صانع محتوى، أو صاحب عمل.</div>
-                  <div data-lang="en">Each audience has its own path — developer, student, creator, or business owner.</div>
-                </div>
-              </div>
+
+                <p class="lp-fineprint" data-lang="ar">بريدك الإلكتروني لن يُشارَك مع أي جهة خارجية. إلغاء الاشتراك في أي وقت.</p>
+                <p class="lp-fineprint" data-lang="en">Your email is never shared. Unsubscribe at any time.</p>
+
+                {% if nl_action == "" %}
+                <p class="lp-notice" data-lang="ar">⚠️ النموذج في وضع المعاينة — أضف action_url في _config.yml للتفعيل</p>
+                <p class="lp-notice" data-lang="en">⚠️ Form in preview mode — add action_url in _config.yml to activate</p>
+                {% endif %}
+              </form>
+
+              {% if nl.lead_magnet_ar != "" and nl.lead_magnet_ar %}
+              <p class="lp-fineprint" style="margin-top:4px;">
+                <span data-lang="ar">🎁 {{ nl.lead_magnet_ar }}</span>
+                <span data-lang="en">🎁 {{ nl.lead_magnet_en }}</span>
+              </p>
+              {% endif %}
             </div>
-          </aside>
+
+            <p class="lp-fineprint" style="text-align:center; margin-top:14px;">
+              <a href="{{ site.baseurl }}/guides/how-to-use-context-mode.html" data-lang="ar" style="color:#7c3aed; font-weight:600;">← اقرأ دليل Context Mode</a>
+              <a href="{{ site.baseurl }}/guides/how-to-use-context-mode.html" data-lang="en" style="color:#7c3aed; font-weight:600;">Read the Context Mode guide →</a>
+            </p>
+
+          </div>
+
+          <!-- Right: Issue preview -->
+          {% include issue-preview.html %}
+
         </div>
       </section>
 
-      <section class="section" id="content-sections">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title" data-lang="ar">المحتوى الرئيسي</h2>
-              <h2 class="section-title" data-lang="en">Core sections</h2>
-              <p class="section-copy" data-lang="ar">اختر القسم الذي يناسب احتياجك — كل واحد له هدف واضح ومسار محدد.</p>
-              <p class="section-copy" data-lang="en">Choose the section that fits your need — each one has a clear purpose and defined path.</p>
-            </div>
-          </div>
+      <div class="stats-section container">
+        {% include social-proof.html %}
+      </div>
 
-          <div class="cards">
-            <a class="card" href="{{ site.baseurl }}/prompts/">
-              <div class="card-icon">✍️</div>
-              <h3 class="card-title" data-lang="ar">برومبتات</h3>
-              <h3 class="card-title" data-lang="en">Prompts</h3>
-              <p class="card-desc" data-lang="ar">قوالب جاهزة للكتابة، البرمجة، الدراسة، والعمل — مع تعليمات أوضح ونتائج أقوى.</p>
-              <p class="card-desc" data-lang="en">Ready-to-use templates for writing, coding, study, and work with stronger structure and better outputs.</p>
-            </a>
+      <div class="container">
+        {% include faq.html %}
+      </div>
 
-            <a class="card" href="{{ site.baseurl }}/guides/">
-              <div class="card-icon">📚</div>
-              <h3 class="card-title" data-lang="ar">شروحات</h3>
-              <h3 class="card-title" data-lang="en">Guides</h3>
-              <p class="card-desc" data-lang="ar">فهم عملي لكيفية كتابة برومبتات أفضل، وتحسين الجودة، واختيار اللغة المناسبة.</p>
-              <p class="card-desc" data-lang="en">Practical guidance for writing better prompts, improving outputs, and choosing the right language.</p>
-            </a>
-
-            <a class="card" href="{{ site.baseurl }}/workflows/">
-              <div class="card-icon">⚙️</div>
-              <h3 class="card-title" data-lang="ar">طرق الاستخدام</h3>
-              <h3 class="card-title" data-lang="en">Workflows</h3>
-              <p class="card-desc" data-lang="ar">خطوات كاملة من البداية للناتج النهائي — لكل جمهور workflow خاص به.</p>
-              <p class="card-desc" data-lang="en">Complete step-by-step paths from task to final output, not vague AI advice.</p>
-            </a>
-
-            <a class="card" href="{{ site.baseurl }}/use-cases/">
-              <div class="card-icon">🎯</div>
-              <h3 class="card-title" data-lang="ar">حالات التطبيق</h3>
-              <h3 class="card-title" data-lang="en">Use cases</h3>
-              <p class="card-desc" data-lang="ar">ابدأ حسب دورك — مطور، طالب، صانع محتوى، أو صاحب عمل — مع مسار واضح لكل فئة.</p>
-              <p class="card-desc" data-lang="en">Start from your role — developer, student, creator, or business owner — with a clear path for each.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title" data-lang="ar">🛠️ مهارات Claude</h2>
-              <h2 class="section-title" data-lang="en">🛠️ Claude skills</h2>
-              <p class="section-copy" data-lang="ar">ملفات جاهزة للتثبيت مباشرة في مشاريعك — تُحسّن أداء Claude لحالات استخدام عربية محددة.</p>
-              <p class="section-copy" data-lang="en">Ready-to-install files for your projects — improve Claude's performance for specific Arabic use cases.</p>
-            </div>
-            <a class="section-badge" href="{{ site.baseurl }}/skills/" data-lang="ar">عرض كل المهارات</a>
-            <a class="section-badge" href="{{ site.baseurl }}/skills/" data-lang="en">View all skills</a>
-          </div>
-
-          <div class="cards">
-            <a class="card" href="{{ site.baseurl }}/skills/arabic-content-creation.html">
-              <div class="card-icon">📝</div>
-              <h3 class="card-title" data-lang="ar">إنشاء المحتوى العربي</h3>
-              <h3 class="card-title" data-lang="en">Arabic Content Creation</h3>
-              <p class="card-desc" data-lang="ar">محتوى تسويقي احترافي بزوايا متعددة وصياغة نهائية جاهزة للنشر.</p>
-              <p class="card-desc" data-lang="en">Professional marketing content with multiple angles and polished final drafts.</p>
-            </a>
-
-            <a class="card" href="{{ site.baseurl }}/skills/prompt-enhancer.html">
-              <div class="card-icon">✨</div>
-              <h3 class="card-title" data-lang="ar">تحسين البرومبتات</h3>
-              <h3 class="card-title" data-lang="en">Prompt Enhancer</h3>
-              <p class="card-desc" data-lang="ar">يحوّل البرومبتات الغامضة إلى 3 نسخ محسّنة — عربي وإنجليزي.</p>
-              <p class="card-desc" data-lang="en">Turns vague prompts into 3 improved versions — Arabic and English.</p>
-            </a>
-
-            <a class="card" href="{{ site.baseurl }}/skills/arabic-ads-copywriting.html">
-              <div class="card-icon">📣</div>
-              <h3 class="card-title" data-lang="ar">كتابة الإعلانات</h3>
-              <h3 class="card-title" data-lang="en">Ads Copywriting</h3>
-              <p class="card-desc" data-lang="ar">5 نسخ إعلانية + 10 عناوين + 5 CTAs بالعربية لكل المنصات.</p>
-              <p class="card-desc" data-lang="en">5 ad variants + 10 headlines + 5 CTAs in Arabic for all platforms.</p>
-            </a>
-
-            <a class="card" href="{{ site.baseurl }}/skills/image-prompt-generator.html">
-              <div class="card-icon">🖼️</div>
-              <h3 class="card-title" data-lang="ar">برومبتات الصور</h3>
-              <h3 class="card-title" data-lang="en">Image Prompts</h3>
-              <p class="card-desc" data-lang="ar">برومبت عربي + إنجليزي + 3 اتجاهات بصرية لكل طلب صورة.</p>
-              <p class="card-desc" data-lang="en">Arabic + English prompt + 3 visual directions for every image request.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title" data-lang="ar">كيف تبدأ</h2>
-              <h2 class="section-title" data-lang="en">How to get started</h2>
-            </div>
-          </div>
-
-          <div class="quick-start">
-            <div class="panel step-panel">
-              <h3 data-lang="ar">إذا كنت جديداً</h3>
-              <h3 data-lang="en">If you're new</h3>
-              <ol class="steps">
-                <li>
-                  <span class="step-num">1</span>
-                  <span data-lang="ar">ابدأ بدليل كتابة البرومبتات لفهم الأساسيات بسرعة.</span>
-                  <span data-lang="en">Start with the prompt-writing guide to learn the basics quickly.</span>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <span data-lang="ar">اختر صفحة مناسبة لدورك من حالات التطبيق.</span>
-                  <span data-lang="en">Choose the page that matches your role in Use Cases.</span>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <span data-lang="ar">جرّب القوالب، ثم عدّلها حسب حاجتك الفعلية.</span>
-                  <span data-lang="en">Try the templates, then adapt them to your real use case.</span>
-                </li>
-              </ol>
-            </div>
-
-            <div class="panel step-panel">
-              <h3 data-lang="ar">إذا كانت لديك خبرة</h3>
-              <h3 data-lang="en">If you're experienced</h3>
-              <ol class="steps">
-                <li>
-                  <span class="step-num">1</span>
-                  <span data-lang="ar">اذهب مباشرة إلى الـ workflows المناسبة لمهمتك.</span>
-                  <span data-lang="en">Go straight to the workflows that match your task.</span>
-                </li>
-                <li>
-                  <span class="step-num">2</span>
-                  <span data-lang="ar">استخدم المهارات الجاهزة لتسريع التنفيذ وتحسين النتيجة.</span>
-                  <span data-lang="en">Use the ready-made skills to speed up execution and improve results.</span>
-                </li>
-                <li>
-                  <span class="step-num">3</span>
-                  <span data-lang="ar">ارجع للشروحات فقط عندما تحتاج تحسيناً أعمق.</span>
-                  <span data-lang="en">Return to the guides only when you want to refine your process further.</span>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title" data-lang="ar">🧠 ملاحظات مهمة</h2>
-              <h2 class="section-title" data-lang="en">🧠 Important notes</h2>
-            </div>
-          </div>
-
-          <div class="notes">
-            <div class="note" data-lang="ar">كلما كان البرومبت أوضح وأكثر تحديداً، كانت النتيجة أفضل.</div>
-            <div class="note" data-lang="en">The clearer and more specific the prompt, the better the result.</div>
-            <div class="note" data-lang="ar">التحسين التكراري يعطي نتائج أقوى من الاعتماد على محاولة واحدة.</div>
-            <div class="note" data-lang="en">Iterating usually works better than expecting one perfect attempt.</div>
-            <div class="note" data-lang="ar">في المهام التقنية، الإنجليزية غالباً أدق من العربية.</div>
-            <div class="note" data-lang="en">For technical work, English often gives more precise output.</div>
-            <div class="note" data-lang="ar">المحادثة المتعددة الخطوات أفضل من برومبت واحد طويل ومزدحم.</div>
-            <div class="note" data-lang="en">Multi-step conversations often work better than one overloaded prompt.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="panel support-box">
-            <div>
-              <h2 style="margin: 0;" data-lang="ar">⭐ دعم المشروع</h2>
-              <h2 style="margin: 0;" data-lang="en">⭐ Support the project</h2>
-              <p data-lang="ar">إذا أفادك المشروع، اعمل له Star وشاركه مع من يحتاجه.</p>
-              <p data-lang="en">If this project helped you, star it and share it with anyone who might benefit.</p>
-            </div>
-
-            <a class="coffee" href="https://www.buymeacoffee.com/amjadshk" target="_blank" rel="noreferrer">
-              <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="170" alt="Buy Me A Coffee" />
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <span data-lang="ar">Awesome Arabic AI &copy; {{ 'now' | date: "%Y" }}</span>
-        <span data-lang="en">Awesome Arabic AI &copy; {{ 'now' | date: "%Y" }}</span>
-        <a href="{{ site.baseurl }}/CONTRIBUTING.html" data-lang="ar">إرشادات المساهمة</a>
-        <a href="{{ site.baseurl }}/CONTRIBUTING.html" data-lang="en">Contribution guidelines</a>
+        <span>Awesome Arabic AI &copy; {{ 'now' | date: "%Y" }}</span>
+        <a href="{{ site.baseurl }}/about.html" data-lang="ar">حول المشروع</a>
+        <a href="{{ site.baseurl }}/about.html" data-lang="en">About this project</a>
       </div>
     </footer>
 
     <script>
       (function () {
-        var buttons = document.querySelectorAll('[data-set-lang]');
         var body = document.body;
+        var langBtns = document.querySelectorAll('[data-set-lang]');
+        var emailInput = document.getElementById('lp-email');
         var savedLang = 'ar';
         try { savedLang = localStorage.getItem('site-lang') || 'ar'; } catch(e) {}
 
-        function setLanguage(lang) {
+        function setLang(lang) {
           body.classList.remove('lang-ar', 'lang-en');
           body.classList.add('lang-' + lang);
           body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
@@ -873,20 +548,140 @@ title: Awesome Arabic AI
           document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
           try { localStorage.setItem('site-lang', lang); } catch(e) {}
 
-          buttons.forEach(function (btn) {
-            btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+          if (emailInput) {
+            emailInput.placeholder = emailInput.getAttribute('data-placeholder-' + lang) || '';
+          }
+
+          langBtns.forEach(function (b) {
+            b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
           });
         }
 
-        buttons.forEach(function (btn) {
+        langBtns.forEach(function (btn) {
           btn.addEventListener('click', function (e) {
             e.preventDefault();
-            setLanguage(btn.getAttribute('data-set-lang'));
+            setLang(btn.getAttribute('data-set-lang'));
           });
         });
 
-        setLanguage(savedLang);
-      })();
+        setLang(savedLang);
+
+        /* ── Toast ── */
+        var _lpToastEl = null;
+        var _lpToastTimer = null;
+        var LP_TOAST = {
+          success: { ar: '\u2705 \u062a\u0645 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643! \u062a\u062d\u0642\u0642 \u0645\u0646 \u0628\u0631\u064a\u062f\u0643 \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643.', en: '\u2705 Subscribed! Check your inbox to confirm.' },
+          already: { ar: '📬 أنت مشترك بالفعل! يمكنك الوصول إلى المحتوى الآن.', en: '📬 You\'re already subscribed! Redirecting to library\u2026' },
+          error:   { ar: '\u26a0\ufe0f \u062a\u0639\u0630\u0651\u0631 \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0648\u0623\u0639\u062f \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629.', en: '\u26a0\ufe0f Could not send. Check your connection and try again.' },
+          close:   { ar: '\u0625\u063a\u0644\u0627\u0642', en: 'Close' }
+        };
+        function _lpCurrentLang() {
+          return document.body.classList.contains('lang-en') ? 'en' : 'ar';
+        }
+        function _lpEnsureToast() {
+          if (_lpToastEl) return _lpToastEl;
+          var el = document.createElement('div');
+          el.id = 'lp-toast';
+          el.className = 'nl-toast';
+          el.setAttribute('role', 'status');
+          el.setAttribute('aria-live', 'polite');
+          var msg = document.createElement('span');
+          msg.className = 'nl-toast__msg';
+          var close = document.createElement('button');
+          close.type = 'button';
+          close.className = 'nl-toast__close';
+          close.innerHTML = '&times;';
+          close.addEventListener('click', _lpHideToast);
+          el.appendChild(msg);
+          el.appendChild(close);
+          document.body.appendChild(el);
+          _lpToastEl = el;
+          return el;
+        }
+        function _lpShowToast(kind) {
+          var lang = _lpCurrentLang();
+          var el = _lpEnsureToast();
+          el.classList.remove('nl-toast--success', 'nl-toast--error', 'nl-toast--already');
+          el.classList.add('nl-toast--' + kind);
+          el.querySelector('.nl-toast__msg').textContent = LP_TOAST[kind][lang];
+          el.querySelector('.nl-toast__close').setAttribute('aria-label', LP_TOAST.close[lang]);
+          el.setAttribute('data-show', '1');
+          if (_lpToastTimer) clearTimeout(_lpToastTimer);
+          _lpToastTimer = setTimeout(_lpHideToast, 5000);
+        }
+        function _lpHideToast() {
+          if (!_lpToastEl) return;
+          _lpToastEl.removeAttribute('data-show');
+          if (_lpToastTimer) { clearTimeout(_lpToastTimer); _lpToastTimer = null; }
+        }
+
+        /* Form: AJAX submit — same tab, localized toast */
+        var forms = document.querySelectorAll('[data-lp-form][action]');
+        forms.forEach(function (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            /* Honeypot */
+            var hp = form.querySelector('[tabindex="-1"][name]');
+            if (hp && hp.value) return;
+            /* Validity */
+            if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+              if (typeof form.reportValidity === 'function') form.reportValidity();
+              return;
+            }
+            var btn = form.querySelector('button[type="submit"]');
+            var origHTML = btn ? btn.innerHTML : null;
+            if (btn) { btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
+            var apiUrl = form.getAttribute('data-lp-api') || '';
+            function _lpRestoreBtn() {
+              if (btn) { btn.disabled = false; btn.removeAttribute('aria-busy'); if (origHTML !== null) btn.innerHTML = origHTML; }
+            }
+            function _lpOnUnlock() {
+              form.reset();
+              try { localStorage.setItem('nl_unlocked', '1'); } catch(e2) {}
+              setTimeout(function () {
+                window.location.assign('{{ site.baseurl }}/library/');
+              }, 1200);
+            }
+            if (apiUrl) {
+              /* ── API path: structured response, duplicate detection ── */
+              var emailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
+              var hpEl = form.querySelector('[tabindex="-1"][name]');
+              var hpVal = hpEl ? hpEl.value : '';
+              fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: emailVal, locale: savedLang, source: 'landing', honeypot: hpVal })
+              }).then(function (res) {
+                return res.json();
+              }).then(function (data) {
+                var status = (data && data.status) || 'upstream_error';
+                if (status === 'subscribed_new') {
+                  _lpShowToast('success');
+                  _lpOnUnlock();
+                } else if (status === 'already_subscribed') {
+                  _lpShowToast('already');
+                  _lpOnUnlock();
+                } else {
+                  _lpShowToast('error');
+                }
+              }).catch(function () {
+                _lpShowToast('error');
+              })['finally'](_lpRestoreBtn);
+            } else {
+              /* ── Legacy path: no-cors Brevo form post (no duplicate detection) ── */
+              fetch(form.action, { method: 'POST', mode: 'no-cors', body: new FormData(form) })
+                .then(function () {
+                  _lpShowToast('success');
+                  _lpOnUnlock();
+                })
+                .catch(function () {
+                  _lpShowToast('error');
+                })['finally'](_lpRestoreBtn);
+            }
+          });
+        });
+      }());
     </script>
+
   </body>
 </html>

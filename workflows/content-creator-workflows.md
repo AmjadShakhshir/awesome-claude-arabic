@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "سير عمل صانع المحتوى مع الذكاء الاصطناعي | Content Creator AI Workflows"
 ---

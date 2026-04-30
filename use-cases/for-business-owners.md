@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "الذكاء الاصطناعي لأصحاب الأعمال | AI for Business Owners"
 ---

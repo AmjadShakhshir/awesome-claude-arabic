@@ -1,0 +1,15 @@
+{
+  "name": "awesome-arabic-content",
+  "version": "1.0.0",
+  "description": "[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabic) [![Newsletter](https://img.shields.io/badge/📬%20Newsletter-Join%20free-7c9cff)](https://amjadshakhshir.github.io/awesome-claude-arabic/#newsletter-hero)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "context-mode": "^1.0.103"
+  }
+}

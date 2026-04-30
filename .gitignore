@@ -7,3 +7,8 @@ node_modules/
 Gemfile.lock
 .playwright-mcp/
 .ruby-lsp/
+assets/img/workflows/.DS_Store
+.env
+.env.*
+.DS_Store
+wrangler.toml

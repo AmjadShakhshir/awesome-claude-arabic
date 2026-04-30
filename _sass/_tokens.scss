@@ -1,0 +1,41 @@
+// ── Amber design tokens ──────────────────────────────────────────
+// Sourced from the /newsletter/ prototype (accentColor: "#f59e0b")
+:root {
+  // Core palette
+  --accent:        #f59e0b;
+  --accent-dark:   #b45309;
+  --accent-glow:   rgba(245, 158, 11, 0.22);
+  --accent-soft:   rgba(245, 158, 11, 0.12);
+
+  // Backgrounds
+  --bg:            #0a0a0f;
+  --bg-2:          #0f0f16;
+  --bg-3:          #14141d;
+
+  // Surfaces / panels
+  --panel:         rgba(255, 255, 255, 0.05);
+  --panel-strong:  rgba(255, 255, 255, 0.09);
+  --line:          rgba(255, 255, 255, 0.10);
+
+  // Foregrounds
+  --fg:            #f4f4f5;
+  --muted:         #a1a1aa;
+  --muted-2:       #71717a;
+
+  // Legacy aliases (keep existing classes working)
+  --text:          #f4f4f5;
+  --brand:         #f59e0b;
+  --brand-2:       #fbbf24;
+  --brand-3:       #b45309;
+
+  // Backgrounds (legacy aliases)
+  --bg-soft:       #0f0f16;
+
+  // Shadows & radii
+  --shadow:        0 20px 50px rgba(0, 0, 0, 0.5);
+  --shadow-amber:  0 14px 32px rgba(245, 158, 11, 0.25);
+  --radius:        22px;
+  --radius-sm:     16px;
+  --radius-xs:     10px;
+  --max:           1180px;
+}

@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "برومبتات توليد الصور الإعلانية | AI Image Generation Prompts"
 ---

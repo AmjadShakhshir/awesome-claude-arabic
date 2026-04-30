@@ -21,7 +21,7 @@ title: حول | About
 <h2>المساهمة</h2>
 <p>
 نرحب بجميع المساهمات! يمكنك فتح Pull Request أو Issue على
-<a href="https://github.com/AmjadShakhshir/awesome-claude-arabicabic">GitHub</a>.
+<a href="https://github.com/AmjadShakhshir/awesome-claude-arabic">GitHub</a>.
 </p>
 
 </div>

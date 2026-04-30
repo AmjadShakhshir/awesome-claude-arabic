@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "الذكاء الاصطناعي للطلاب | AI for Students"
 ---

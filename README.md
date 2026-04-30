@@ -1,8 +1,11 @@
 # 🚀 Awesome Arabic AI
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabicabic)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabic)
+[![Newsletter](https://img.shields.io/badge/📬%20Newsletter-Join%20free-7c9cff)](https://amjadshakhshir.github.io/awesome-claude-arabic/#newsletter-hero)
 
 🌐 **[Visit the Live Site](https://amjadshakhshir.github.io/awesome-claude-arabic/)** — bilingual (العربية / English) with built-in language switcher.
+
+📬 **[Join the free newsletter](https://amjadshakhshir.github.io/awesome-claude-arabic/#newsletter-hero)** — weekly Arabic AI prompts + a free PDF (Top 20 Arabic AI Prompts) when you subscribe.
 
 أفضل الموارد العملية للذكاء الاصطناعي باللغة العربية  
 Prompts, guides, tools, and real workflows for getting actual results with AI
@@ -43,6 +46,7 @@ Prompts, guides, tools, and real workflows for getting actual results with AI
 - [كيف تكتب برومبت قوي](./guides/how-to-write-better-prompts.md)
 - [العربية أم الإنجليزية؟](./guides/arabic-vs-english-for-ai.md)
 - [نصائح الاستخدام](./guides/ai-usage-tips.md)
+- [وضع السياق — Context Mode](./guides/how-to-use-context-mode.md)
 
 ---
 

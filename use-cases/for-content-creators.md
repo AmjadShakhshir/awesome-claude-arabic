@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "الذكاء الاصطناعي لصانعي المحتوى | AI for Content Creators"
 ---

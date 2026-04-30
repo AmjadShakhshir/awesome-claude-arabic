@@ -1,0 +1,7 @@
+{%- comment -%}
+  content-gate.html — passthrough.
+  The hard gate is handled entirely by content-gate.js (redirect to /).
+  Non-subscribers never reach this layout; subscribers see content directly.
+{%- endcomment -%}
+
+{{ content }}
