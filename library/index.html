@@ -234,6 +234,7 @@ gated: true
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
         gap: 10px;
         min-height: 48px;
         padding: 0 18px;
@@ -263,6 +264,51 @@ gated: true
 
       .btn-secondary:hover {
         background: rgba(255, 255, 255, 0.08);
+      }
+
+      .gifts-spotlight {
+        padding-top: 0;
+      }
+
+      .gifts-banner {
+        padding: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        border: 1px solid rgba(245, 158, 11, 0.38);
+        background:
+          radial-gradient(circle at top left, rgba(245, 158, 11, 0.16), transparent 48%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      }
+
+      .gifts-banner-copy {
+        max-width: 72ch;
+      }
+
+      .gifts-banner h2 {
+        margin: 0 0 8px;
+        font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+        letter-spacing: -0.02em;
+      }
+
+      .gifts-kicker {
+        margin: 0 0 6px;
+        color: #fbbf24;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .gifts-banner p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .gifts-banner-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
       }
 
       .library-hero-visual {
@@ -539,6 +585,12 @@ gated: true
         display: block;
       }
 
+      body.lang-ar .btn[data-lang="ar"],
+      body.lang-en .btn[data-lang="en"] {
+        display: inline-flex;
+        text-align: center;
+      }
+
       body.lang-ar .nav-links[data-lang="ar"],
       body.lang-en .nav-links[data-lang="en"],
       body.lang-ar span[data-lang="ar"],
@@ -598,6 +650,7 @@ gated: true
 
         .hero-card,
         .library-hero-visual,
+        .gifts-banner,
         .step-panel,
         .support-box,
         .card {
@@ -639,6 +692,7 @@ gated: true
             <a class="page-link" href="{{ site.baseurl }}/library/">الرئيسية</a>
             <a class="page-link" href="{{ site.baseurl }}/prompts/">البرومبتات</a>
             <a class="page-link" href="{{ site.baseurl }}/skills/">المهارات</a>
+            <a class="page-link" href="{{ site.baseurl }}/gifts/">الهدايا</a>
             <a class="page-link" href="{{ site.baseurl }}/about.html">حول</a>
           </div>
 
@@ -646,6 +700,7 @@ gated: true
             <a class="page-link" href="{{ site.baseurl }}/library/">Home</a>
             <a class="page-link" href="{{ site.baseurl }}/prompts/">Prompts</a>
             <a class="page-link" href="{{ site.baseurl }}/skills/">Skills</a>
+            <a class="page-link" href="{{ site.baseurl }}/gifts/">Gifts</a>
             <a class="page-link" href="{{ site.baseurl }}/about.html">About</a>
           </div>
 
@@ -690,6 +745,31 @@ gated: true
               <p class="hero-visual-kicker" data-lang="en">Quick snapshots of practical library use cases</p>
             </div>
             <ul id="library-hero-accordion" class="hero-accordion" aria-label="Library use cases"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section gifts-spotlight">
+        <div class="container">
+          <div class="panel gifts-banner">
+            <div class="gifts-banner-copy" data-lang="ar">
+              <p class="gifts-kicker">🎁 هدايا المشتركين متاحة الآن</p>
+              <h2>لا تفوّت ملفات الهدايا المجانية</h2>
+              <p>إذا اشتركت بالفعل، يمكنك فتح صفحة الهدايا مباشرة ونسخ الملفات الجاهزة للتطبيق الفوري.</p>
+            </div>
+
+            <div class="gifts-banner-copy" data-lang="en">
+              <p class="gifts-kicker">🎁 Your subscriber gifts are ready</p>
+              <h2>Access your free gifts in one click</h2>
+              <p>If you already subscribed, open the gifts page directly and use the ready-to-apply files right away.</p>
+            </div>
+
+            <div class="gifts-banner-actions">
+              <a class="btn btn-primary" href="{{ site.baseurl }}/gifts/" data-lang="ar">اذهب إلى الهدايا</a>
+              <a class="btn btn-primary" href="{{ site.baseurl }}/gifts/" data-lang="en">Open gifts</a>
+              <a class="btn btn-secondary" href="{{ site.baseurl }}/gifts/top-20-arabic-prompts/" data-lang="ar">ابدأ بأفضل 20 برومبت</a>
+              <a class="btn btn-secondary" href="{{ site.baseurl }}/gifts/top-20-arabic-prompts/" data-lang="en">Start with top 20 prompts</a>
+            </div>
           </div>
         </div>
       </section>
@@ -888,7 +968,9 @@ gated: true
         </div>
       </section>
 
-      {% include faq.html %}
+      <div class="container">
+        {% include faq.html %}
+      </div>
 
       {% include newsletter.html variant="band" uid="band" %}
 

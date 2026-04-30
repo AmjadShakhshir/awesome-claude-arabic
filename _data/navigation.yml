@@ -5,6 +5,8 @@ ar:
     url: /prompts/
   - title: المهارات
     url: /skills/
+  - title: الهدايا
+    url: /gifts/
   - title: حول
     url: /about.html
 en:
@@ -14,5 +16,7 @@ en:
     url: /prompts/
   - title: Skills
     url: /skills/
+  - title: Gifts
+    url: /gifts/
   - title: About
     url: /about.html

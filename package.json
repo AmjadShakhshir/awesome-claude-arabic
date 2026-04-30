@@ -4,7 +4,8 @@
   "description": "[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabic) [![Newsletter](https://img.shields.io/badge/📬%20Newsletter-Join%20free-7c9cff)](https://amjadshakhshir.github.io/awesome-claude-arabic/#newsletter-hero)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-push && echo 'Git hooks installed.'"
   },
   "keywords": [],
   "author": "",
