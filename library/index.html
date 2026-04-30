@@ -1,0 +1,1093 @@
+---
+layout: none
+permalink: /library/
+title: Awesome Arabic AI — المكتبة
+gated: true
+---
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Awesome Arabic AI — المكتبة</title>
+
+    <!-- Anti-FOUC: hide page until gate check runs (prevents content flash before redirect) -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('nl_unlocked') === '1') return;
+          var ua = navigator.userAgent || '';
+          if (/Googlebot|bingbot|Slurp|DuckDuckBot|GPTBot|ChatGPT-User|ClaudeBot|PerplexityBot/i.test(ua)) return;
+          if (/[?&]nogate=1/.test(window.location.search)) return;
+          document.documentElement.style.visibility = 'hidden';
+        } catch (e) {}
+      }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <meta
+      name="description"
+      content="قائمة منسّقة من الموارد والأدوات العربية للذكاء الاصطناعي — A curated list of Arabic AI resources, tools, and guides."
+    />
+    <style>
+      :root {
+        --bg: #0a0a0f;
+        --bg-soft: #0f0f16;
+        --panel: rgba(255, 255, 255, 0.05);
+        --panel-strong: rgba(255, 255, 255, 0.09);
+        --text: #f4f4f5;
+        --muted: #a1a1aa;
+        --line: rgba(255, 255, 255, 0.10);
+        --brand: #f59e0b;
+        --brand-2: #fbbf24;
+        --brand-3: #b45309;
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --shadow-amber: 0 14px 32px rgba(245, 158, 11, 0.25);
+        --radius: 22px;
+        --radius-sm: 16px;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Tajawal', 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top right, rgba(245, 158, 11, 0.18), transparent 30%),
+          radial-gradient(circle at bottom left, rgba(180, 83, 9, 0.10), transparent 25%),
+          linear-gradient(180deg, #0a0a0f 0%, #0f0f16 55%, #0a0a0f 100%);
+        line-height: 1.7;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        backdrop-filter: blur(16px);
+        background: rgba(10, 10, 15, 0.82);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 76px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        font-size: 1.05rem;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-3));
+        display: grid;
+        place-items: center;
+        color: #1a1205;
+        font-size: 1.1rem;
+        box-shadow: 0 12px 30px rgba(245, 158, 11, 0.35);
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .page-link,
+      .lang-switch {
+        color: var(--muted);
+        padding: 10px 14px;
+        border-radius: 999px;
+        transition: 180ms ease;
+        font-size: 0.96rem;
+      }
+
+      .page-link:hover,
+      .lang-switch:hover,
+      .lang-switch.active {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-inline-start: 8px;
+        padding-inline-start: 10px;
+        border-inline-start: 1px solid var(--line);
+      }
+
+      .hero {
+        padding: 72px 0 40px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 26px;
+        align-items: stretch;
+      }
+
+      .hero-card,
+      .panel {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        padding: 34px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -80px -80px auto;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.22), transparent 65%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.08);
+        color: #fbbf24;
+        font-size: 0.92rem;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.2rem, 5vw, 4.2rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+        max-width: 62ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 14px;
+        font-weight: 700;
+        transition: 180ms ease;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background: #f59e0b;
+        color: #1a1205;
+        box-shadow: 0 14px 28px rgba(245, 158, 11, 0.35);
+      }
+
+      .btn-primary:hover {
+        background: #fbbf24;
+        transform: translateY(-1px);
+        box-shadow: 0 18px 32px rgba(245, 158, 11, 0.45);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .library-hero-visual {
+        padding: 22px;
+      }
+
+      .hero-visual-head {
+        margin-bottom: 14px;
+      }
+
+      .hero-visual-kicker {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-accordion {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        overflow-x: auto;
+      }
+
+      .hero-accordion-item {
+        flex: 0 0 auto;
+      }
+
+      .hero-accordion-card {
+        position: relative;
+        display: block;
+        height: 380px;
+        width: 56px;
+        border: 0;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        overflow: hidden;
+        padding: 0;
+        text-decoration: none;
+        background: var(--bg-soft);
+        box-shadow: var(--shadow);
+        transition: width 560ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms ease;
+      }
+
+      .hero-accordion-card:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-accordion-card.is-active {
+        width: 224px;
+      }
+
+      .hero-accordion-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-accordion-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 10, 15, 0.15), rgba(10, 10, 15, 0.78));
+        pointer-events: none;
+      }
+
+      .hero-accordion-label {
+        position: absolute;
+        left: 50%;
+        bottom: 5.8rem;
+        transform: translateX(-50%) rotate(-90deg);
+        transform-origin: center;
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: transform 220ms ease, bottom 220ms ease;
+      }
+
+      body.lang-ar .hero-accordion-label span[data-lang="ar"],
+      body.lang-en .hero-accordion-label span[data-lang="en"] {
+        display: block;
+      }
+
+      .hero-accordion-card.is-active .hero-accordion-label {
+        bottom: 1.2rem;
+        transform: translateX(-50%) rotate(0deg);
+      }
+
+      .hero-accordion-card:focus-visible {
+        outline: 2px solid var(--brand-2);
+        outline-offset: 3px;
+      }
+
+      .section {
+        padding: 22px 0 12px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        letter-spacing: -0.03em;
+      }
+
+      .section-copy {
+        margin: 8px 0 0;
+        color: var(--muted);
+        max-width: 72ch;
+      }
+
+      .section-badge {
+        color: #fbbf24;
+        background: rgba(245, 158, 11, 0.12);
+        border: 1px solid rgba(245, 158, 11, 0.28);
+        padding: 8px 12px;
+        border-radius: 999px;
+        white-space: nowrap;
+        font-size: 0.92rem;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        display: block;
+        padding: 22px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(245, 158, 11, 0.4);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
+      }
+
+      .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(180, 83, 9, 0.18));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .card-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin: 0 0 8px;
+        letter-spacing: -0.02em;
+      }
+
+      .card-desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .quick-start {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .step-panel {
+        padding: 24px;
+      }
+
+      .step-panel h3 {
+        margin: 0 0 16px;
+        font-size: 1.16rem;
+      }
+
+      .steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .steps li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        color: var(--muted);
+      }
+
+      .step-num {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        color: #1a1205;
+        background: #f59e0b;
+        flex: 0 0 auto;
+      }
+
+      .notes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .note {
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+      }
+
+      .support-box {
+        padding: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .support-box p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .coffee {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-footer {
+        padding: 28px 0 42px;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        border-top: 1px solid var(--line);
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      [data-lang] {
+        display: none;
+      }
+
+      body.lang-ar [data-lang="ar"],
+      body.lang-en [data-lang="en"] {
+        display: block;
+      }
+
+      body.lang-ar .nav-links[data-lang="ar"],
+      body.lang-en .nav-links[data-lang="en"],
+      body.lang-ar span[data-lang="ar"],
+      body.lang-en span[data-lang="en"] {
+        display: flex;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .quick-start,
+        .notes,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .library-hero-visual {
+          padding: 20px;
+        }
+
+        .hero-accordion-card {
+          height: 320px;
+        }
+
+        .hero-accordion-card.is-active {
+          width: 252px;
+        }
+
+        .header-inner {
+          align-items: flex-start;
+          padding: 14px 0;
+          flex-direction: column;
+        }
+
+        .lang-switcher {
+          margin-inline-start: 0;
+          padding-inline-start: 0;
+          border-inline-start: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding-top: 42px;
+        }
+
+        .hero-card,
+        .library-hero-visual,
+        .step-panel,
+        .support-box,
+        .card {
+          padding: 20px;
+        }
+
+        .hero-accordion-card {
+          height: 280px;
+          width: 50px;
+        }
+
+        .hero-accordion-card.is-active {
+          width: 216px;
+        }
+
+        .hero-accordion-label {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-accordion-card,
+        .hero-accordion-label {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="lang-ar">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="{{ site.baseurl }}/library/">
+          <span class="brand-mark">✦</span>
+          <span>Awesome Arabic AI</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main navigation">
+          <div class="nav-links" data-lang="ar">
+            <a class="page-link" href="{{ site.baseurl }}/library/">الرئيسية</a>
+            <a class="page-link" href="{{ site.baseurl }}/prompts/">البرومبتات</a>
+            <a class="page-link" href="{{ site.baseurl }}/skills/">المهارات</a>
+            <a class="page-link" href="{{ site.baseurl }}/about.html">حول</a>
+          </div>
+
+          <div class="nav-links" data-lang="en">
+            <a class="page-link" href="{{ site.baseurl }}/library/">Home</a>
+            <a class="page-link" href="{{ site.baseurl }}/prompts/">Prompts</a>
+            <a class="page-link" href="{{ site.baseurl }}/skills/">Skills</a>
+            <a class="page-link" href="{{ site.baseurl }}/about.html">About</a>
+          </div>
+
+          <div class="lang-switcher" aria-label="Language switcher">
+            <a href="#" class="lang-switch active" data-set-lang="ar">العربية</a>
+            <a href="#" class="lang-switch" data-set-lang="en">English</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-card">
+            <div data-lang="ar">
+              <div class="eyebrow">دليل عملي لا مجرد قائمة روابط</div>
+              <h1>أفضل موارد الذكاء الاصطناعي بالعربية</h1>
+              <p>
+                برومبتات، شروحات، workflows، ومسارات استخدام جاهزة — لمن يريد نتائج فعلية لا مجرد تصفح.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#content-sections">تصفّح المحتوى ↓</a>
+              </div>
+            </div>
+
+            <div data-lang="en">
+              <div class="eyebrow">A practical guide, not just a list of links</div>
+              <h1>Arabic AI resources — practical, curated, ready to use</h1>
+              <p>
+                Prompts, guides, workflows, and clear starting paths. Built for people who want results, not just a collection to browse.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#content-sections">Browse the content ↓</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="library-hero-visual panel">
+            <div class="hero-visual-head">
+              <p class="hero-visual-kicker" data-lang="ar">لقطات سريعة من حالات الاستخدام داخل المكتبة</p>
+              <p class="hero-visual-kicker" data-lang="en">Quick snapshots of practical library use cases</p>
+            </div>
+            <ul id="library-hero-accordion" class="hero-accordion" aria-label="Library use cases"></ul>
+          </div>
+        </div>
+      </section>
+
+      {% include social-proof.html %}
+
+      <section class="section" id="content-sections">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" data-lang="ar">المحتوى الرئيسي</h2>
+              <h2 class="section-title" data-lang="en">Core sections</h2>
+              <p class="section-copy" data-lang="ar">اختر القسم الذي يناسب احتياجك — كل واحد له هدف واضح ومسار محدد.</p>
+              <p class="section-copy" data-lang="en">Choose the section that fits your need — each one has a clear purpose and defined path.</p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <a class="card" href="{{ site.baseurl }}/prompts/">
+              <div class="card-icon">✍️</div>
+              <h3 class="card-title" data-lang="ar">برومبتات</h3>
+              <h3 class="card-title" data-lang="en">Prompts</h3>
+              <p class="card-desc" data-lang="ar">قوالب جاهزة للكتابة، البرمجة، الدراسة، والعمل — مع تعليمات أوضح ونتائج أقوى.</p>
+              <p class="card-desc" data-lang="en">Ready-to-use templates for writing, coding, study, and work with stronger structure and better outputs.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/guides/">
+              <div class="card-icon">📚</div>
+              <h3 class="card-title" data-lang="ar">شروحات</h3>
+              <h3 class="card-title" data-lang="en">Guides</h3>
+              <p class="card-desc" data-lang="ar">فهم عملي لكيفية كتابة برومبتات أفضل، وتحسين الجودة، واختيار اللغة المناسبة.</p>
+              <p class="card-desc" data-lang="en">Practical guidance for writing better prompts, improving outputs, and choosing the right language.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/workflows/">
+              <div class="card-icon">⚙️</div>
+              <h3 class="card-title" data-lang="ar">Workflow and automation</h3>
+              <h3 class="card-title" data-lang="en">Workflows</h3>
+              <p class="card-desc" data-lang="ar">خطوات كاملة من البداية للناتج النهائي — لكل جمهور workflow خاص به.</p>
+              <p class="card-desc" data-lang="en">Complete step-by-step paths from task to final output, not vague AI advice.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/use-cases/">
+              <div class="card-icon">🎯</div>
+              <h3 class="card-title" data-lang="ar">نماذج للتطبيق</h3>
+              <h3 class="card-title" data-lang="en">Use cases</h3>
+              <p class="card-desc" data-lang="ar">ابدأ حسب دورك — مطور، طالب، صانع محتوى، أو صاحب عمل — مع مسار واضح لكل فئة.</p>
+              <p class="card-desc" data-lang="en">Start from your role — developer, student, creator, or business owner — with a clear path for each.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" data-lang="ar">🛠️ مهارات Claude</h2>
+              <h2 class="section-title" data-lang="en">🛠️ Claude skills</h2>
+              <p class="section-copy" data-lang="ar">ملفات جاهزة للتثبيت مباشرة في مشاريعك — تُحسّن أداء Claude لحالات استخدام عربية محددة.</p>
+              <p class="section-copy" data-lang="en">Ready-to-install files for your projects — improve Claude's performance for specific Arabic use cases.</p>
+            </div>
+            <a class="section-badge" href="{{ site.baseurl }}/skills/" data-lang="ar">عرض كل المهارات</a>
+            <a class="section-badge" href="{{ site.baseurl }}/skills/" data-lang="en">View all skills</a>
+          </div>
+
+          <div class="cards">
+            <a class="card" href="{{ site.baseurl }}/skills/arabic-content-creation.html">
+              <div class="card-icon">📝</div>
+              <h3 class="card-title" data-lang="ar">إنشاء المحتوى العربي</h3>
+              <h3 class="card-title" data-lang="en">Arabic Content Creation</h3>
+              <p class="card-desc" data-lang="ar">محتوى تسويقي احترافي بزوايا متعددة وصياغة نهائية جاهزة للنشر.</p>
+              <p class="card-desc" data-lang="en">Professional marketing content with multiple angles and polished final drafts.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/skills/prompt-enhancer.html">
+              <div class="card-icon">✨</div>
+              <h3 class="card-title" data-lang="ar">تحسين البرومبتات</h3>
+              <h3 class="card-title" data-lang="en">Prompt Enhancer</h3>
+              <p class="card-desc" data-lang="ar">يحوّل البرومبتات الغامضة إلى 3 نسخ محسّنة — عربي وإنجليزي.</p>
+              <p class="card-desc" data-lang="en">Turns vague prompts into 3 improved versions — Arabic and English.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/skills/arabic-ads-copywriting.html">
+              <div class="card-icon">📣</div>
+              <h3 class="card-title" data-lang="ar">كتابة الإعلانات</h3>
+              <h3 class="card-title" data-lang="en">Ads Copywriting</h3>
+              <p class="card-desc" data-lang="ar">5 نسخ إعلانية + 10 عناوين + 5 CTAs بالعربية لكل المنصات.</p>
+              <p class="card-desc" data-lang="en">5 ad variants + 10 headlines + 5 CTAs in Arabic for all platforms.</p>
+            </a>
+
+            <a class="card" href="{{ site.baseurl }}/skills/image-prompt-generator.html">
+              <div class="card-icon">🖼️</div>
+              <h3 class="card-title" data-lang="ar">برومبتات الصور</h3>
+              <h3 class="card-title" data-lang="en">Image Prompts</h3>
+              <p class="card-desc" data-lang="ar">برومبت عربي + إنجليزي + 3 اتجاهات بصرية لكل طلب صورة.</p>
+              <p class="card-desc" data-lang="en">Arabic + English prompt + 3 visual directions for every image request.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" data-lang="ar">كيف تبدأ</h2>
+              <h2 class="section-title" data-lang="en">How to get started</h2>
+            </div>
+          </div>
+
+          <div class="quick-start">
+            <div class="panel step-panel">
+              <h3 data-lang="ar">إذا كنت جديداً</h3>
+              <h3 data-lang="en">If you're new</h3>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span data-lang="ar">ابدأ بدليل كتابة البرومبتات لفهم الأساسيات بسرعة.</span>
+                  <span data-lang="en">Start with the prompt-writing guide to learn the basics quickly.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span data-lang="ar">اختر صفحة مناسبة لدورك من حالات التطبيق.</span>
+                  <span data-lang="en">Choose the page that matches your role in Use Cases.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span data-lang="ar">جرّب القوالب، ثم عدّلها حسب حاجتك الفعلية.</span>
+                  <span data-lang="en">Try the templates, then adapt them to your real use case.</span>
+                </li>
+              </ol>
+            </div>
+
+            <div class="panel step-panel">
+              <h3 data-lang="ar">إذا كانت لديك خبرة</h3>
+              <h3 data-lang="en">If you're experienced</h3>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span data-lang="ar">اذهب مباشرة إلى الـ workflows المناسبة لمهمتك.</span>
+                  <span data-lang="en">Go straight to the workflows that match your task.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span data-lang="ar">استخدم المهارات الجاهزة لتسريع التنفيذ وتحسين النتيجة.</span>
+                  <span data-lang="en">Use the ready-made skills to speed up execution and improve results.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span data-lang="ar">ارجع للشروحات فقط عندما تحتاج تحسيناً أعمق.</span>
+                  <span data-lang="en">Return to the guides only when you want to refine your process further.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" data-lang="ar">🧠 ملاحظات مهمة</h2>
+              <h2 class="section-title" data-lang="en">🧠 Important notes</h2>
+            </div>
+          </div>
+
+          <div class="notes">
+            <div class="note" data-lang="ar">كلما كان البرومبت أوضح وأكثر تحديداً، كانت النتيجة أفضل.</div>
+            <div class="note" data-lang="en">The clearer and more specific the prompt, the better the result.</div>
+            <div class="note" data-lang="ar">التحسين التكراري يعطي نتائج أقوى من الاعتماد على محاولة واحدة.</div>
+            <div class="note" data-lang="en">Iterating usually works better than expecting one perfect attempt.</div>
+            <div class="note" data-lang="ar">في المهام التقنية، الإنجليزية غالباً أدق من العربية.</div>
+            <div class="note" data-lang="en">For technical work, English often gives more precise output.</div>
+            <div class="note" data-lang="ar">المحادثة المتعددة الخطوات أفضل من برومبت واحد طويل ومزدحم.</div>
+            <div class="note" data-lang="en">Multi-step conversations often work better than one overloaded prompt.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="panel support-box">
+            <div>
+              <h2 style="margin: 0;" data-lang="ar">⭐ دعم المشروع</h2>
+              <h2 style="margin: 0;" data-lang="en">⭐ Support the project</h2>
+              <p data-lang="ar">إذا أفادك المشروع، اعمل له Star وشاركه مع من يحتاجه.</p>
+              <p data-lang="en">If this project helped you, star it and share it with anyone who might benefit.</p>
+            </div>
+
+            <a class="coffee" href="https://www.buymeacoffee.com/amjadshk" target="_blank" rel="noreferrer">
+              <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="170" alt="Buy Me A Coffee" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {% include faq.html %}
+
+      {% include newsletter.html variant="band" uid="band" %}
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span data-lang="ar">Awesome Arabic AI &copy; {{ 'now' | date: "%Y" }}</span>
+        <span data-lang="en">Awesome Arabic AI &copy; {{ 'now' | date: "%Y" }}</span>
+        <a href="{{ site.baseurl }}/CONTRIBUTING.html" data-lang="ar">إرشادات المساهمة</a>
+        <a href="{{ site.baseurl }}/CONTRIBUTING.html" data-lang="en">Contribution guidelines</a>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll('[data-set-lang]');
+        var body = document.body;
+        var savedLang = 'ar';
+        var heroAccordion = document.getElementById('library-hero-accordion');
+        var accordionItems = [
+          {
+            titleAr: 'برومبتات الكتابة',
+            titleEn: 'Writing prompts',
+            imageUrl: 'https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?q=80&w=1974&auto=format&fit=crop',
+            href: '{{ site.baseurl }}/prompts/writing-prompts.html'
+          },
+          {
+            titleAr: 'توليد الصور',
+            titleEn: 'Image generation',
+            imageUrl: 'https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=2070&auto=format&fit=crop',
+            href: '{{ site.baseurl }}/prompts/image-generation-prompts.html'
+          },
+          {
+            titleAr: 'مساعد التطوير',
+            titleEn: 'Developer assistant',
+            imageUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1974&auto=format&fit=crop',
+            href: '{{ site.baseurl }}/use-cases/for-developers.html'
+          },
+          {
+            titleAr: 'أتمتة المهام',
+            titleEn: 'Workflow automation',
+            imageUrl: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2090&auto=format&fit=crop',
+            href: '{{ site.baseurl }}/workflows/'
+          },
+          {
+            titleAr: 'فهم بصري',
+            titleEn: 'Visual understanding',
+            imageUrl: 'https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=2070&auto=format&fit=crop',
+            href: '{{ site.baseurl }}/prompts/image-generation-prompts.html'
+          }
+        ];
+        var accordionDefaultIndex = 2;
+        var activeAccordionIndex = Math.min(accordionDefaultIndex, accordionItems.length - 1);
+        try { savedLang = localStorage.getItem('site-lang') || 'ar'; } catch(e) {}
+
+        function setAccordionAriaLabel(lang) {
+          if (!heroAccordion) {
+            return;
+          }
+
+          heroAccordion.setAttribute(
+            'aria-label',
+            lang === 'ar' ? 'حالات استخدام من المكتبة' : 'Library use cases'
+          );
+        }
+
+        function getAccordionCards() {
+          if (!heroAccordion) {
+            return [];
+          }
+
+          return heroAccordion.querySelectorAll('.hero-accordion-card');
+        }
+
+        function setActiveAccordionIndex(index) {
+          activeAccordionIndex = index;
+          var cards = getAccordionCards();
+
+          cards.forEach(function (card, cardIndex) {
+            var isActive = cardIndex === activeAccordionIndex;
+            card.classList.toggle('is-active', isActive);
+          });
+        }
+
+        function createAccordionCard(item, index) {
+          var listItem = document.createElement('li');
+          listItem.className = 'hero-accordion-item';
+
+          var link = document.createElement('a');
+          link.className = 'hero-accordion-card';
+          link.href = item.href;
+          link.setAttribute('aria-label', item.titleAr + ' - ' + item.titleEn);
+
+          var image = document.createElement('img');
+          image.src = item.imageUrl;
+          image.alt = item.titleEn;
+
+          var overlay = document.createElement('span');
+          overlay.className = 'hero-accordion-overlay';
+          overlay.setAttribute('aria-hidden', 'true');
+
+          var label = document.createElement('span');
+          label.className = 'hero-accordion-label';
+
+          var labelAr = document.createElement('span');
+          labelAr.setAttribute('data-lang', 'ar');
+          labelAr.textContent = item.titleAr;
+
+          var labelEn = document.createElement('span');
+          labelEn.setAttribute('data-lang', 'en');
+          labelEn.textContent = item.titleEn;
+
+          label.appendChild(labelAr);
+          label.appendChild(labelEn);
+
+          link.appendChild(image);
+          link.appendChild(overlay);
+          link.appendChild(label);
+          listItem.appendChild(link);
+
+          link.addEventListener('mouseenter', function () {
+            setActiveAccordionIndex(index);
+          });
+
+          link.addEventListener('focus', function () {
+            setActiveAccordionIndex(index);
+          });
+
+          return listItem;
+        }
+
+        function handleAccordionKeyNavigation(event) {
+          if (!heroAccordion) {
+            return;
+          }
+
+          if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
+            return;
+          }
+
+          event.preventDefault();
+
+          var cards = getAccordionCards();
+          if (!cards.length) {
+            return;
+          }
+
+          var isRtl = document.documentElement.dir === 'rtl';
+          var forwardKey = isRtl ? 'ArrowLeft' : 'ArrowRight';
+          var delta = event.key === forwardKey ? 1 : -1;
+          var nextIndex = (activeAccordionIndex + delta + cards.length) % cards.length;
+
+          cards[nextIndex].focus();
+          setActiveAccordionIndex(nextIndex);
+        }
+
+        function initializeAccordion() {
+          if (!heroAccordion) {
+            return;
+          }
+
+          accordionItems.forEach(function (item, index) {
+            heroAccordion.appendChild(createAccordionCard(item, index));
+          });
+
+          heroAccordion.addEventListener('keydown', handleAccordionKeyNavigation);
+          setActiveAccordionIndex(activeAccordionIndex);
+        }
+
+        function setLanguage(lang) {
+          body.classList.remove('lang-ar', 'lang-en');
+          body.classList.add('lang-' + lang);
+          body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+          document.documentElement.lang = lang;
+          document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+          try { localStorage.setItem('site-lang', lang); } catch(e) {}
+
+          buttons.forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+          });
+
+          setAccordionAriaLabel(lang);
+        }
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            setLanguage(btn.getAttribute('data-set-lang'));
+          });
+        });
+
+        initializeAccordion();
+        setLanguage(savedLang);
+      })();
+    </script>
+
+    <!-- Gate: hard redirect for non-subscribers -->
+    <script>window.SITE_BASEURL = '{{ site.baseurl }}';</script>
+    <script src="{{ site.baseurl }}/assets/js/content-gate.js"></script>
+  </body>
+</html>
