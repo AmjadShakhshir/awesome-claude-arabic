@@ -9,9 +9,35 @@
   'use strict';
 
   var GATE_PAGE = (window.SITE_BASEURL || '') + '/';
+  var UNLOCK_TOKEN = '__nl_unlocked=1';
 
   function show() {
     document.documentElement.style.visibility = '';
+  }
+
+  function hasUnlockFlag() {
+    if (window.__nl_unlocked === true) return true;
+    try {
+      if (localStorage.getItem('nl_unlocked') === '1') return true;
+    } catch (e) {}
+    try {
+      if (sessionStorage.getItem('nl_unlocked') === '1') return true;
+    } catch (e2) {}
+    try {
+      if ((window.name || '').indexOf(UNLOCK_TOKEN) !== -1) return true;
+    } catch (e3) {}
+    return false;
+  }
+
+  function persistUnlockFlag() {
+    window.__nl_unlocked = true;
+    try { localStorage.setItem('nl_unlocked', '1'); } catch (e) {}
+    try { sessionStorage.setItem('nl_unlocked', '1'); } catch (e2) {}
+    try {
+      if ((window.name || '').indexOf(UNLOCK_TOKEN) === -1) {
+        window.name = (window.name ? window.name + '|' : '') + UNLOCK_TOKEN;
+      }
+    } catch (e3) {}
   }
 
   /* ── Bot / crawler bypass ────────────────────────────────────── */
@@ -31,18 +57,22 @@
   }
 
   /* ── Already unlocked? ──────────────────────────────────────── */
-  if (localStorage.getItem('nl_unlocked') === '1') {
+  if (hasUnlockFlag()) {
     document.body.classList.add('nl-unlocked');
     show();
     return;
   }
 
   /* ── Redirect non-subscriber to landing ─────────────────────── */
-  window.location.replace(GATE_PAGE);
+  try {
+    window.location.replace(GATE_PAGE);
+  } catch (e) {
+    window.location.assign(GATE_PAGE);
+  }
 
   /* ── Unlock listener (future-proof, e.g. postMessage flows) ─── */
   window.addEventListener('nl:unlocked', function () {
-    try { localStorage.setItem('nl_unlocked', '1'); } catch (e) {}
+    persistUnlockFlag();
     document.body.classList.add('nl-unlocked');
     show();
   });

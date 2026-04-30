@@ -331,6 +331,9 @@
 
 <script>
   (function () {
+    var INAPP_WEBVIEW_RE = /BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|MicroMessenger|QQBrowser|Alipay|DingTalk|Line\//i;
+    var isInAppBrowser = INAPP_WEBVIEW_RE.test(navigator.userAgent || '');
+
     function currentLang() {
       return document.body.classList.contains('lang-en') ? 'en' : 'ar';
     }
@@ -371,6 +374,10 @@
         ar: '⚠️ تعذر الإرسال. تحقق من الاتصال وأعد المحاولة.',
         en: '⚠️ Could not send. Check your connection and try again.'
       },
+      openbrowser: {
+        ar: '📲 إذا لم يكتمل النقل، افتح الصفحة في المتصفح ثم أعد المحاولة.',
+        en: '📲 If redirect fails, open this page in your browser and try again.'
+      },
       close: { ar: 'إغلاق', en: 'Close' }
     };
     function ensureToast() {
@@ -396,7 +403,7 @@
       var lang = currentLang();
       var el = ensureToast();
       el.classList.remove('nl-toast--success', 'nl-toast--error', 'nl-toast--already');
-      el.classList.add('nl-toast--' + kind);
+      el.classList.add('nl-toast--' + (kind === 'openbrowser' ? 'error' : kind));
       el.querySelector('.nl-toast__msg').textContent = TOAST_MESSAGES[kind][lang];
       el.querySelector('.nl-toast__close').setAttribute('aria-label', TOAST_MESSAGES.close[lang]);
       el.setAttribute('data-show', '1');
@@ -410,8 +417,54 @@
     }
 
     /* ---- AJAX submit ---- */
-    function unlockGate() {
+    function setUnlockFlag() {
+      window.__nl_unlocked = true;
       try { localStorage.setItem('nl_unlocked', '1'); } catch (e) {}
+      try { sessionStorage.setItem('nl_unlocked', '1'); } catch (e2) {}
+      try {
+        if ((window.name || '').indexOf('__nl_unlocked=1') === -1) {
+          window.name = (window.name ? window.name + '|' : '') + '__nl_unlocked=1';
+        }
+      } catch (e3) {}
+    }
+
+    function fetchJsonWithTimeout(url, options, timeoutMs) {
+      var controller = null;
+      var timer = null;
+      if (typeof AbortController !== 'undefined') {
+        controller = new AbortController();
+        timer = setTimeout(function () {
+          try { controller.abort(); } catch (e) {}
+        }, timeoutMs || 8000);
+      }
+      var requestOptions = options || {};
+      if (controller) requestOptions.signal = controller.signal;
+
+      return fetch(url, requestOptions)
+        .then(function (res) {
+          if (!res || typeof res.json !== 'function') throw new Error('invalid_response');
+          return res.json();
+        })
+        ['finally'](function () {
+          if (timer) clearTimeout(timer);
+        });
+    }
+
+    function tryLegacyFallback(form) {
+      if (!form || !form.action) return Promise.resolve(false);
+      return fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(form)
+      }).then(function () {
+        return true;
+      }).catch(function () {
+        return false;
+      });
+    }
+
+    function unlockGate() {
+      setUnlockFlag();
       document.body.classList.add('nl-unlocked');
       try { window.dispatchEvent(new Event('nl:unlocked')); } catch (e) {
         var ev = document.createEvent('Event');
@@ -458,12 +511,10 @@
         var emailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
         var localeVal = (form.querySelector('[name="locale"]') || {}).value || '{{ nl.default_locale | default: "ar" }}';
         var hpVal = (form.querySelector('.nl-hp') || {}).value || '';
-        fetch(apiUrl, {
+        fetchJsonWithTimeout(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailVal, locale: localeVal, source: 'website', honeypot: hpVal })
-        }).then(function (res) {
-          return res.json();
         }).then(function (data) {
           var status = (data && data.status) || 'upstream_error';
           if (status === 'subscribed_new') {
@@ -479,10 +530,28 @@
           } else if (status === 'invalid_email') {
             showToast('error');
           } else {
-            showToast('error');
+            return tryLegacyFallback(form).then(function (fallbackOk) {
+              if (fallbackOk) {
+                showToast('success');
+                form.reset();
+                syncLocale(currentLang());
+                unlockGate();
+              } else {
+                showToast(isInAppBrowser ? 'openbrowser' : 'error');
+              }
+            });
           }
         }).catch(function () {
-          showToast('error');
+          return tryLegacyFallback(form).then(function (fallbackOk) {
+            if (fallbackOk) {
+              showToast('success');
+              form.reset();
+              syncLocale(currentLang());
+              unlockGate();
+            } else {
+              showToast(isInAppBrowser ? 'openbrowser' : 'error');
+            }
+          });
         }).then(_restoreBtn);
       } else {
         /* ── Legacy path: no-cors Brevo form post (no duplicate detection) ── */
@@ -496,7 +565,7 @@
           syncLocale(currentLang());
           unlockGate();
         }).catch(function () {
-          showToast('error');
+          showToast(isInAppBrowser ? 'openbrowser' : 'error');
         }).then(_restoreBtn);
       }
     });

@@ -27,19 +27,16 @@
  */
 
 const BREVO_CONTACTS = 'https://api.brevo.com/v3/contacts';
+const BREVO_SMTP = 'https://api.brevo.com/v3/smtp/email';
+const BREVO_TIMEOUT_MS = 8000;
+const INAPP_WEBVIEW_UA = /BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|MicroMessenger|QQBrowser|Alipay|DingTalk|Line\/|UCBrowser/i;
 
 export default {
   async fetch(request, env, ctx) {
     const reqId = crypto.randomUUID();
-    const origin = request.headers.get('Origin') || '';
-    const allowedOrigin = env.ALLOWED_ORIGIN || '';
-
-    const corsHeaders = {
-      'Access-Control-Allow-Origin': allowedOrigin || origin, // narrow by default
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Max-Age': '86400',
-    };
+    const allowedOrigin = (env.ALLOWED_ORIGIN || '').trim();
+    const originCheck = evaluateRequestOrigin(request, allowedOrigin);
+    const corsHeaders = buildCorsHeaders(originCheck.responseOrigin || allowedOrigin);
 
     /* ── Pre-flight ── */
     if (request.method === 'OPTIONS') {
@@ -52,8 +49,20 @@ export default {
     }
 
     /* ── Origin guard (when ALLOWED_ORIGIN is configured) ── */
-    if (allowedOrigin && origin !== allowedOrigin) {
+    if (!originCheck.allowed) {
+      log(reqId, 'origin_rejected', {
+        origin: originCheck.origin,
+        refererOrigin: originCheck.refererOrigin,
+        inAppUA: originCheck.inAppUA,
+      });
       return jsonResponse({ status: 'upstream_error' }, 403, corsHeaders);
+    }
+    if (originCheck.reason !== 'origin_match' && originCheck.reason !== 'no_origin_restriction') {
+      log(reqId, 'origin_nonstandard_allowed', {
+        reason: originCheck.reason,
+        origin: originCheck.origin,
+        refererOrigin: originCheck.refererOrigin,
+      });
     }
 
     let email, locale, source, honeypot;
@@ -104,9 +113,10 @@ export default {
     let contactInList = false;
 
     try {
-      const checkRes = await fetch(
+      const checkRes = await fetchWithTimeout(
         `${BREVO_CONTACTS}/${encodeURIComponent(email)}`,
-        { headers: { 'api-key': apiKey, 'Content-Type': 'application/json' } }
+        { headers: { 'api-key': apiKey, 'Content-Type': 'application/json' } },
+        BREVO_TIMEOUT_MS
       );
 
       if (checkRes.status === 200) {
@@ -127,8 +137,8 @@ export default {
         log(reqId, 'upstream_error', { phase: 'check', httpStatus: checkRes.status });
         return jsonResponse({ status: 'upstream_error' }, 502, corsHeaders);
       }
-    } catch (_) {
-      log(reqId, 'upstream_error', { phase: 'check', err: 'network' });
+    } catch (err) {
+      log(reqId, 'upstream_error', { phase: 'check', err: classifyNetworkError(err) });
       return jsonResponse({ status: 'upstream_error' }, 502, corsHeaders);
     }
 
@@ -150,11 +160,11 @@ export default {
     };
 
     try {
-      const createRes = await fetch(BREVO_CONTACTS, {
+      const createRes = await fetchWithTimeout(BREVO_CONTACTS, {
         method: 'POST',
         headers: { 'api-key': apiKey, 'Content-Type': 'application/json' },
         body: JSON.stringify(createBody),
-      });
+      }, BREVO_TIMEOUT_MS);
 
       if (createRes.status === 201 || createRes.status === 204) {
         log(reqId, 'subscribed_new', {});
@@ -174,14 +184,122 @@ export default {
         log(reqId, 'upstream_error', { phase: 'create', httpStatus: createRes.status, body: errBody.slice(0, 200) });
         return jsonResponse({ status: 'upstream_error' }, 502, corsHeaders);
       }
-    } catch (_) {
-      log(reqId, 'upstream_error', { phase: 'create', err: 'network' });
+    } catch (err) {
+      log(reqId, 'upstream_error', { phase: 'create', err: classifyNetworkError(err) });
       return jsonResponse({ status: 'upstream_error' }, 502, corsHeaders);
     }
   },
 };
 
 /* ── Helpers ── */
+
+function buildCorsHeaders(allowOrigin) {
+  return {
+    'Access-Control-Allow-Origin': allowOrigin || '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin',
+  };
+}
+
+function evaluateRequestOrigin(request, allowedOrigin) {
+  const origin = request.headers.get('Origin') || '';
+  const refererOrigin = getOriginFromUrl(request.headers.get('Referer') || '');
+  const userAgent = request.headers.get('User-Agent') || '';
+  const inAppUA = INAPP_WEBVIEW_UA.test(userAgent);
+
+  if (!allowedOrigin) {
+    return {
+      allowed: true,
+      responseOrigin: origin || '*',
+      reason: 'no_origin_restriction',
+      origin,
+      refererOrigin,
+      inAppUA,
+    };
+  }
+
+  if (origin === allowedOrigin) {
+    return {
+      allowed: true,
+      responseOrigin: origin,
+      reason: 'origin_match',
+      origin,
+      refererOrigin,
+      inAppUA,
+    };
+  }
+
+  if (!origin && refererOrigin === allowedOrigin) {
+    return {
+      allowed: true,
+      responseOrigin: allowedOrigin,
+      reason: 'referer_match_missing_origin',
+      origin,
+      refererOrigin,
+      inAppUA,
+    };
+  }
+
+  if (inAppUA && refererOrigin === allowedOrigin) {
+    return {
+      allowed: true,
+      responseOrigin: allowedOrigin,
+      reason: 'inapp_referer_origin_match',
+      origin,
+      refererOrigin,
+      inAppUA,
+    };
+  }
+
+  return {
+    allowed: false,
+    responseOrigin: allowedOrigin,
+    reason: 'rejected',
+    origin,
+    refererOrigin,
+    inAppUA,
+  };
+}
+
+function getOriginFromUrl(value) {
+  if (!value) return '';
+  try {
+    return new URL(value).origin;
+  } catch (_) {
+    return '';
+  }
+}
+
+async function fetchWithTimeout(url, init, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(function () {
+    controller.abort('timeout');
+  }, timeoutMs || BREVO_TIMEOUT_MS);
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } catch (err) {
+    if (err && err.name === 'AbortError') {
+      const timeoutErr = new Error('timeout');
+      timeoutErr.code = 'timeout';
+      throw timeoutErr;
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function classifyNetworkError(err) {
+  if (!err) return 'network';
+  if (err.code === 'timeout') return 'timeout';
+  if (err.name === 'AbortError') return 'timeout';
+  const message = String(err.message || '').toLowerCase();
+  if (message.indexOf('timeout') !== -1) return 'timeout';
+  return 'network';
+}
 
 function jsonResponse(body, status, extraHeaders) {
   return new Response(JSON.stringify(body), {
@@ -206,8 +324,6 @@ function log(reqId, event, meta) {
 
 /* ── Welcome email ── */
 
-const BREVO_SMTP = 'https://api.brevo.com/v3/smtp/email';
-
 /**
  * Send a bilingual welcome email via Brevo's transactional API.
  * Locale picks the template (ar | en — anything else falls back to en).
@@ -227,7 +343,7 @@ async function sendWelcomeEmail(env, { email, locale, reqId }) {
   const lang = String(locale || 'ar').toLowerCase().startsWith('en') ? 'en' : 'ar';
   const tpl = lang === 'en' ? welcomeEmailEn(ctaUrl) : welcomeEmailAr(ctaUrl);
 
-  const res = await fetch(BREVO_SMTP, {
+  const res = await fetchWithTimeout(BREVO_SMTP, {
     method: 'POST',
     headers: { 'api-key': apiKey, 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -239,7 +355,7 @@ async function sendWelcomeEmail(env, { email, locale, reqId }) {
       tags: ['welcome', 'awesome-arabic-ai'],
       headers: { 'X-Mailer': 'newsletter-api-worker' },
     }),
-  });
+  }, BREVO_TIMEOUT_MS);
 
   if (res.status >= 200 && res.status < 300) {
     let messageId = '';
