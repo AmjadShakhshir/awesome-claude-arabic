@@ -13,7 +13,11 @@
     <!-- Anti-FOUC: hide document until gate.js confirms access -->
     <script>
       (function(){try{
-        if(localStorage.getItem('nl_unlocked')==='1') return;
+        var unlocked=false;
+        try{if(localStorage.getItem('nl_unlocked')==='1') unlocked=true;}catch(e){}
+        if(!unlocked){try{if(sessionStorage.getItem('nl_unlocked')==='1') unlocked=true;}catch(e2){}}
+        if(!unlocked){try{if((window.name||'').indexOf('__nl_unlocked=1')!==-1) unlocked=true;}catch(e3){}}
+        if(unlocked) return;
         var ua=navigator.userAgent||'';
         if(/Googlebot|bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|GPTBot|ChatGPT-User|ClaudeBot|PerplexityBot/i.test(ua)) return;
         if(/[?&]nogate=1/.test(window.location.search)) return;

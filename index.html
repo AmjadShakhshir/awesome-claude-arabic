@@ -409,7 +409,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
     <script>
       (function () {
         try {
-          if (/BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV/.test(navigator.userAgent || '')) {
+          if (/BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|MicroMessenger|QQBrowser|Alipay|DingTalk|Line\//i.test(navigator.userAgent || '')) {
             document.getElementById('inapp-banner').style.display = 'block';
           }
         } catch (e) {}
@@ -585,6 +585,65 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
 
         setLang(savedLang);
 
+        var _lpInAppRegex = /BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|MicroMessenger|QQBrowser|Alipay|DingTalk|Line\//i;
+        var _lpIsInAppBrowser = _lpInAppRegex.test(navigator.userAgent || '');
+
+        function _lpSetUnlockFlag() {
+          window.__nl_unlocked = true;
+          try { localStorage.setItem('nl_unlocked', '1'); } catch (e) {}
+          try { sessionStorage.setItem('nl_unlocked', '1'); } catch (e2) {}
+          try {
+            if ((window.name || '').indexOf('__nl_unlocked=1') === -1) {
+              window.name = (window.name ? window.name + '|' : '') + '__nl_unlocked=1';
+            }
+          } catch (e3) {}
+        }
+
+        function _lpNotifyUnlock() {
+          try {
+            window.dispatchEvent(new Event('nl:unlocked'));
+          } catch (e) {
+            var ev = document.createEvent('Event');
+            ev.initEvent('nl:unlocked', true, true);
+            window.dispatchEvent(ev);
+          }
+        }
+
+        function _lpFetchJsonWithTimeout(url, options, timeoutMs) {
+          var controller = null;
+          var timer = null;
+          if (typeof AbortController !== 'undefined') {
+            controller = new AbortController();
+            timer = setTimeout(function () {
+              try { controller.abort(); } catch (e) {}
+            }, timeoutMs || 8000);
+          }
+          var requestOptions = options || {};
+          if (controller) requestOptions.signal = controller.signal;
+
+          return fetch(url, requestOptions)
+            .then(function (res) {
+              if (!res || typeof res.json !== 'function') throw new Error('invalid_response');
+              return res.json();
+            })
+            ['finally'](function () {
+              if (timer) clearTimeout(timer);
+            });
+        }
+
+        function _lpTryLegacyFallback(form) {
+          if (!form || !form.action) return Promise.resolve(false);
+          return fetch(form.action, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: new FormData(form)
+          }).then(function () {
+            return true;
+          }).catch(function () {
+            return false;
+          });
+        }
+
         /* ── Toast ── */
         var _lpToastEl = null;
         var _lpToastTimer = null;
@@ -592,6 +651,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
           success: { ar: '\u2705 \u062a\u0645 \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643! \u062a\u062d\u0642\u0642 \u0645\u0646 \u0628\u0631\u064a\u062f\u0643 \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u0627\u0634\u062a\u0631\u0627\u0643.', en: '\u2705 Subscribed! Check your inbox to confirm.' },
           already: { ar: '📬 أنت مشترك بالفعل! يمكنك الوصول إلى المحتوى الآن.', en: '📬 You\'re already subscribed! Redirecting to library\u2026' },
           error:   { ar: '\u26a0\ufe0f \u062a\u0639\u0630\u0651\u0631 \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0648\u0623\u0639\u062f \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629.', en: '\u26a0\ufe0f Could not send. Check your connection and try again.' },
+          openbrowser: { ar: '📲 إذا لم يكتمل النقل، افتح الصفحة في المتصفح ثم أعد المحاولة.', en: '📲 If redirect fails, open this page in your browser and try again.' },
           close:   { ar: '\u0625\u063a\u0644\u0627\u0642', en: 'Close' }
         };
         function _lpCurrentLang() {
@@ -621,7 +681,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
           var lang = _lpCurrentLang();
           var el = _lpEnsureToast();
           el.classList.remove('nl-toast--success', 'nl-toast--error', 'nl-toast--already');
-          el.classList.add('nl-toast--' + kind);
+          el.classList.add('nl-toast--' + (kind === 'openbrowser' ? 'error' : kind));
           el.querySelector('.nl-toast__msg').textContent = LP_TOAST[kind][lang];
           el.querySelector('.nl-toast__close').setAttribute('aria-label', LP_TOAST.close[lang]);
           el.setAttribute('data-show', '1');
@@ -656,9 +716,23 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
             }
             function _lpOnUnlock() {
               form.reset();
-              try { localStorage.setItem('nl_unlocked', '1'); } catch(e2) {}
+              _lpSetUnlockFlag();
+              _lpNotifyUnlock();
               setTimeout(function () {
-                window.location.assign('{{ site.baseurl }}/library/');
+                var currentPath = window.location.pathname + window.location.search;
+                try {
+                  window.location.assign('{{ site.baseurl }}/library/');
+                } catch (navErr) {
+                  window.location.href = '{{ site.baseurl }}/library/';
+                }
+                if (_lpIsInAppBrowser) {
+                  setTimeout(function () {
+                    if ((window.location.pathname + window.location.search) === currentPath) {
+                      _lpShowToast('openbrowser');
+                      try { document.getElementById('inapp-banner').style.display = 'block'; } catch (e3) {}
+                    }
+                  }, 900);
+                }
               }, 1200);
             }
             if (apiUrl) {
@@ -666,12 +740,10 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
               var emailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
               var hpEl = form.querySelector('[tabindex="-1"][name]');
               var hpVal = hpEl ? hpEl.value : '';
-              fetch(apiUrl, {
+              _lpFetchJsonWithTimeout(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailVal, locale: savedLang, source: 'landing', honeypot: hpVal })
-              }).then(function (res) {
-                return res.json();
               }).then(function (data) {
                 var status = (data && data.status) || 'upstream_error';
                 if (status === 'subscribed_new') {
@@ -680,11 +752,27 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
                 } else if (status === 'already_subscribed') {
                   _lpShowToast('already');
                   _lpOnUnlock();
-                } else {
+                } else if (status === 'invalid_email') {
                   _lpShowToast('error');
+                } else {
+                  return _lpTryLegacyFallback(form).then(function (fallbackOk) {
+                    if (fallbackOk) {
+                      _lpShowToast('success');
+                      _lpOnUnlock();
+                    } else {
+                      _lpShowToast(_lpIsInAppBrowser ? 'openbrowser' : 'error');
+                    }
+                  });
                 }
               }).catch(function () {
-                _lpShowToast('error');
+                return _lpTryLegacyFallback(form).then(function (fallbackOk) {
+                  if (fallbackOk) {
+                    _lpShowToast('success');
+                    _lpOnUnlock();
+                  } else {
+                    _lpShowToast(_lpIsInAppBrowser ? 'openbrowser' : 'error');
+                  }
+                });
               })['finally'](_lpRestoreBtn);
             } else {
               /* ── Legacy path: no-cors Brevo form post (no duplicate detection) ── */
@@ -694,7 +782,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
                   _lpOnUnlock();
                 })
                 .catch(function () {
-                  _lpShowToast('error');
+                  _lpShowToast(_lpIsInAppBrowser ? 'openbrowser' : 'error');
                 })['finally'](_lpRestoreBtn);
             }
           });
