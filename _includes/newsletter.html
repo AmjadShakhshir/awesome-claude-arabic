@@ -333,6 +333,85 @@
   (function () {
     var INAPP_WEBVIEW_RE = /BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|MicroMessenger|QQBrowser|Alipay|DingTalk|Line\//i;
     var isInAppBrowser = INAPP_WEBVIEW_RE.test(navigator.userAgent || '');
+    var debugEnabled = /[?&](debug|nldebug)=1(?:&|$)/.test(window.location.search);
+    var debugPanel = null;
+    var debugMaxLines = 28;
+
+    function ensureDebugPanel() {
+      if (!debugEnabled) return null;
+      if (debugPanel) return debugPanel;
+
+      var panel = document.createElement('div');
+      panel.id = 'nl-debug-panel';
+      panel.setAttribute('dir', 'ltr');
+      panel.style.position = 'fixed';
+      panel.style.left = '12px';
+      panel.style.right = '12px';
+      panel.style.bottom = '12px';
+      panel.style.zIndex = '10000';
+      panel.style.maxHeight = '42vh';
+      panel.style.overflow = 'auto';
+      panel.style.padding = '10px 12px';
+      panel.style.borderRadius = '12px';
+      panel.style.border = '1px solid rgba(245,158,11,0.45)';
+      panel.style.background = 'rgba(12,12,18,0.96)';
+      panel.style.color = '#fcd34d';
+      panel.style.font = '12px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace';
+      panel.style.whiteSpace = 'pre-wrap';
+      panel.style.wordBreak = 'break-word';
+      panel.style.boxShadow = '0 12px 30px rgba(0,0,0,0.45)';
+      panel.style.pointerEvents = 'none';
+
+      var header = document.createElement('div');
+      header.textContent = 'DEBUG MODE (?debug=1)';
+      header.style.color = '#fff';
+      header.style.fontWeight = '700';
+      header.style.marginBottom = '6px';
+      panel.appendChild(header);
+
+      document.body.appendChild(panel);
+      debugPanel = panel;
+      return panel;
+    }
+
+    function debugLog(step, data) {
+      if (!debugEnabled) return;
+      var panel = ensureDebugPanel();
+      if (!panel) return;
+
+      var time = new Date().toISOString().slice(11, 19);
+      var line = '[' + time + '] ' + step;
+      if (typeof data !== 'undefined') {
+        if (typeof data === 'string') {
+          line += ' | ' + data;
+        } else {
+          try {
+            line += ' | ' + JSON.stringify(data);
+          } catch (e) {
+            line += ' | [unserializable]';
+          }
+        }
+      }
+
+      var row = document.createElement('div');
+      row.textContent = line;
+      panel.appendChild(row);
+
+      while (panel.childNodes.length > debugMaxLines + 1) {
+        panel.removeChild(panel.childNodes[1]);
+      }
+      panel.scrollTop = panel.scrollHeight;
+
+      try {
+        console.log('[NL DEBUG]', step, data || '');
+      } catch (err) {}
+    }
+
+    debugLog('bootstrap', {
+      inApp: isInAppBrowser,
+      uaSnippet: (navigator.userAgent || '').slice(0, 110),
+      page: window.location.pathname
+    });
 
     function currentLang() {
       return document.body.classList.contains('lang-en') ? 'en' : 'ar';
@@ -431,9 +510,11 @@
     function fetchJsonWithTimeout(url, options, timeoutMs) {
       var controller = null;
       var timer = null;
+      var hasTimedOut = false;
       if (typeof AbortController !== 'undefined') {
         controller = new AbortController();
         timer = setTimeout(function () {
+          hasTimedOut = true;
           try { controller.abort(); } catch (e) {}
         }, timeoutMs || 8000);
       }
@@ -445,6 +526,14 @@
           if (!res || typeof res.json !== 'function') throw new Error('invalid_response');
           return res.json();
         })
+        .catch(function (err) {
+          if (hasTimedOut) {
+            var timeoutErr = new Error('timeout');
+            timeoutErr.code = 'timeout';
+            throw timeoutErr;
+          }
+          throw err;
+        })
         ['finally'](function () {
           if (timer) clearTimeout(timer);
         });
@@ -452,13 +541,16 @@
 
     function tryLegacyFallback(form) {
       if (!form || !form.action) return Promise.resolve(false);
+      debugLog('fallback_start', { mode: 'no-cors', hasAction: !!form.action });
       return fetch(form.action, {
         method: 'POST',
         mode: 'no-cors',
         body: new FormData(form)
       }).then(function () {
+        debugLog('fallback_result', { ok: true });
         return true;
       }).catch(function () {
+        debugLog('fallback_result', { ok: false });
         return false;
       });
     }
@@ -476,13 +568,24 @@
       var form = event.target;
       if (!form || !form.matches || !form.matches('[data-nl-form]')) return;
       event.preventDefault();
+      debugLog('submit', {
+        apiConfigured: !!form.getAttribute('data-nl-api'),
+        actionConfigured: !!form.action
+      });
 
       /* Honeypot — silently drop bot submissions */
       var hp = form.querySelector('.nl-hp');
-      if (hp && hp.value) return;
+      if (hp && hp.value) {
+        debugLog('blocked_honeypot', { hasValue: true });
+        return;
+      }
 
       /* Native validity (email format / required) */
       if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+        var emailField = form.querySelector('[name="EMAIL"]');
+        debugLog('blocked_validation', {
+          emailLength: emailField && emailField.value ? emailField.value.length : 0
+        });
         if (typeof form.reportValidity === 'function') form.reportValidity();
         return;
       }
@@ -506,17 +609,87 @@
         }
       }
 
+      function nativeSubmitFallback(reason) {
+        debugLog('inapp_native_submit', {
+          reason: reason || 'fallback',
+          hasApi: !!apiUrl,
+          action: form.action
+        });
+        setUnlockFlag();
+        unlockGate();
+        _restoreBtn();
+        try {
+          form.submit();
+        } catch (nativeErr) {
+          debugLog('inapp_native_submit_error', {
+            name: nativeErr && nativeErr.name,
+            message: nativeErr && nativeErr.message
+          });
+          showToast('openbrowser');
+        }
+      }
+
+      if (isInAppBrowser) {
+        if (apiUrl) {
+          var inAppEmailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
+          var inAppLocaleVal = (form.querySelector('[name="locale"]') || {}).value || '{{ nl.default_locale | default: "ar" }}';
+          var inAppHpVal = (form.querySelector('.nl-hp') || {}).value || '';
+          debugLog('inapp_api_start', {
+            endpoint: apiUrl,
+            emailLength: inAppEmailVal.length,
+            timeoutMs: 4000
+          });
+          fetchJsonWithTimeout(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: inAppEmailVal, locale: inAppLocaleVal, source: 'website', honeypot: inAppHpVal })
+          }, 4000).then(function (data) {
+            var status = (data && data.status) || 'upstream_error';
+            debugLog('inapp_api_result', { status: status, code: data && data.code });
+            if (status === 'subscribed_new' || status === 'already_subscribed') {
+              showToast(status === 'already_subscribed' ? 'already' : 'success');
+              form.reset();
+              syncLocale(currentLang());
+              unlockGate();
+              _restoreBtn();
+            } else if (status === 'invalid_email') {
+              showToast('error');
+              _restoreBtn();
+            } else {
+              nativeSubmitFallback('inapp_api_non_success');
+            }
+          }).catch(function (err) {
+            debugLog('inapp_api_error', {
+              name: err && err.name,
+              message: err && err.message,
+              code: err && err.code
+            });
+            nativeSubmitFallback('inapp_api_error');
+          });
+        } else {
+          nativeSubmitFallback('inapp_no_api');
+        }
+        return;
+      }
+
       if (apiUrl) {
         /* ── API path: structured JSON response, duplicate detection ── */
         var emailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
         var localeVal = (form.querySelector('[name="locale"]') || {}).value || '{{ nl.default_locale | default: "ar" }}';
         var hpVal = (form.querySelector('.nl-hp') || {}).value || '';
+        debugLog('api_start', {
+          endpoint: apiUrl,
+          emailLength: emailVal.length,
+          locale: localeVal,
+          inApp: isInAppBrowser
+        });
         fetchJsonWithTimeout(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailVal, locale: localeVal, source: 'website', honeypot: hpVal })
         }).then(function (data) {
           var status = (data && data.status) || 'upstream_error';
+          debugLog('api_result', { status: status, code: data && data.code });
           if (status === 'subscribed_new') {
             showToast('success');
             form.reset();
@@ -541,7 +714,12 @@
               }
             });
           }
-        }).catch(function () {
+        }).catch(function (err) {
+          debugLog('api_error', {
+            name: err && err.name,
+            message: err && err.message,
+            code: err && err.code
+          });
           return tryLegacyFallback(form).then(function (fallbackOk) {
             if (fallbackOk) {
               showToast('success');
@@ -555,16 +733,23 @@
         }).then(_restoreBtn);
       } else {
         /* ── Legacy path: no-cors Brevo form post (no duplicate detection) ── */
+        debugLog('legacy_start', { mode: 'no-cors', endpoint: form.action });
         fetch(form.action, {
           method: 'POST',
           mode: 'no-cors',
           body: new FormData(form)
         }).then(function () {
+          debugLog('legacy_result', { ok: true });
           showToast('success');
           form.reset();
           syncLocale(currentLang());
           unlockGate();
-        }).catch(function () {
+        }).catch(function (err) {
+          debugLog('legacy_result', {
+            ok: false,
+            name: err && err.name,
+            message: err && err.message
+          });
           showToast(isInAppBrowser ? 'openbrowser' : 'error');
         }).then(_restoreBtn);
       }
