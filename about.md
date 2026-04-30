@@ -8,7 +8,7 @@ title: حول | About
 <h1>حول هذا المشروع</h1>
 
 <p>
-<strong>Awesome Arabic AI</strong> هو مشروع مفتوح المصدر يهدف إلى جمع وتنظيم أفضل الموارد العربية في مجال الذكاء الاصطناعي.
+<strong>Awesome Claude Arabic</strong> هو مشروع مفتوح المصدر يهدف إلى جمع وتنظيم أفضل الموارد العربية في مجال الذكاء الاصطناعي.
 </p>
 
 <h2>الأهداف</h2>
@@ -31,7 +31,7 @@ title: حول | About
 <h1>About This Project</h1>
 
 <p>
-<strong>Awesome Arabic AI</strong> is an open-source project that curates and organizes the best Arabic resources in the field of Artificial Intelligence.
+<strong>Awesome Claude Arabic</strong> is an open-source project that curates and organizes the best Arabic resources in the field of Artificial Intelligence.
 </p>
 
 <h2>Goals</h2>

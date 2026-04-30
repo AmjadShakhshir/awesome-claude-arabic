@@ -8,7 +8,7 @@ permalink: /CONTRIBUTING.html
 
 # المساهمة
 
-شكراً لاهتمامك بالمساهمة في **Awesome Arabic AI**!
+شكراً لاهتمامك بالمساهمة في **Awesome Claude Arabic**!
 
 ## كيفية المساهمة
 
@@ -30,7 +30,7 @@ permalink: /CONTRIBUTING.html
 
 # Contributing
 
-Thank you for your interest in contributing to **Awesome Arabic AI**!
+Thank you for your interest in contributing to **Awesome Claude Arabic**!
 
 ## How to Contribute
 

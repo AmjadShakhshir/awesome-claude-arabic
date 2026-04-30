@@ -1,4 +1,4 @@
-# 🚀 Awesome Arabic AI
+# 🚀 Awesome Claude Arabic
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://amjadshakhshir.github.io/awesome-claude-arabic)
 [![Newsletter](https://img.shields.io/badge/📬%20Newsletter-Join%20free-7c9cff)](https://amjadshakhshir.github.io/awesome-claude-arabic/#newsletter-hero)

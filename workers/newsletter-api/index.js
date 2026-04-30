@@ -216,7 +216,7 @@ const BREVO_SMTP = 'https://api.brevo.com/v3/smtp/email';
  */
 async function sendWelcomeEmail(env, { email, locale, reqId }) {
   const senderEmail = env.BREVO_SENDER_EMAIL || '';
-  const senderName  = env.BREVO_SENDER_NAME  || 'Awesome Arabic AI';
+  const senderName  = env.BREVO_SENDER_NAME  || 'Awesome Claude Arabic';
   const apiKey      = env.BREVO_API_KEY      || '';
 
   if (!apiKey || !senderEmail) {
@@ -253,7 +253,7 @@ async function sendWelcomeEmail(env, { email, locale, reqId }) {
 }
 
 function welcomeEmailAr(ctaUrl) {
-  const subject = 'يسعدنا انضمامك — Awesome Arabic AI 🌟';
+  const subject = 'يسعدنا انضمامك — Awesome Claude Arabic 🌟';
   const html = `<!doctype html>
 <html dir="rtl" lang="ar">
   <head>
@@ -270,7 +270,7 @@ function welcomeEmailAr(ctaUrl) {
 
           <!-- Logo / Brand bar -->
           <tr><td align="center" style="padding-bottom:24px;">
-            <span style="display:inline-block;padding:8px 20px;border-radius:999px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);color:#fbbf24;font-size:13px;font-weight:700;letter-spacing:0.04em;">✦ Awesome Arabic AI</span>
+            <span style="display:inline-block;padding:8px 20px;border-radius:999px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);color:#fbbf24;font-size:13px;font-weight:700;letter-spacing:0.04em;">✦ Awesome Claude Arabic</span>
           </td></tr>
 
           <!-- Main card -->
@@ -334,7 +334,7 @@ function welcomeEmailAr(ctaUrl) {
 
           <!-- Bottom brand note -->
           <tr><td align="center" style="padding-top:20px;">
-            <p style="margin:0;color:#52525b;font-size:12px;">Awesome Arabic AI &mdash; محتوى عربي عملي للذكاء الاصطناعي</p>
+            <p style="margin:0;color:#52525b;font-size:12px;">Awesome Claude Arabic &mdash; محتوى عربي عملي للذكاء الاصطناعي</p>
           </td></tr>
 
         </table>
@@ -343,7 +343,7 @@ function welcomeEmailAr(ctaUrl) {
   </body>
 </html>`;
   const text = [
-    'يسعدنا انضمامك — Awesome Arabic AI',
+    'يسعدنا انضمامك — Awesome Claude Arabic',
     '',
     'اشتراكك تم بنجاح.',
     '',
@@ -361,7 +361,7 @@ function welcomeEmailAr(ctaUrl) {
 }
 
 function welcomeEmailEn(ctaUrl) {
-  const subject = 'Welcome to Awesome Arabic AI ✨';
+  const subject = 'Welcome to Awesome Claude Arabic ✨';
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -375,7 +375,7 @@ function welcomeEmailEn(ctaUrl) {
         <table role="presentation" width="100%" style="max-width:560px;background:linear-gradient(180deg,rgba(245,158,11,0.08),rgba(15,15,22,0.98));border:1px solid rgba(245,158,11,0.3);border-radius:20px;padding:32px;" cellpadding="0" cellspacing="0">
           <tr><td>
             <div style="display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(245,158,11,0.15);color:#fbbf24;font-size:13px;font-weight:700;margin-bottom:16px;">Welcome 👋</div>
-            <h1 style="margin:0 0 12px;font-size:22px;line-height:1.3;color:#ffffff;">You're in — welcome to Awesome Arabic AI</h1>
+            <h1 style="margin:0 0 12px;font-size:22px;line-height:1.3;color:#ffffff;">You're in — welcome to Awesome Claude Arabic</h1>
             <p style="margin:0 0 16px;color:#d4d4d8;font-size:15px;line-height:1.7;">You'll get practical drops on AI: ready-to-use Arabic prompts, real workflows, and guides that actually save you time.</p>
             <p style="margin:0 0 24px;color:#d4d4d8;font-size:15px;line-height:1.7;">Start here — we've curated the best prompts and guides in one place.</p>
             <p style="margin:0 0 24px;">
@@ -389,7 +389,7 @@ function welcomeEmailEn(ctaUrl) {
   </body>
 </html>`;
   const text = [
-    "You're in — welcome to Awesome Arabic AI",
+    "You're in — welcome to Awesome Claude Arabic",
     '',
     "You'll get practical drops on AI: ready-to-use Arabic prompts, real workflows, and guides that actually save you time.",
     '',
