@@ -54,7 +54,7 @@
 }
 .nl-bullets li { display: flex; gap: 10px; align-items: flex-start; }
 .nl-bullets li::before { content: "\2736"; color: #f59e0b; flex: 0 0 auto; }
-.nl-form { display: grid; gap: 10px; }
+.nl-form { display: grid; gap: 10px; position: relative; }
 .nl-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .nl-input {
   flex: 1 1 220px;
@@ -65,6 +65,7 @@
   background: rgba(0,0,0,0.3);
   color: #f4f4f5;
   font: inherit;
+  font-size: 16px;
 }
 .nl-input::placeholder { color: #71717a; }
 .nl-input:focus { outline: 2px solid #f59e0b; outline-offset: 1px; }
@@ -154,7 +155,7 @@
   bottom: 24px;
   inset-inline-end: 24px;
   z-index: 9999;
-  max-width: calc(100vw - 32px);
+  max-width: calc(100% - 32px);
   min-width: 260px;
   padding: 14px 18px;
   border-radius: 14px;

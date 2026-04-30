@@ -14,10 +14,14 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
     />
 
     <!-- Redirect subscribed users to the library immediately — no flash -->
+    <!-- Skip redirect for in-app webviews (TikTok, Instagram, etc.) so the signup form stays accessible -->
     <script>
       (function () {
         try {
-          if (localStorage.getItem('nl_unlocked') === '1') {
+          var ua = navigator.userAgent || '';
+          var isInApp = /BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV|Line\//.test(ua);
+          var hasSignupParam = /[?&](signup|nogate)=1/.test(window.location.search);
+          if (!isInApp && !hasSignupParam && localStorage.getItem('nl_unlocked') === '1') {
             window.location.replace('{{ site.baseurl }}/library/');
           }
         } catch (e) {}
@@ -350,7 +354,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
         .header-inner { flex-wrap: wrap; min-height: auto; padding: 14px 0; }
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
         .lp-row { flex-direction: column; }
         .lp-btn { width: 100%; }
       }
@@ -361,7 +365,7 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
         bottom: 24px;
         inset-inline-end: 24px;
         z-index: 9999;
-        max-width: calc(100vw - 32px);
+        max-width: calc(100% - 32px);
         min-width: 260px;
         padding: 14px 18px;
         border-radius: 14px;
@@ -396,6 +400,21 @@ title: Awesome Claude Arabic — برومبتات وأدوات الذكاء ال
     </style>
   </head>
   <body class="lang-ar">
+
+    <!-- In-app browser hint — shown only when TikTok/Instagram webview is detected -->
+    <div id="inapp-banner" style="display:none;position:fixed;top:0;inset-inline-start:0;inset-inline-end:0;z-index:9998;background:rgba(245,158,11,0.97);color:#1a1205;font-weight:700;font-size:0.92rem;padding:10px 16px;text-align:center;line-height:1.5;">
+      <div data-lang="ar">📲 لتجربة أفضل، اضغط "···" ثم "فتح في المتصفح"</div>
+      <div data-lang="en">📲 For best experience, tap "···" then "Open in browser"</div>
+    </div>
+    <script>
+      (function () {
+        try {
+          if (/BytedanceWebview|musical_ly|TikTok|Instagram|FBAN|FBAV/.test(navigator.userAgent || '')) {
+            document.getElementById('inapp-banner').style.display = 'block';
+          }
+        } catch (e) {}
+      }());
+    </script>
 
     <header class="site-header">
       <div class="container header-inner">
