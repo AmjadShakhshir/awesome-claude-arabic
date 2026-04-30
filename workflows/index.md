@@ -1,17 +1,18 @@
 ---
 layout: default
-title: أنظمة عمل الذكاء الاصطناعي | AI Workflows
+gated: true
+title: أنظمة عمل Claude Cowork | Claude Cowork Workflows
 ---
 
 <div data-lang="ar">
 
 <p><a href="{{ site.baseurl }}/">← العودة للرئيسية</a></p>
 
-<h1>⚙️ أنظمة عمل الذكاء الاصطناعي</h1>
+<h1>⚙️ أنظمة عمل Claude Cowork</h1>
 
 <blockquote>
-<strong>خطوات عملية من المهمة إلى الناتج</strong><br>
-هذه الصفحة تجمع سير العمل الجاهزة حسب الجمهور والاستخدام، بحيث تبدأ بسرعة وتنتج نتائج قابلة للتنفيذ.
+<strong>خطوات عملية من المهمة إلى الناتج — بواسطة Claude Cowork</strong><br>
+هذه الصفحة تجمع سير العمل الجاهزة حسب الجمهور والاستخدام. كل سير عمل مبني على Claude Cowork كأداة التنظيم المركزية — بحيث تبدأ بسرعة وتنتج نتائج قابلة للتنفيذ.
 </blockquote>
 
 <hr>
@@ -75,11 +76,11 @@ title: أنظمة عمل الذكاء الاصطناعي | AI Workflows
 
 <p><a href="{{ site.baseurl }}/">← Back to Home</a></p>
 
-<h1>⚙️ AI Workflows</h1>
+<h1>⚙️ Claude Cowork Workflows</h1>
 
 <blockquote>
-<strong>Practical systems from task to output</strong><br>
-This page collects ready workflows by audience and use case so you can execute quickly with clearer outcomes.
+<strong>Practical systems from task to output — orchestrated in Claude Cowork</strong><br>
+This page collects ready workflows by audience and use case. Each workflow is built around Claude Cowork as the central orchestration layer so you can execute quickly with clearer outcomes.
 </blockquote>
 
 <hr>
