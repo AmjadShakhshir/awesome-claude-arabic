@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-push && echo 'Git hooks installed.'"
+    "install-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-push && echo 'Git hooks installed.'",
+    "smoke:tiktok": "bundle exec jekyll build && bash scripts/smoke-tiktok-fallback.sh"
   },
   "keywords": [],
   "author": "",
