@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "سير عمل صاحب العمل مع الذكاء الاصطناعي | Business Owner AI Workflows"
 ---

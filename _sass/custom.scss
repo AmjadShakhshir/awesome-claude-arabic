@@ -1,32 +1,21 @@
-// ── Design tokens ───────────────────────────────────────────────
-:root {
-  --bg: #0b1020;
-  --bg-soft: #111831;
-  --panel: rgba(255, 255, 255, 0.06);
-  --panel-strong: rgba(255, 255, 255, 0.1);
-  --text: #eff4ff;
-  --muted: #b7c2de;
-  --line: rgba(255, 255, 255, 0.12);
-  --brand: #7c9cff;
-  --brand-2: #6ee7d8;
-  --brand-3: #b388ff;
-  --shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
-  --radius: 22px;
-  --radius-sm: 16px;
-  --max: 1180px;
-}
+// ── Design tokens (amber palette) ──────────────────────────────
+@import "tokens";
 
 // ── Base reset ───────────────────────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+img { max-width: 100%; height: auto; display: block; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   margin: 0;
-  color: var(--text);
+  overflow-x: hidden;
+  color: var(--fg);
   background:
-    radial-gradient(circle at top right, rgba(124, 156, 255, 0.15), transparent 28%),
-    linear-gradient(180deg, #0b1020 0%, #0e1428 45%, #0a0f1f 100%);
+    radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.08), transparent 40%),
+    radial-gradient(ellipse at bottom left, rgba(180, 83, 9, 0.06), transparent 40%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 60%, var(--bg) 100%);
   line-height: 1.7;
   min-height: 100vh;
 }
@@ -51,7 +40,7 @@ a:hover { color: var(--brand-2); }
   top: 0;
   z-index: 30;
   backdrop-filter: blur(16px);
-  background: rgba(11, 16, 32, 0.74);
+  background: rgba(10, 10, 15, 0.82);
   border-bottom: 1px solid var(--line);
 }
 
@@ -78,12 +67,12 @@ a:hover { color: var(--brand-2); }
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   display: grid;
   place-items: center;
-  color: white;
+  color: #1a1205;
   font-size: 1.1rem;
-  box-shadow: 0 12px 30px rgba(124, 156, 255, 0.35);
+  box-shadow: var(--shadow-amber);
 }
 
 .site-nav {
@@ -124,6 +113,38 @@ a:hover { color: var(--brand-2); }
   border-inline-start: 1px solid var(--line);
 }
 
+// ── Nav subscribe button ─────────────────────────────────────────
+.nav-subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a1205 !important;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: 180ms ease;
+  box-shadow: var(--shadow-amber);
+
+  &:hover {
+    background: var(--brand-2);
+    color: #1a1205 !important;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+}
+
+// ── Font stack ───────────────────────────────────────────────────
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+body.lang-ar {
+  font-family: 'Tajawal', 'Segoe UI', Arial, sans-serif;
+}
+
 // ── Page content ─────────────────────────────────────────────────
 .page-content {
   padding: 0;
@@ -143,10 +164,10 @@ h3 { font-size: 1.1rem; margin: 1.5rem 0 0.4rem; }
 p { color: var(--muted); }
 
 blockquote {
-  border-inline-start: 3px solid var(--brand);
+  border-inline-start: 3px solid var(--accent);
   padding: 0.75rem 1.25rem;
   margin: 1rem 0;
-  background: rgba(124, 156, 255, 0.08);
+  background: var(--accent-soft);
   border-radius: 0 12px 12px 0;
   color: var(--muted);
 }
@@ -172,7 +193,7 @@ pre {
     border: none;
     padding: 0;
     font-size: 0.875rem;
-    color: var(--text);
+    color: var(--fg);
   }
 }
 
@@ -217,13 +238,13 @@ pre.prompt-box {
 }
 
 .lang-tip {
-  background: rgba(110, 231, 216, 0.08);
-  border: 1px solid rgba(110, 231, 216, 0.2);
+  background: var(--accent-soft);
+  border: 1px solid rgba(245, 158, 11, 0.25);
   border-radius: 10px;
   padding: 0.6rem 0.9rem;
   font-size: 0.875rem;
   margin: 0.5rem 0 1.5rem;
-  color: var(--brand-2);
+  color: var(--accent);
 }
 
 // ── Section cards ────────────────────────────────────────────────
@@ -246,7 +267,7 @@ pre.prompt-box {
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(124, 156, 255, 0.4);
+    border-color: rgba(245, 158, 11, 0.4);
     text-decoration: none;
   }
 }

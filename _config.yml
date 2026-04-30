@@ -4,7 +4,7 @@ description: >-
   أفضل الموارد العملية للذكاء الاصطناعي باللغة العربية
   — Practical AI resources for Arabic-speaking users.
 url: "https://amjadshakhshir.github.io"
-baseurl: "/awesome-claude-arabicabic"
+baseurl: "/awesome-claude-arabic"
 
 # Plugins
 plugins:
@@ -16,6 +16,23 @@ markdown: kramdown
 kramdown:
   syntax_highlighter: rouge
 
+# Newsletter (Brevo)
+# Get action_url from: Brevo → Contacts → Forms → Share → "Simple HTML form"
+# Until action_url is set, the form renders in "preview" mode (disabled submit + a notice).
+newsletter:
+  action_url: "https://8bf06cc9.sibforms.com/serve/MUIFADbhUOtmVQZ0anyN9Rb8p9AGajaS1GbyV6BOFjwRRmRSwFgwPA_55vOSKdRxoHubTp_zLjA78oMuHGnl3FxZ5VZ6FWQkP46dNOpBzoCtGNo3_rCE90PQSeeHK0haFTsPFZiDT7mfv6urrLICAPJJT25C3glt2vwQ5Rbz4njNxQaTwUZ73GorkwkwdHuYlapjUuCVdIPQzmsu7Q=="
+  # Cloudflare Worker API endpoint — handles duplicate detection & returns structured status.
+  # Set this to your deployed Worker URL, e.g. https://newsletter-api.your-subdomain.workers.dev
+  # When empty the form falls back to the legacy no-cors action_url POST (no duplicate detection).
+  api_url: "https://newsletter-api.awesome-claude-arabic.workers.dev"
+  # Brevo's fixed anti-bot field name (same for all Brevo forms).
+  honeypot_name: "email_address_check"
+  # Default locale sent to Brevo; JS overrides this at runtime to match the active UI language.
+  default_locale: "ar"
+  # Lead magnet promised in the welcome email.
+  lead_magnet_ar: "حزمة أفضل 20 برومبت عربي (PDF)"
+  lead_magnet_en: "Top 20 Arabic AI Prompts (free PDF)"
+
 # Exclude from build
 exclude:
   - .gitignore
@@ -25,4 +42,3 @@ exclude:
   - vendor/
   - node_modules/
   - .claude/
-  - "*.png"

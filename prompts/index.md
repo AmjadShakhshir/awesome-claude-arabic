@@ -1,6 +1,7 @@
 ---
 layout: default
 title: مكتبة البرومبتات العربية | Arabic Prompts Library
+gated: true
 ---
 
 <div data-lang="ar">

@@ -1,0 +1,503 @@
+{%- comment -%}
+  Bilingual Brevo signup component — amber design.
+  Variants:
+    {% include newsletter.html %}                   → full hero variant (default)
+    {% include newsletter.html variant="compact" %} → single-row strip (footer / page bottom)
+    {% include newsletter.html variant="band" %}    → wide band between sections
+    {% include newsletter.html variant="gate" %}    → unlock overlay card inside content-gate.html
+  Reads Brevo config from _config.yml under `newsletter:`.
+  The hidden `locale` field is synced to the active UI language (ar/en) at page load
+  and on every [data-set-lang] click via the inline script at the bottom of this file.
+{%- endcomment -%}
+
+{%- assign variant = include.variant | default: "full" -%}
+{%- assign nl = site.newsletter -%}
+{%- assign action = nl.action_url -%}
+{%- assign honeypot = nl.honeypot_name -%}
+{%- assign lm_ar = nl.lead_magnet_ar | default: "حزمة أفضل 20 برومبت عربي (PDF)" -%}
+{%- assign lm_en = nl.lead_magnet_en | default: "Top 20 Arabic AI Prompts (free PDF)" -%}
+{%- assign uid = include.uid | default: variant -%}
+
+<style>
+/* ── Newsletter amber styles ─────────────────────────────────── */
+.nl-card {
+  background: linear-gradient(180deg, rgba(245,158,11,0.07), rgba(255,255,255,0.03));
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.1) inset;
+  color: #f4f4f5;
+}
+.nl-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(245,158,11,0.4);
+  background: rgba(245,158,11,0.12);
+  color: #fbbf24;
+  font-size: 0.86rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.nl-title { margin: 0 0 8px; font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.2; }
+.nl-sub { margin: 0 0 18px; color: #a1a1aa; font-size: 0.98rem; }
+.nl-bullets {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  color: #a1a1aa;
+  font-size: 0.94rem;
+}
+.nl-bullets li { display: flex; gap: 10px; align-items: flex-start; }
+.nl-bullets li::before { content: "\2736"; color: #f59e0b; flex: 0 0 auto; }
+.nl-form { display: grid; gap: 10px; }
+.nl-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.nl-input {
+  flex: 1 1 220px;
+  min-height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.3);
+  color: #f4f4f5;
+  font: inherit;
+}
+.nl-input::placeholder { color: #71717a; }
+.nl-input:focus { outline: 2px solid #f59e0b; outline-offset: 1px; }
+.nl-btn {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  font: inherit;
+  color: #1a1205;
+  background: #f59e0b;
+  box-shadow: 0 10px 28px rgba(245,158,11,0.35);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease, background .15s ease;
+  white-space: nowrap;
+}
+.nl-btn:hover {
+  background: #fbbf24;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(245,158,11,0.45);
+}
+.nl-btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+.nl-fineprint { margin: 10px 0 0; color: #71717a; font-size: 0.82rem; }
+.nl-notice {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  color: #fcd34d;
+  font-size: 0.86rem;
+}
+/* Honeypot — visually hidden but reachable to bots */
+.nl-hp { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Compact variant */
+.nl-compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(245,158,11,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(245,158,11,0.2);
+  color: #f4f4f5;
+}
+.nl-compact .nl-form { flex: 1 1 320px; }
+.nl-compact .nl-title { font-size: 1.05rem; margin: 0; }
+.nl-compact .nl-sub { margin: 2px 0 0; font-size: 0.88rem; }
+
+/* Band variant */
+.nl-band { padding: 40px; text-align: center; }
+.nl-band .nl-form { max-width: 520px; margin: 0 auto; }
+.nl-band .nl-bullets {
+  justify-items: center;
+  text-align: start;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+/* Gate variant — compact card for the unlock overlay */
+.nl-gate-card {
+  background: linear-gradient(180deg, rgba(245,158,11,0.08), rgba(15,15,22,0.98));
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  max-width: 440px;
+  width: calc(100% - 40px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,158,11,0.08) inset;
+}
+.nl-gate-card .nl-eyebrow { margin-bottom: 12px; }
+.nl-gate-card .nl-title { font-size: 1.25rem; margin-bottom: 6px; }
+.nl-gate-card .nl-sub { font-size: 0.9rem; margin-bottom: 16px; }
+
+@media (max-width: 640px) {
+  .nl-card, .nl-band { padding: 22px; }
+  .nl-compact { flex-direction: column; align-items: stretch; text-align: center; }
+  .nl-gate-card { padding: 24px 18px 20px; }
+}
+
+/* Toast — shared, lazily mounted by JS */
+.nl-toast {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-end: 24px;
+  z-index: 9999;
+  max-width: calc(100vw - 32px);
+  min-width: 260px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06) inset;
+  background: linear-gradient(180deg, rgba(245,158,11,0.18), rgba(15,15,22,0.98));
+  color: #fff;
+  border: 1px solid rgba(245,158,11,0.4);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+  pointer-events: none;
+}
+.nl-toast[data-show="1"] { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.nl-toast--success { background: linear-gradient(180deg, rgba(34,197,94,0.22), rgba(15,15,22,0.98)); border-color: rgba(34,197,94,0.45); }
+.nl-toast--error   { background: linear-gradient(180deg, rgba(239,68,68,0.22), rgba(15,15,22,0.98)); border-color: rgba(239,68,68,0.45); }
+.nl-toast--already { background: linear-gradient(180deg, rgba(59,130,246,0.22), rgba(15,15,22,0.98)); border-color: rgba(59,130,246,0.45); }
+.nl-toast__msg { flex: 1; }
+.nl-toast__close {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  opacity: 0.75;
+}
+.nl-toast__close:hover { opacity: 1; background: rgba(255,255,255,0.08); }
+
+@media (max-width: 640px) {
+  .nl-toast { left: 16px; right: 16px; inset-inline-end: 16px; bottom: 16px; min-width: 0; }
+}
+</style>
+
+{%- capture form_inner -%}
+  {%- if action and action != "" -%}
+  <form class="nl-form" action="{{ action }}" method="post" novalidate data-nl-form
+    {%- if nl.api_url and nl.api_url != "" %} data-nl-api="{{ nl.api_url }}"{%- endif %}>  
+    <div class="nl-row">
+      <label class="sr-only" for="nl-email-{{ uid }}">Email</label>
+      <input
+        class="nl-input"
+        type="email"
+        name="EMAIL"
+        id="nl-email-{{ uid }}"
+        autocomplete="email"
+        required
+        aria-required="true"
+        data-lang-placeholder-ar="بريدك الإلكتروني"
+        data-lang-placeholder-en="Your email address"
+        placeholder="بريدك الإلكتروني"
+      />
+      <button class="nl-btn" type="submit">
+        <span data-lang="ar">🎁 اشترك مجاناً</span>
+        <span data-lang="en">🎁 Subscribe FREE</span>
+      </button>
+    </div>
+    <input type="hidden" name="locale" value="{{ nl.default_locale | default: 'ar' }}" data-nl-locale />
+    <input type="text" name="{{ honeypot }}" class="nl-hp" tabindex="-1" value="" aria-hidden="true" />
+    <p class="nl-fineprint">
+      <span data-lang="ar">رسائل قصيرة عملية فقط — يمكنك إلغاء الاشتراك في أي وقت.</span>
+      <span data-lang="en">Short, practical emails only — unsubscribe anytime.</span>
+    </p>
+  </form>
+  {%- else -%}
+  <form class="nl-form" onsubmit="event.preventDefault();return false;" aria-disabled="true">
+    <div class="nl-row">
+      <input class="nl-input" type="email" placeholder="email@example.com" disabled aria-disabled="true" />
+      <button class="nl-btn" type="button" disabled>
+        <span data-lang="ar">🎁 اشترك مجاناً</span>
+        <span data-lang="en">🎁 Subscribe FREE</span>
+      </button>
+    </div>
+    <div class="nl-notice">
+      <span data-lang="ar">⚙️ النموذج في وضع المعاينة. أضف <code>newsletter.action_url</code> في <code>_config.yml</code> لتفعيله.</span>
+      <span data-lang="en">⚙️ Form in preview mode. Set <code>newsletter.action_url</code> in <code>_config.yml</code> to activate it.</span>
+    </div>
+  </form>
+  {%- endif -%}
+{%- endcapture -%}
+
+{% if variant == "compact" %}
+<aside class="nl-compact" id="newsletter-{{ uid }}" aria-labelledby="nl-title-{{ uid }}">
+  <div>
+    <p class="nl-title" id="nl-title-{{ uid }}" style="font-weight:800;">
+      <span data-lang="ar">📬 اشترك في النشرة — مجاناً</span>
+      <span data-lang="en">📬 Join the newsletter — free</span>
+    </p>
+    <p class="nl-sub">
+      <span data-lang="ar">برومبتات وأدوات عربية جديدة كل أسبوع + {{ lm_ar }} هدية.</span>
+      <span data-lang="en">Fresh Arabic AI prompts weekly + {{ lm_en }} as a welcome gift.</span>
+    </p>
+  </div>
+  {{ form_inner }}
+</aside>
+
+{% elsif variant == "band" %}
+<section class="section">
+  <div class="container">
+    <div class="nl-card nl-band" id="newsletter-{{ uid }}" aria-labelledby="nl-title-{{ uid }}">
+      <span class="nl-eyebrow">
+        <span data-lang="ar">📬 النشرة الأسبوعية — مجاناً تماماً</span>
+        <span data-lang="en">📬 Weekly newsletter — completely free</span>
+      </span>
+      <h2 class="nl-title" id="nl-title-{{ uid }}" style="font-size:1.7rem;">
+        <span data-lang="ar">احصل على برومبتات عربية جديدة كل أسبوع</span>
+        <span data-lang="en">Get new Arabic AI prompts every week</span>
+      </h2>
+      <p class="nl-sub">
+        <span data-lang="ar">هدية الترحيب: {{ lm_ar }} — مجاناً عند الاشتراك.</span>
+        <span data-lang="en">Welcome gift: {{ lm_en }} — free when you sign up.</span>
+      </p>
+      {{ form_inner }}
+    </div>
+  </div>
+</section>
+
+{% elsif variant == "gate" %}
+<div class="nl-gate-card" role="dialog" aria-labelledby="nl-gate-title">
+  <span class="nl-eyebrow">
+    <span data-lang="ar">🔓 اشترك مجاناً للمتابعة</span>
+    <span data-lang="en">🔓 Subscribe free to continue</span>
+  </span>
+  <h3 class="nl-title" id="nl-gate-title">
+    <span data-lang="ar">هذا المحتوى حصري للمشتركين</span>
+    <span data-lang="en">This content is subscriber-only</span>
+  </h3>
+  <p class="nl-sub">
+    <span data-lang="ar">اشترك مجاناً للوصول الفوري — بلا بطاقة، بلا دفع. هدية: {{ lm_ar }}.</span>
+    <span data-lang="en">Subscribe free for instant access — no card, no payment. Gift: {{ lm_en }}.</span>
+  </p>
+  {{ form_inner }}
+</div>
+
+{% else %}
+<aside class="nl-card" id="newsletter-{{ uid }}" aria-labelledby="nl-title-{{ uid }}">
+  <span class="nl-eyebrow">
+    <span data-lang="ar">📬 النشرة الأسبوعية — مجاناً تماماً</span>
+    <span data-lang="en">📬 Weekly newsletter — completely free</span>
+  </span>
+  <h2 class="nl-title" id="nl-title-{{ uid }}">
+    <span data-lang="ar">برومبتات عربية جديدة كل أسبوع — <span style="color:#f59e0b;">مجاناً</span></span>
+    <span data-lang="en">New Arabic AI prompts every week — <span style="color:#f59e0b;">free</span></span>
+  </h2>
+  <p class="nl-sub">
+    <span data-lang="ar">اشترك واحصل على <strong>{{ lm_ar }}</strong> فور تأكيد بريدك.</span>
+    <span data-lang="en">Subscribe and get <strong>{{ lm_en }}</strong> as soon as you confirm your email.</span>
+  </p>
+  <ul class="nl-bullets">
+    <li>
+      <span data-lang="ar">برومبتات قوية بقيود واضحة — ليس "اكتب مقال".</span>
+      <span data-lang="en">Strong prompts with real constraints — not "write an article".</span>
+    </li>
+    <li>
+      <span data-lang="ar">توجيه متى تكتب بالعربية ومتى بالإنجليزية لأفضل نتيجة.</span>
+      <span data-lang="en">Guidance on when Arabic vs English gives better results.</span>
+    </li>
+    <li>
+      <span data-lang="ar">أدوات ومسارات عمل للمطورين، الطلاب، والمستقلين.</span>
+      <span data-lang="en">Tools and workflows for developers, students, and freelancers.</span>
+    </li>
+  </ul>
+  {{ form_inner }}
+</aside>
+{% endif %}
+
+<script>
+  (function () {
+    function currentLang() {
+      return document.body.classList.contains('lang-en') ? 'en' : 'ar';
+    }
+    function applyPlaceholders(lang) {
+      document.querySelectorAll('[data-lang-placeholder-' + lang + ']').forEach(function (el) {
+        el.setAttribute('placeholder', el.getAttribute('data-lang-placeholder-' + lang));
+      });
+    }
+    function syncLocale(lang) {
+      document.querySelectorAll('[data-nl-locale]').forEach(function (el) {
+        el.value = lang;
+      });
+    }
+    var startLang = currentLang();
+    applyPlaceholders(startLang);
+    syncLocale(startLang);
+    document.querySelectorAll('[data-set-lang]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.getAttribute('data-set-lang');
+        applyPlaceholders(lang);
+        syncLocale(lang);
+      });
+    });
+
+    /* ---- Toast ---- */
+    var toastEl = null;
+    var toastTimer = null;
+    var TOAST_MESSAGES = {
+      success: {
+        ar: '✅ تم الاشتراك! تحقق من بريدك لتأكيد الاشتراك.',
+        en: '✅ Subscribed! Check your inbox to confirm.'
+      },
+      already: {
+        ar: '📬 أنت مشترك بالفعل! يمكنك الوصول إلى المحتوى الآن.',
+        en: '📬 You\'re already subscribed! You can access the content now.'
+      },
+      error: {
+        ar: '⚠️ تعذر الإرسال. تحقق من الاتصال وأعد المحاولة.',
+        en: '⚠️ Could not send. Check your connection and try again.'
+      },
+      close: { ar: 'إغلاق', en: 'Close' }
+    };
+    function ensureToast() {
+      if (toastEl) return toastEl;
+      toastEl = document.createElement('div');
+      toastEl.id = 'nl-toast';
+      toastEl.className = 'nl-toast';
+      toastEl.setAttribute('role', 'status');
+      toastEl.setAttribute('aria-live', 'polite');
+      var msg = document.createElement('span');
+      msg.className = 'nl-toast__msg';
+      var close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'nl-toast__close';
+      close.innerHTML = '&times;';
+      close.addEventListener('click', hideToast);
+      toastEl.appendChild(msg);
+      toastEl.appendChild(close);
+      document.body.appendChild(toastEl);
+      return toastEl;
+    }
+    function showToast(kind) {
+      var lang = currentLang();
+      var el = ensureToast();
+      el.classList.remove('nl-toast--success', 'nl-toast--error', 'nl-toast--already');
+      el.classList.add('nl-toast--' + kind);
+      el.querySelector('.nl-toast__msg').textContent = TOAST_MESSAGES[kind][lang];
+      el.querySelector('.nl-toast__close').setAttribute('aria-label', TOAST_MESSAGES.close[lang]);
+      el.setAttribute('data-show', '1');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(hideToast, 5000);
+    }
+    function hideToast() {
+      if (!toastEl) return;
+      toastEl.removeAttribute('data-show');
+      if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+    }
+
+    /* ---- AJAX submit ---- */
+    function unlockGate() {
+      try { localStorage.setItem('nl_unlocked', '1'); } catch (e) {}
+      document.body.classList.add('nl-unlocked');
+      try { window.dispatchEvent(new Event('nl:unlocked')); } catch (e) {
+        var ev = document.createEvent('Event');
+        ev.initEvent('nl:unlocked', true, true);
+        window.dispatchEvent(ev);
+      }
+    }
+    document.addEventListener('submit', function (event) {
+      var form = event.target;
+      if (!form || !form.matches || !form.matches('[data-nl-form]')) return;
+      event.preventDefault();
+
+      /* Honeypot — silently drop bot submissions */
+      var hp = form.querySelector('.nl-hp');
+      if (hp && hp.value) return;
+
+      /* Native validity (email format / required) */
+      if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+        if (typeof form.reportValidity === 'function') form.reportValidity();
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var originalHTML = null;
+      if (btn) {
+        originalHTML = btn.innerHTML;
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        btn.innerHTML = currentLang() === 'en' ? 'Sending…' : 'جارٍ الإرسال…';
+      }
+
+      var apiUrl = form.getAttribute('data-nl-api') || '';
+
+      function _restoreBtn() {
+        if (btn) {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          if (originalHTML !== null) btn.innerHTML = originalHTML;
+        }
+      }
+
+      if (apiUrl) {
+        /* ── API path: structured JSON response, duplicate detection ── */
+        var emailVal = (form.querySelector('[name="EMAIL"]') || {}).value || '';
+        var localeVal = (form.querySelector('[name="locale"]') || {}).value || '{{ nl.default_locale | default: "ar" }}';
+        var hpVal = (form.querySelector('.nl-hp') || {}).value || '';
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailVal, locale: localeVal, source: 'website', honeypot: hpVal })
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          var status = (data && data.status) || 'upstream_error';
+          if (status === 'subscribed_new') {
+            showToast('success');
+            form.reset();
+            syncLocale(currentLang());
+            unlockGate();
+          } else if (status === 'already_subscribed') {
+            showToast('already');
+            form.reset();
+            syncLocale(currentLang());
+            unlockGate();
+          } else if (status === 'invalid_email') {
+            showToast('error');
+          } else {
+            showToast('error');
+          }
+        }).catch(function () {
+          showToast('error');
+        }).then(_restoreBtn);
+      } else {
+        /* ── Legacy path: no-cors Brevo form post (no duplicate detection) ── */
+        fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form)
+        }).then(function () {
+          showToast('success');
+          form.reset();
+          syncLocale(currentLang());
+          unlockGate();
+        }).catch(function () {
+          showToast('error');
+        }).then(_restoreBtn);
+      }
+    });
+  })();
+</script>

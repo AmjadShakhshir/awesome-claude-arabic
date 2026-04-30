@@ -1,4 +1,5 @@
 ---
+gated: true
 layout: default
 title: "برومبتات كتابة المحتوى | Content Writing Prompts"
 ---

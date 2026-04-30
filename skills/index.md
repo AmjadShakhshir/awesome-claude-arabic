@@ -1,5 +1,6 @@
 ---
 layout: default
+gated: true
 title: مكتبة مهارات Claude العربية
 ---
 

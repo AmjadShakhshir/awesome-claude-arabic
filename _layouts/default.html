@@ -4,10 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {%- seo -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     {%- feed_meta -%}
+    {% if page.gated %}
+    <!-- Anti-FOUC: hide document until gate.js confirms access -->
+    <script>
+      (function(){try{
+        if(localStorage.getItem('nl_unlocked')==='1') return;
+        var ua=navigator.userAgent||'';
+        if(/Googlebot|bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|GPTBot|ChatGPT-User|ClaudeBot|PerplexityBot/i.test(ua)) return;
+        if(/[?&]nogate=1/.test(window.location.search)) return;
+        document.documentElement.style.visibility='hidden';
+      }catch(e){}}());
+    </script>
+    {% endif %}
   </head>
-  <body class="lang-ar">
+  <body class="lang-ar" style="font-family: 'Tajawal', 'Inter', 'Segoe UI', Arial, sans-serif;">
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="{{ '/' | relative_url }}">
@@ -30,13 +45,25 @@
             <a href="#" class="lang-switch active" data-set-lang="ar">العربية</a>
             <a href="#" class="lang-switch" data-set-lang="en">English</a>
           </div>
+          <a href="{{ '/library/' | relative_url }}" class="nav-subscribe-btn">
+            <span data-lang="ar">🎁 اشترك مجاناً</span>
+            <span data-lang="en">🎁 Subscribe FREE</span>
+          </a>
         </nav>
       </div>
     </header>
 
     <main class="page-content">
       <div class="container wrapper">
-        {{ content }}
+        {% if page.gated %}
+          {% include content-gate.html %}
+        {% else %}
+          {{ content }}
+        {% endif %}
+      </div>
+
+      <div class="container" style="margin-top:48px;">
+        {% include newsletter.html variant="compact" uid="footer" %}
       </div>
     </main>
 
@@ -50,5 +77,13 @@
     </footer>
 
     <script src="{{ '/assets/js/lang-switcher.js' | relative_url }}"></script>
+    {% if page.gated %}
+      <script>window.SITE_BASEURL = '{{ site.baseurl }}';</script>
+      <script src="{{ '/assets/js/content-gate.js' | relative_url }}" defer></script>
+    {% endif %}
+    {% if page.mermaid %}
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+      <script>document.addEventListener('DOMContentLoaded',function(){if(typeof mermaid!=='undefined'){mermaid.initialize({startOnLoad:true,theme:'dark'});}});</script>
+    {% endif %}
   </body>
 </html>

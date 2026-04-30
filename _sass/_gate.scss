@@ -1,0 +1,47 @@
+/* ── Content gate styles ───────────────────────────────────────── */
+
+/* Wrapper: positions the blur and overlay relative to content */
+.gate-wrapper {
+  position: relative;
+}
+
+/* The "blurred" teaser — shows ~30% of content then fades */
+.gate-blur {
+  max-height: 38vh;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 95%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Overlay: covers the gradient fade area, centers the gate card */
+.gate-overlay {
+  position: absolute;
+  inset: 0;
+  top: 22%; /* start overlay partway through the blur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 80%,
+    rgba(10, 10, 15, 0.98) 40%,
+    rgba(10, 10, 15, 0.72) 70%,
+    transparent
+  );
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* When gate is resolved (user subscribed), hide everything gate-related */
+body.nl-unlocked .gate-blur {
+  max-height: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  pointer-events: auto;
+  user-select: auto;
+}
+body.nl-unlocked .gate-overlay {
+  display: none;
+}
