@@ -6,6 +6,10 @@ description: >-
 url: "https://amjadshakhshir.github.io"
 baseurl: "/awesome-claude-arabic"
 
+# Google Analytics (GA4)
+# Set your Measurement ID, e.g. G-XXXXXXXXXX
+google_analytics_id: "G-C6NWW9ZLYF"
+
 # Plugins
 plugins:
   - jekyll-feed
