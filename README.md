@@ -96,6 +96,12 @@ Prompts, guides, tools, and real workflows for getting actual results with AI
 
 ---
 
+### 🔗 موارد مجتمعية إضافية | Community resources
+
+- [Arabic Claude Skills — مُشَيِّد (Moshid AI)](https://github.com/younesbag/arabic-claude-skills) — ست أدوات مجانية بالعربي لـ Claude: ملف CLAUDE.md، فحص السيرة الذاتية لأنظمة ATS، عرض خدمة أول، صفحة هبوط، فيلم موشن جرافيك، ووكيل سيو. Six free Arabic Claude skills (CC BY 4.0).
+
+---
+
 ## 🧠 ملاحظات مهمة
 
 - النتائج تعتمد على جودة البرومبت
